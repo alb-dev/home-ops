@@ -7,3 +7,4 @@ resources:
 - external-services
 - metallb
 - namespace.yaml
+- loadbalancer-ips
