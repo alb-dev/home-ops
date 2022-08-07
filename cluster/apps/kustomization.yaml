@@ -7,3 +7,4 @@ resources:
 - networking
 - security
 - kube-system
+- tigera-operator
