@@ -19,3 +19,4 @@ resources:
 - jetstack-charts.yaml
 - longhorn-charts.yaml
 - grafana-charts.yaml
+- project-calico-charts.yaml
