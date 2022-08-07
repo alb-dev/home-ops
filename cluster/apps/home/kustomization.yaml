@@ -7,5 +7,6 @@ resources:
 - paperless
 - komga 
 - namespace.yaml
+- vaultwarden
 #- adguard
 #- mosquitto
