@@ -6,5 +6,4 @@ resources:
 - wildcard
 - external-services
 - metallb
-- namespace.yaml
 - loadbalancer-ips
