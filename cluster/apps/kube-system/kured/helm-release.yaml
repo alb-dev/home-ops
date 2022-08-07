@@ -21,13 +21,12 @@ spec:
       repository: weaveworks/kured
     updateStrategy: RollingUpdate
     configuration:
-      timeZone: "Europe/Berlin"
       startTime: "10pm"
       endTime: "2am"
-      messageTemplateDrain: "⏳ Draining node %s"
-      messageTemplateReboot: "♻️ Rebooted node %s"
-      rebootCommand: "/usr/bin/systemctl reboot"
-      period: "1h0m0s"  
+      logFormat: "json"
+      timeZone: "Europe/Berlin"
+      rebootSentinelCommand: |-
+        sh -c "! needs-restarting --reboothint" 
     tolerations:
         - key: node-role.kubernetes.io/master
           operator: Exists
