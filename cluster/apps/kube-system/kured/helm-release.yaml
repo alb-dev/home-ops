@@ -1,0 +1,36 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kured
+  namespace: kube-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://weaveworks.github.io/kured
+      chart: kured
+      version: 3.0.0
+      sourceRef:
+        kind: HelmRepository
+        name: weaveworks-kured-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: weaveworks/kured
+    updateStrategy: RollingUpdate
+    configuration:
+      timeZone: "Europe/Berlin"
+      startTime: "10pm"
+      endTime: "2am"
+      messageTemplateDrain: "⏳ Draining node %s"
+      messageTemplateReboot: "♻️ Rebooted node %s"
+      rebootCommand: "/usr/bin/systemctl reboot"
+      period: "1h0m0s"  
+    tolerations:
+        - key: node-role.kubernetes.io/master
+          operator: Exists
+          effect: NoSchedule
+    metrics:
+      create: true

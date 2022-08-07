@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-paperless-export
+  labels:
+    usage: paperless-export
+  namespace: home
+spec:
+  capacity:
+    storage: 1024Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  mountOptions:
+    - hard
+    - nfsvers=3
+  nfs:
+    path: /volume1/kubernetes/paperless/export
+    server: "${NFS_SERVER}"

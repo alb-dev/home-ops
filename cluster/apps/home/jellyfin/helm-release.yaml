@@ -1,0 +1,95 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: jellyfin
+  namespace: media
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: jellyfin
+      version: 9.5.0
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+  values:
+    image:
+      repository: jellyfin/jellyfin
+      tag: 10.8.3
+      pullPolicy: IfNotPresent
+    env:
+      TZ: UTC
+    service:
+      main:
+        ports:
+          http:
+            port: 8096
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "nginx"
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+        hosts:
+          - host: "jelly.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+        - hosts:
+            - "jelly.${SECRET_DOMAIN}"
+          secretName: "jelly.${SECRET_DOMAIN}"
+    persistence:
+      transcode:
+        enabled: true
+        type: emptyDir
+        medium: Memory
+      config:
+        enabled: true
+        existingClaim: pvc-jellyfin-config
+        mountPath: /config
+      cache:
+        enabled: true
+        type: emptyDir
+        medium: Memory
+      # Cache does NOT contain temporary transcoding data.
+      media:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: 192.168.178.35
+            path: /volume1/General/Video
+        mountPath: /media
+        readOnly: true
+    # -- Configure the Security Context for the Pod
+    podSecurityContext: {}
+    #   runAsUser: 568
+    #   runAsGroup: 568
+    #   fsGroup: 568
+    #   # Hardware acceleration using an Intel iGPU w/ QuickSync
+    #   # These IDs below should be matched to your `video` and `render` group on the host
+    #   # To obtain those IDs run the following grep statement on the host:
+    #   # $ cat /etc/group | grep "video\|render"
+    #   # video:x:44:
+    #   # render:x:109:
+    #   supplementalGroups:
+    #   - 39
+    #   - 997
+
+    # resources:
+    #   requests:
+    #     # Hardware acceleration using an Intel iGPU w/ QuickSync and
+    #     # using intel-gpu-plugin (https://github.com/intel/intel-device-plugins-for-kubernetes)
+    #     gpu.intel.com/i915: 1
+    #     cpu: 200m
+    #     memory: 256Mi
+    #   limits:
+    #     # Hardware acceleration using an Intel iGPU w/ QuickSync and
+    #     # using intel-gpu-plugin (https://github.com/intel/intel-device-plugins-for-kubernetes)
+    #     gpu.intel.com/i915: 1
+    #     memory: 4096Mi

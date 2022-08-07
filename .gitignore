@@ -1,0 +1,10 @@
+.terraform
+.terraform.tfstate*
+terraform.tfstate*
+terraform.tfvars
+terrraform.auto.tfvars
+xanmanning.k3s
+variable.tf
+roles
+.sops.yaml
+kubeconfig

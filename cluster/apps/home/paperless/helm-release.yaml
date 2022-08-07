@@ -1,0 +1,129 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: paperless
+  namespace: home
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: paperless
+      version: 9.1.1
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+  values:
+    image:
+      # -- image repository
+      repository: jonaswinkler/paperless-ng
+      # -- image pull policy
+      pullPolicy: IfNotPresent
+      # -- image tag
+      tag: 1.5.0
+
+    # -- See the following files for additional environment variables:
+    # https://github.com/jonaswinkler/paperless-ng/tree/master/docker/compose/
+    # https://github.com/jonaswinkler/paperless-ng/blob/master/paperless.conf.example
+    # @default -- See below
+    env:
+      # -- Project name
+      COMPOSE_PROJECT_NAME: paperless
+      # -- Redis to use
+      PAPERLESS_REDIS: redis://paperless-redis-master:6379
+      # -- OCR languages to install
+      PAPERLESS_OCR_LANGUAGE: deu
+      # USERMAP_UID: 1000
+      # USERMAP_GID: 1000
+      PAPERLESS_TIME_ZONE: Europe/Berlin
+      # -- Database host to use
+      PAPERLESS_DBHOST:
+
+    # -- Configures service settings for the chart.
+    # @default -- See values.yaml
+    service:
+      main:
+        ports:
+          http:
+            port: 8000
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "nginx"
+        hosts:
+          - host: "paperless.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+        - hosts:
+            - "paperless.${SECRET_DOMAIN}"
+
+    persistence:
+      # -- Configure persistence for data.
+      # @default -- See values.yaml
+      data:
+        enabled: true
+        existingClaim: pvc-paperless-data
+        mountPath: /usr/src/paperless/data
+        accessMode: ReadWriteOnce
+        emptyDir:
+          enabled: false
+      # -- Configure persistence for media.
+      # @default -- See values.yaml
+      media:
+        enabled: true
+        existingClaim: pvc-paperless-media
+        mountPath: /usr/src/paperless/media
+        accessMode: ReadWriteOnce
+        emptyDir:
+          enabled: false
+      # -- Configure volume to monitor for new documents.
+      # @default -- See values.yaml
+      consume:
+        enabled: true
+        existingClaim: pvc-paperless-consume
+        mountPath: /usr/src/paperless/consume
+        accessMode: ReadWriteOnce
+        emptyDir:
+          enabled: false
+      # -- Configure export volume.
+      # @default -- See values.yaml
+      export:
+        enabled: true
+        existingClaim: pvc-paperless-export
+        mountPath: /usr/src/paperless/export
+        accessMode: ReadWriteOnce
+        emptyDir:
+          enabled: false
+
+    # -- Enable and configure postgresql database subchart under this key.
+    #    For more options see [postgresql chart documentation](https://github.com/bitnami/charts/tree/master/bitnami/postgresql)
+    # @default -- See values.yaml
+    postgresql:
+      enabled: false
+      postgresqlUsername: paperless
+      postgresqlPassword: paperless
+      postgresqlDatabase: paperless
+      persistence:
+        enabled: false
+        # storageClass: ""
+
+    # -- Enable and configure redis subchart under this key.
+    #    For more options see [redis chart documentation](https://github.com/bitnami/charts/tree/master/bitnami/redis)
+    # @default -- See values.yaml
+    redis:
+      enabled: true
+      auth:
+        enabled: false
+      master:
+        persistence:
+          enabled: true
+          medium: "emptyDir"
+      replicas: 
+        persistence:
+          enabled: true
+          medium: "emptyDir"

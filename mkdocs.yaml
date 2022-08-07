@@ -1,0 +1,75 @@
+---
+# Project information
+site_name: ald-dev | Home Cluster
+site_description: My home Kubernetes (k3s) cluster managed by GitOps (Flux2)
+site_author: Alexander Breidenbach
+site_url: https://alb-dev.github.io/homecluster
+
+# Repository
+repo_name: alb-dev/homecluster
+repo_url: https://github.com/alb-dev/homecluster
+edit_uri: "edit/main/docs/"
+
+theme:
+  name: material
+  icon:
+    repo: fontawesome/brands/github-alt
+  language: en
+  features:
+    - navigation.sections
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+  palette:
+    - scheme: default
+      primary: blue
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: blue
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+docs_dir: ./docs
+
+# Customization
+extra_css:
+  - _static/custom.css
+
+# Plugins
+plugins:
+  - search:
+      lang: en
+  - minify:
+      minify_html: true
+  - macros:
+      include_dir: docs/_snippets
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - attr_list
+  - toc:
+      permalink: true
+
+# Navigation structure
+nav:
+  - Introduction: index.md
+  - Installation:
+      - Guidelines: installation/guidelines.md
+      - Preparing Nodes: installation/preparing-nodes.md
+      - Installing Kubernetes: installation/installing-kubernetes.md
+      - Bootstrap Applications: installation/bootstrap-applications.md
+  - Applications:
+      - Paperless: applications/paperless.md
+  - Networking:
+      - General: networking/general.md
+      - DNS: networking/dns.md

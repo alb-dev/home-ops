@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-home-assistant-config
+  labels:
+    usage: home-assistant-config
+  namespace: home
+spec:
+  capacity:
+    storage: 10240Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  mountOptions:
+    - hard
+    - nfsvers=4.1
+  nfs:
+    path: /volume1/kubernetes/home-assistant/data
+    server: "${NFS_SERVER}"

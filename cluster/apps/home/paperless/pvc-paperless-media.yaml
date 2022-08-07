@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-paperless-media
+  namespace: home
+spec:
+  volumeName: pv-paperless-media
+  storageClassName: ""
+  accessModes: 
+  - ReadWriteOnce
+  resources:
+     requests: 
+      storage: 1024Mi
+  selector: 
+    matchLabels: 
+     usage: paperless-media
