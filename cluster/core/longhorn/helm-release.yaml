@@ -31,7 +31,7 @@ spec:
       concurrentAutomaticEngineUpgradePerNodeLimit: 2
       storageMinimalAvailablePercentage: 20
       storageOverProvisioningPercentage: 200
-      defaultReplicaCount: 3
+      defaultReplicaCount: 2
       defaultLonghornStaticStorageClass: longhorn
       replicaSoftAntiAffinity: false
       allowVolumeCreationWithDegradedAvailability: false
