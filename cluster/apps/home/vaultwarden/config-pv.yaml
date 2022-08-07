@@ -4,7 +4,7 @@ metadata:
   name: pv-vaultwarden
   labels:
     usage: nfs-vaultwarden
-  namespace: security
+  namespace: home
 spec:
   capacity:
     storage: 1024Mi
