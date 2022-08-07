@@ -17,8 +17,8 @@ spec:
         namespace: flux-system
       interval: 5m
   dependsOn:
-    - name: longhorn
-      namespace: longhorn-system
+    - name: nfs-csi
+      namespace: nfs-csi-system
   values:
    alertmanager:
       config:
@@ -47,7 +47,7 @@ spec:
         storage:
           volumeClaimTemplate:
             spec:
-              storageClassName: "longhorn"
+              storageClassName: "nfs-csi"
               resources:
                 requests:
                   # TODO(kube-prometheus-stack): change alertmanager volume to 250Mi
@@ -142,7 +142,7 @@ spec:
             storageSpec:
               volumeClaimTemplate:
                 spec:
-                  storageClassName: "longhorn"
+                  storageClassName: "nfs-csi"
                   resources:
                     requests:
                       storage: 10Gi
