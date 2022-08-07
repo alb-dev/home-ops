@@ -32,7 +32,7 @@ spec:
       env:
       # -- Config dir
         DATA_FOLDER: "config"
-        DOMAIN: https://vaultwarden.${SECRET_DOMAIN}
+        DOMAIN: https://pw.${SECRET_DOMAIN}
         SIGNUPS_ALLOWED: "false"
         SMTP_FROM_NAME: Vaultwarden
         SMTP_HOST: mail.breidenbach.koeln
