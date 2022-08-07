@@ -16,9 +16,9 @@ spec:
         name: prometheus-community-charts
         namespace: flux-system
       interval: 5m
-  dependsOn:
-    - name: nfs-csi
-      namespace: nfs-csi-system
+#  dependsOn:
+#    - name: nfs-csi
+#      namespace: nfs-csi-system
   values:
    alertmanager:
       config:
