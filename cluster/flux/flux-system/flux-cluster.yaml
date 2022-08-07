@@ -8,7 +8,7 @@ spec:
   interval: 1m0s
   ref:
     branch: main
-  url: https://github.com/alb-dev/home-ops
+  url: https://github.com/alb-dekuv/home-ops
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
