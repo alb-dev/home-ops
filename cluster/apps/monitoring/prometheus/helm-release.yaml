@@ -55,16 +55,16 @@ spec:
     kube-state-metrics:
       metricLabelsAllowlist:
         - "persistentvolumeclaims=[*]"
-    prometheus:
-      monitor:
-        enabled: true
-        relabelings:
-          - action: replace
-            regex: (.*)
-            replacement: $1
-            sourceLabels:
-              - __meta_kubernetes_pod_node_name
-            targetLabel: kubernetes_node
+      prometheus:
+        monitor:
+          enabled: true
+          relabelings:
+            - action: replace
+              regex: (.*)
+              replacement: $1
+              sourceLabels:
+                - __meta_kubernetes_pod_node_name
+              targetLabel: kubernetes_node
     grafana:
       enabled: false
       forceDeployDashboards: true
@@ -111,44 +111,44 @@ spec:
         enabled: true
         port: 2379
         targetPort: 2379
-      prometheus:
-        ingress:
-          enabled: true
-          pathType: Prefix
-          ingressClassName: "nginx"
-          hosts:
-            - "prometheus.${SECRET_DOMAIN}"
-          tls:
-            - hosts:
-                - prometheus.${SECRET_DOMAIN}
-        prometheusSpec:
-          replicas: 3
-          replicaExternalLabelName: __replica__
-          externalLabels:
-            cluster: home-ops
-          # remoteWrite:
-          #   - url: http://mimir-distributor.monitoring.svc.cluster.local:8080/api/v1/push
-          #     headers:
-          #       X-Scope-OrgID: anonymous
-          podAntiAffinity: hard
-          retentionSize: "6GB"
-          ruleSelectorNilUsesHelmValues: false
-          serviceMonitorSelectorNilUsesHelmValues: false
-          podMonitorSelectorNilUsesHelmValues: false
-          probeSelectorNilUsesHelmValues: false
-          retention: 2d
-          enableAdminAPI: true
-          walCompression: true
-          storageSpec:
-            volumeClaimTemplate:
-              spec:
-                storageClassName: "nfs-csi"
-                resources:
-                  requests:
-                    storage: 10Gi
-          resources:
-            requests:
-              cpu: 10m
-              memory: 1000Mi
-            limits:
-              memory: 8000Mi
+    prometheus:
+      ingress:
+        enabled: true
+        pathType: Prefix
+        ingressClassName: "nginx"
+        hosts:
+          - "prometheus.${SECRET_DOMAIN}"
+        tls:
+          - hosts:
+              - prometheus.${SECRET_DOMAIN}
+      prometheusSpec:
+        replicas: 3
+        replicaExternalLabelName: __replica__
+        externalLabels:
+          cluster: home-ops
+        # remoteWrite:
+        #   - url: http://mimir-distributor.monitoring.svc.cluster.local:8080/api/v1/push
+        #     headers:
+        #       X-Scope-OrgID: anonymous
+        podAntiAffinity: hard
+        retentionSize: "6GB"
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
+        retention: 2d
+        enableAdminAPI: true
+        walCompression: true
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: "nfs-csi"
+              resources:
+                requests:
+                  storage: 10Gi
+        resources:
+          requests:
+            cpu: 10m
+            memory: 1000Mi
+          limits:
+            memory: 8000Mi
