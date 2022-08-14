@@ -20,135 +20,135 @@ spec:
 #    - name: nfs-csi
 #      namespace: nfs-csi-system
   values:
-   alertmanager:
-      config:
-        global:
-          resolve_timeout: 5m
-        receivers:
-          - name: "null"
-        inhibit_rules:
-          - source_matchers:
-              - severity = "critical"
-            target_matchers:
-              - severity = "warning"
-            equal: ["alertname", "namespace"]
-      ingress:
-        enabled: true
-        pathType: Prefix
-        ingressClassName: "nginx"
-        hosts:
-          - "alert-manager.${SECRET_DOMAIN}"
-        tls:
-          - hosts:
-              - alert-manager.${SECRET_DOMAIN}
-      alertmanagerSpec:
-        replicas: 3
-        podAntiAffinity: hard
-        storage:
-          volumeClaimTemplate:
-            spec:
-              storageClassName: "nfs-csi"
-              resources:
-                requests:
-                  # TODO(kube-prometheus-stack): change alertmanager volume to 250Mi
-                  storage: 250Mi
-      kube-state-metrics:
-        metricLabelsAllowlist:
-          - "persistentvolumeclaims=[*]"
-        prometheus:
-          monitor:
-            enabled: true
-            relabelings:
-              - action: replace
-                regex: (.*)
-                replacement: $1
-                sourceLabels:
-                  - __meta_kubernetes_pod_node_name
-                targetLabel: kubernetes_node
-      grafana:
-        enabled: false
-        forceDeployDashboards: true
-        sidecar:
-          dashboards:
-            multicluster:
-              etcd:
-                enabled: true
-      kubelet:
-        enabled: true
-        serviceMonitor:
-          metricRelabelings:
-            - action: replace
-              sourceLabels:
-                - node
-              targetLabel: instance
-      kubeApiServer:
-        enabled: true
-      kubeControllerManager:
-        enabled: true
-        endpoints:
-          - 192.168.178.90
-          - 192.168.178.91
-          - 192.168.178.92
-      kubeScheduler:
-        enabled: true
-        endpoints:
-          - 192.168.178.90
-          - 192.168.178.91
-          - 192.168.178.92
-      kubeProxy:
-        enabled: true
-#        endpoints:
-#          - 192.168.178.12
-#          - 192.168.178.13
-#          - 192.168.178.14
-      kubeEtcd:
-        enabled: true
-        endpoints:
-          - 192.168.178.90
-          - 192.168.178.91
-          - 192.168.178.92
-        service:
+    alertmanager:
+        config:
+          global:
+            resolve_timeout: 5m
+          receivers:
+            - name: "null"
+          inhibit_rules:
+            - source_matchers:
+                - severity = "critical"
+              target_matchers:
+                - severity = "warning"
+              equal: ["alertname", "namespace"]
+        ingress:
           enabled: true
-          port: 2379
-          targetPort: 2379
-        prometheus:
-          ingress:
-            enabled: true
-            pathType: Prefix
-            ingressClassName: "nginx"
-            hosts:
-              - "prometheus.${SECRET_DOMAIN}"
-            tls:
-              - hosts:
-                  - prometheus.${SECRET_DOMAIN}
-          prometheusSpec:
-            replicas: 3
-            replicaExternalLabelName: __replica__
-            externalLabels:
-              cluster: home-ops
-            # remoteWrite:
-            #   - url: http://mimir-distributor.monitoring.svc.cluster.local:8080/api/v1/push
-            #     headers:
-            #       X-Scope-OrgID: anonymous
-            podAntiAffinity: hard
-            retentionSize: "6GB"
-            ruleSelectorNilUsesHelmValues: false
-            serviceMonitorSelectorNilUsesHelmValues: false
-            podMonitorSelectorNilUsesHelmValues: false
-            probeSelectorNilUsesHelmValues: false
-            retention: 2d
-            enableAdminAPI: true
-            walCompression: true
-            storageSpec:
-              volumeClaimTemplate:
-                spec:
-                  storageClassName: "nfs-csi"
-                  resources:
-                    requests:
-                      storage: 10Gi
-            resources:
-              requests:
-                cpu: 10m
-                memory: 1000Mi
-              limits:
-                memory: 8000Mi
+          pathType: Prefix
+          ingressClassName: "nginx"
+          hosts:
+            - "alert-manager.${SECRET_DOMAIN}"
+          tls:
+            - hosts:
+                - alert-manager.${SECRET_DOMAIN}
+        alertmanagerSpec:
+          replicas: 3
+          podAntiAffinity: hard
+          storage:
+            volumeClaimTemplate:
+              spec:
+                storageClassName: "nfs-csi"
+                resources:
+                  requests:
+                    # TODO(kube-prometheus-stack): change alertmanager volume to 250Mi
+                    storage: 250Mi
+    kube-state-metrics:
+      metricLabelsAllowlist:
+        - "persistentvolumeclaims=[*]"
+    prometheus:
+      monitor:
+        enabled: true
+        relabelings:
+          - action: replace
+            regex: (.*)
+            replacement: $1
+            sourceLabels:
+              - __meta_kubernetes_pod_node_name
+            targetLabel: kubernetes_node
+    grafana:
+      enabled: false
+      forceDeployDashboards: true
+      sidecar:
+        dashboards:
+          multicluster:
+            etcd:
+              enabled: true
+    kubelet:
+      enabled: true
+      serviceMonitor:
+        metricRelabelings:
+          - action: replace
+            sourceLabels:
+              - node
+            targetLabel: instance
+    kubeApiServer:
+      enabled: true
+    kubeControllerManager:
+      enabled: true
+      endpoints:
+        - 192.168.178.90
+        - 192.168.178.91
+        - 192.168.178.92
+    kubeScheduler:
+      enabled: true
+      endpoints:
+        - 192.168.178.90
+        - 192.168.178.91
+        - 192.168.178.92
+    kubeProxy:
+      enabled: true
+      endpoints:
+        - 192.168.178.90
+        - 192.168.178.91
+        - 192.168.178.92
+    kubeEtcd:
+      enabled: true
+      endpoints:
+        - 192.168.178.90
+        - 192.168.178.91
+        - 192.168.178.92
+      service:
+        enabled: true
+        port: 2379
+        targetPort: 2379
+      prometheus:
+        ingress:
+          enabled: true
+          pathType: Prefix
+          ingressClassName: "nginx"
+          hosts:
+            - "prometheus.${SECRET_DOMAIN}"
+          tls:
+            - hosts:
+                - prometheus.${SECRET_DOMAIN}
+        prometheusSpec:
+          replicas: 3
+          replicaExternalLabelName: __replica__
+          externalLabels:
+            cluster: home-ops
+          # remoteWrite:
+          #   - url: http://mimir-distributor.monitoring.svc.cluster.local:8080/api/v1/push
+          #     headers:
+          #       X-Scope-OrgID: anonymous
+          podAntiAffinity: hard
+          retentionSize: "6GB"
+          ruleSelectorNilUsesHelmValues: false
+          serviceMonitorSelectorNilUsesHelmValues: false
+          podMonitorSelectorNilUsesHelmValues: false
+          probeSelectorNilUsesHelmValues: false
+          retention: 2d
+          enableAdminAPI: true
+          walCompression: true
+          storageSpec:
+            volumeClaimTemplate:
+              spec:
+                storageClassName: "nfs-csi"
+                resources:
+                  requests:
+                    storage: 10Gi
+          resources:
+            requests:
+              cpu: 10m
+              memory: 1000Mi
+            limits:
+              memory: 8000Mi
