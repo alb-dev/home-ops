@@ -22,6 +22,8 @@ k3s_server:
     - servicelb
     # Disable metrics-server - installed with Flux
     - metrics-server
+    # Disable localpath
+    - local-storage
   disable-network-policy: true
   disable-cloud-controller: true
   write-kubeconfig-mode: "644"
@@ -54,3 +56,7 @@ k3s_server:
     - "feature-gates=MixedProtocolLBService=true"
     # Required for HAProxy health-checks
     - "anonymous-auth=true"
+    # Allow pods to be rescheduled quicker in the case of a node failure
+    # https://github.com/k3s-io/k3s/issues/1264
+    - "default-not-ready-toleration-seconds=20"
+    - "default-unreachable-toleration-seconds=20"
