@@ -122,10 +122,10 @@ spec:
       master:
         persistence:
           enabled: true
-          type: emptyDir
-          medium: Memory
+          global:
+            storageClass: "nfs-csi"
       replicas: 
         persistence:
           enabled: true
-          type: emptyDir
-          medium: Memory
+          global:
+            storageClass: "nfs-csi"
