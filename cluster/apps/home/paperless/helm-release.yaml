@@ -122,8 +122,10 @@ spec:
       master:
         persistence:
           enabled: true
-          medium: "emptyDir"
+          type: emptyDir
+          medium: Memory
       replicas: 
         persistence:
           enabled: true
-          medium: "emptyDir"
+          type: emptyDir
+          medium: Memory
