@@ -122,10 +122,8 @@ spec:
       master:
         persistence:
           enabled: true
-          global:
-            storageClass: "nfs-csi"
+          storageClass: "nfs-csi"
       replicas: 
         persistence:
           enabled: true
-          global:
-            storageClass: "nfs-csi"
+          storageClass: "nfs-csi"
