@@ -8,5 +8,4 @@ resources:
 - komga 
 - namespace.yaml
 - vaultwarden
-#- adguard
-#- mosquitto
+- hajimari
