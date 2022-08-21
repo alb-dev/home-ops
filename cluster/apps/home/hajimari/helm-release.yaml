@@ -32,14 +32,10 @@ spec:
           - networking
           - security
       name: "Sparks"
-      customApps:
-        - name: Habitica
-          url: https://habitica.com
-          icon: "check-bold"
       groups:
         - name: Kubernetes
           links:
-            - name: SparksD2145/flux-infra
+            - name: alv-dev/home-ops
               url: "https://github.com/alb-dev/home-ops"
             - name: k8s-at-home Charts
               url: "https://github.com/k8s-at-home/charts/tree/master/charts"
