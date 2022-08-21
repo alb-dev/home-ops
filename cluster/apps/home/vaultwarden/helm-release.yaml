@@ -74,6 +74,11 @@ spec:
         admin:
           enabled: true
           ingressClassName: "nginx"
+          annotations:
+            cert-manager.io/cluster-issuer: "letsencrypt-production"
+            hajimari.io/enable: "true"
+            hajimari.io/appName: "Vault"
+            hajimari.io/icon: "mdiLock"
           hosts:
             - host: "pw.${SECRET_DOMAIN}"
               paths:
