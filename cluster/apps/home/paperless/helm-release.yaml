@@ -125,5 +125,5 @@ spec:
           storageClass: "nfs-csi"
       replicas: 
         persistence:
-          enabled: true
+          enabled: false
           storageClass: "nfs-csi"
