@@ -49,6 +49,9 @@ spec:
         ingressClassName: "nginx"
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "Mangas"
+          hajimari.io/icon: "mdiBookOpenVariant"
         hosts:
           - host: "manga.${SECRET_DOMAIN}"
             paths:

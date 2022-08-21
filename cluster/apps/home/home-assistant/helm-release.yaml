@@ -38,6 +38,11 @@ spec:
       main:
         enabled: true
         ingressClassName: "nginx"
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "Home"
+          hajimari.io/icon: "mdiHomeAssistant"
         hosts:
           - host: "hass.${SECRET_DOMAIN}"
             paths:
