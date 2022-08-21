@@ -60,6 +60,11 @@ spec:
         main:
           enabled: true
           ingressClassName: "nginx"
+          annotations:
+            cert-manager.io/cluster-issuer: "letsencrypt-production"
+            hajimari.io/enable: "true"
+            hajimari.io/appName: "Vault"
+            hajimari.io/icon: "mdiLock"
           #  traefik.ingress.kubernetes.io/router.tls.domains.0.main: "vaultwarden.${SECRET_DOMAIN}"
           hosts:
             - host: "pw.${SECRET_DOMAIN}"
@@ -74,11 +79,6 @@ spec:
         admin:
           enabled: true
           ingressClassName: "nginx"
-          annotations:
-            cert-manager.io/cluster-issuer: "letsencrypt-production"
-            hajimari.io/enable: "true"
-            hajimari.io/appName: "Vault"
-            hajimari.io/icon: "mdiLock"
           hosts:
             - host: "pw.${SECRET_DOMAIN}"
               paths:
