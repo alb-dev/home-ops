@@ -55,10 +55,6 @@ spec:
         enabled: true
         existingClaim: pvc-jellyfin-config
         mountPath: /config
-      cache:
-        enabled: true
-        type: emptyDir
-        medium: Memory
       # Cache does NOT contain temporary transcoding data.
       media:
         enabled: true

@@ -35,7 +35,7 @@ spec:
         DOMAIN: https://pw.${SECRET_DOMAIN}
         SIGNUPS_ALLOWED: "false"
         SMTP_FROM_NAME: Vaultwarden
-        SMTP_HOST: mail.breidenbach.koeln
+        SMTP_HOST: mail.${SECRET_FAM_DOMAIN}
         SMTP_PORT: 587
         SMTP_SSL: "true"
         TZ: "Europe/Berlin"
