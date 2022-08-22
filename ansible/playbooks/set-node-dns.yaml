@@ -1,0 +1,17 @@
+---
+# Playbook to handle dns cloud-init problem under fedora > 36 and proxmox
+- hosts:
+    - master
+    - worker
+  become: true
+  gather_facts: true
+  any_errors_fatal: true
+  pre_tasks:
+    - name: Pausing for 5 seconds...
+      ansible.builtin.pause:
+        seconds: 5
+  tasks:
+    - name: Configuration | Set node dns 
+      ansible.builtin.command: nmcli con mod cloud-init\ eth0 ipv4.dns "192.168.178.5"
+    - name: Configuration | restart node 
+      ansible.builtin.reboot:
