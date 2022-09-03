@@ -62,7 +62,7 @@ spec:
         volumeSpec:
           nfs:
             server: 192.168.178.35
-            path: /volume1/General/Video
+            path: /volume1/media/Video
         mountPath: /media
         readOnly: false
     # -- Configure the Security Context for the Pod
