@@ -6,7 +6,7 @@ metadata:
 provisioner: nfs.csi.k8s.io
 parameters:
   server: "${NFS_SERVER}"
-  share: /volume2/k8s_ssd/PVCs
+  share: /volume1/kubernetes/PVCs
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
