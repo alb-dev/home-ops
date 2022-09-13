@@ -27,7 +27,7 @@ spec:
       # -- image repository
       repository: gotson/komga
       # -- image tag
-      tag: 0.157.1
+      tag: 0.157.2
       # -- image pull policy
       pullPolicy: IfNotPresent
 
