@@ -10,9 +10,9 @@ on: # yamllint disable-line rule:truthy
 
 jobs:
   renovate-helm-releases:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest  
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         fetch-depth: 1
