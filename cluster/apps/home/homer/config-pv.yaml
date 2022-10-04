@@ -17,5 +17,5 @@ spec:
     - hard
     - nfsvers=4.1
   nfs:
-    path: /volume1/kubernetes/homer
+    path: /volume3/kubernetes/homer
     server: "${NFS_SERVER}"

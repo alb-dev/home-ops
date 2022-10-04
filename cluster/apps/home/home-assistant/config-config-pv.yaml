@@ -17,5 +17,5 @@ spec:
     - hard
     - nfsvers=4.1
   nfs:
-    path: /volume1/kubernetes/home-assistant/data
+    path: /volume3/kubernetes/home-assistant/data
     server: "${NFS_SERVER}"

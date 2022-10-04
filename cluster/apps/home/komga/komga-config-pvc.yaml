@@ -12,7 +12,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: "${NFS_SERVER}"
-    path: /volume1/kubernetes/komga/config
+    path: /volume3/kubernetes/komga/config
   mountOptions:
     - nfsvers=4.1
     - nconnect=8
