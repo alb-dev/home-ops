@@ -2,6 +2,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  annotations:
+      nginx.ingress.kubernetes.io/app-root: /admin
   name: &app pihole
   namespace: networking
   labels:
@@ -13,7 +15,7 @@ spec:
     - host: &host "pihole.${SECRET_DOMAIN}"
       http:
         paths:
-          - path: /admin
+          - path: /
             pathType: Prefix
             backend:
               service:
