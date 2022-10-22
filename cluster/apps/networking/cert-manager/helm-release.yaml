@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: cert-manager
-  namespace: cert-manager
+  namespace: networking
 spec:
   interval: 15m
   chart:
@@ -22,7 +22,7 @@ spec:
     remediation:
       retries: 5
   values:
-    installCRDs: true
+    installCRDs: false
     replicaCount: 3
     webhook:
       replicaCount: 3
