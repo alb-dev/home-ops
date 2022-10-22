@@ -5,5 +5,4 @@ resources:
   - node-problem-detector
   - uptime-kuma
   - grafana
-  - namespace.yaml
 
