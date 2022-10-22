@@ -22,6 +22,7 @@ spec:
     remediation:
       retries: 5
   values:
+    # TODO | Change to true when new cluster is made
     installCRDs: false
     replicaCount: 3
     webhook:
