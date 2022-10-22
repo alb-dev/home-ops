@@ -8,3 +8,4 @@ variable.tf
 roles
 .sops.yaml
 kubeconfig
+.decrypted*
