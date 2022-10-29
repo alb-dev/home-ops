@@ -5,13 +5,13 @@ resources:
   - pv-paperless-media.yaml
   - pvc-paperless-media.yaml
     # pv and pvc for paperless data dir
-  - pv-paperless-data.yaml
+#  - pv-paperless-data.yaml
   - pvc-paperless-data.yaml
   # pv and pvc for paperless consume dir
-  - pv-paperless-consume.yaml
-  - pvc-paperless-consume.yaml
+ # - pv-paperless-consume.yaml
+ # - pvc-paperless-consume.yaml
   # pv and pvc for paperless export dir
-  - pv-paperless-export.yaml
-  - pvc-paperless-export.yaml
+ # - pv-paperless-export.yaml
+ # - pvc-paperless-export.yaml
   - helm-release.yaml
 

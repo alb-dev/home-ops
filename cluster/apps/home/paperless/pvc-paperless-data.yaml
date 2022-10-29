@@ -1,16 +1,17 @@
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pvc-paperless-data
+  name: paperless-config-v1
   namespace: home
+  labels:
+    app.kubernetes.io/name: &name paperless
+    app.kubernetes.io/instance: *name
+    snapshot.home.arpa/enabled: "true"
 spec:
-  volumeName: pv-paperless-data
-  storageClassName: ""
-  accessModes: 
-  - ReadWriteOnce
+  accessModes:
+    - ReadWriteOnce
   resources:
-     requests: 
-      storage: 1024Mi
-  selector: 
-    matchLabels: 
-     usage: paperless-data
+    requests:
+      storage: 15Gi
+  storageClassName: longhorn
