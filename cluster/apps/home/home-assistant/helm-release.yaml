@@ -102,5 +102,5 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: home-assistant-config
+        existingClaim: hass-config-v1
   
