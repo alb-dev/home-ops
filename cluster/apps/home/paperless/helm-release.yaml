@@ -117,8 +117,8 @@ spec:
       master:
         persistence:
           enabled: true
-          storageClass: "nfs-csi"
+          storageClass: "longhorn"
       replica: 
         persistence:
           enabled: false
-          storageClass: "nfs-csi"
+          storageClass: "longhorn"
