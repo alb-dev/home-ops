@@ -9,3 +9,4 @@ resources:
 - security
 - kube-system
 - tigera-operator
+- storage
