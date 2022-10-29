@@ -33,7 +33,7 @@ spec:
       storageOverProvisioningPercentage: 200
       defaultReplicaCount: 2
       defaultLonghornStaticStorageClass: longhorn
-      replicaSoftAntiAffinity: false
+      replicaSoftAntiAffinity: true
       allowVolumeCreationWithDegradedAvailability: false
     ingress:
       enabled: true
