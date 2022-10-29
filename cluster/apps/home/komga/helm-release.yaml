@@ -67,7 +67,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: komga-config-nfs
+        existingClaim: komga-config-v1
         mountPath: /config
       data:
         enabled: true
