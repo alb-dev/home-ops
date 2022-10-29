@@ -1,16 +1,17 @@
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: home-assistant-config
+  name: hass-config-v1
   namespace: home
+  labels:
+    app.kubernetes.io/name: &name home-assistant
+    app.kubernetes.io/instance: *name
+    snapshot.home.arpa/enabled: "true"
 spec:
-  storageClassName: "" # Empty string must be explicitly set otherwise default StorageClass will be set
-  volumeName: pv-home-assistant-config
-  accessModes: 
-  - ReadWriteOnce
+  accessModes:
+    - ReadWriteOnce
   resources:
-     requests: 
-      storage: 10240Mi
-  selector: 
-    matchLabels: 
-     usage: home-assistant-config 
+    requests:
+      storage: 10Gi
+  storageClassName: longhorn
