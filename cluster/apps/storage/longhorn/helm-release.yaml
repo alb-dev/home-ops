@@ -20,7 +20,7 @@ spec:
   values:
     persistence:
       defaultClass: true
-      defaultClassReplicaCount: 2
+      defaultClassReplicaCount: 3
       reclaimPolicy: Retain
     defaultSettings:
       backupstorePollInterval: 300
@@ -28,10 +28,10 @@ spec:
       createDefaultDiskLabeledNodes: true
       defaultDataLocality: best-effort
       nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
-      concurrentAutomaticEngineUpgradePerNodeLimit: 2
-      storageMinimalAvailablePercentage: 20
+      concurrentAutomaticEngineUpgradePerNodeLimit: 3
+      storageMinimalAvailablePercentage: 5
       storageOverProvisioningPercentage: 200
-      defaultReplicaCount: 2
+      defaultReplicaCount: 3
       defaultLonghornStaticStorageClass: longhorn
       replicaSoftAntiAffinity: false
       allowVolumeCreationWithDegradedAvailability: false
