@@ -1,16 +1,17 @@
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pvc-uptime-kuma
-  namespace: monitoring
+  name: uptime-kuma-v1
+  namespace: home
+  labels:
+    app.kubernetes.io/name: &name uptime-kuma
+    app.kubernetes.io/instance: *name
+    snapshot.home.arpa/enabled: "true"
 spec:
-  volumeName: pv-uptime-kuma
-  storageClassName: ""
-  accessModes: 
-  - ReadWriteOnce
+  accessModes:
+    - ReadWriteOnce
   resources:
-     requests: 
-      storage: 4Gi
-  selector: 
-    matchLabels: 
-     usage: uptime-kuma
+    requests:
+      storage: 5Gi
+  storageClassName: longhorn
