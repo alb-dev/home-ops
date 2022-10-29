@@ -53,7 +53,7 @@ spec:
         medium: Memory
       config:
         enabled: true
-        existingClaim: pvc-jellyfin-config
+        existingClaim: jellyfin-config-v1
         mountPath: /config
       # Cache does NOT contain temporary transcoding data.
       media:

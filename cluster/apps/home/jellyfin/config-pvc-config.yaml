@@ -1,17 +1,17 @@
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pvc-jellyfin-config
+  name: jellyfin-config-v1
   namespace: home
+  labels:
+    app.kubernetes.io/name: &name jellyfin
+    app.kubernetes.io/instance: *name
+    snapshot.home.arpa/enabled: "true"
 spec:
-  volumeName: pv-jellyfin-config
-  storageClassName: ""
-  accessModes: 
-  - ReadWriteOnce
+  accessModes:
+    - ReadWriteOnce
   resources:
-     requests: 
-      storage: 4096Mi
-  selector: 
-    matchLabels: 
-     usage: jellyfin-config
-
+    requests:
+      storage: 10Gi
+  storageClassName: longhorn
