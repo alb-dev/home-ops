@@ -37,4 +37,3 @@ spec:
       config:
         enabled: true
         existingClaim: homer-config-v1
-        mountPath: /www/assets
