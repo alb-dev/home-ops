@@ -20,7 +20,7 @@ spec:
   values:
     persistence:
       defaultClass: true
-      defaultClassReplicaCount: 1
+      defaultClassReplicaCount: 3
       reclaimPolicy: Retain
     defaultSettings:
       backupstorePollInterval: 300
@@ -31,7 +31,7 @@ spec:
       concurrentAutomaticEngineUpgradePerNodeLimit: 2
       storageMinimalAvailablePercentage: 5
       storageOverProvisioningPercentage: 200
-      defaultReplicaCount: 1
+      defaultReplicaCount: 3
       defaultLonghornStaticStorageClass: longhorn
       ## Sollte geändert werden
       replicaSoftAntiAffinity: true
