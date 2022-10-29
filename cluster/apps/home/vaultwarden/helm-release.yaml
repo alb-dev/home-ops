@@ -33,7 +33,7 @@ spec:
       # -- Config dir
         DATA_FOLDER: "config"
         DOMAIN: https://pw.${SECRET_DOMAIN}
-        SIGNUPS_ALLOWED: "false"
+        SIGNUPS_ALLOWED: "true"
         SMTP_FROM_NAME: Vaultwarden
         SMTP_HOST: mail.${SECRET_FAM_DOMAIN}
         SMTP_PORT: 587
@@ -92,4 +92,4 @@ spec:
       persistence:
           config:
             enabled: true
-            existingClaim: pvc-vaultwarden
+            existingClaim: vaultwarden-v1
