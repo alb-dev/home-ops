@@ -145,7 +145,7 @@ spec:
               storageClassName: "longhorn"
               resources:
                 requests:
-                  storage: 10Gi
+                  storage: 40Gi
         resources:
           requests:
             cpu: 10m
