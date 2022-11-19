@@ -25,12 +25,12 @@ spec:
     defaultSettings:
       backupstorePollInterval: 300
       backupTarget: nfs://${NFS_SERVER}:/volume3/kubernetes/LonghornBackup
-      createDefaultDiskLabeledNodes: false
+      createDefaultDiskLabeledNodes: true
       defaultDataLocality: best-effort
       nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
       concurrentAutomaticEngineUpgradePerNodeLimit: 2
       storageMinimalAvailablePercentage: 5
-      storageOverProvisioningPercentage: 200
+      storageOverProvisioningPercentage: 100
       defaultReplicaCount: 3
       defaultLonghornStaticStorageClass: longhorn
       ## Sollte geändert werden
