@@ -17,8 +17,6 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
-    image:
-      repository: weaveworks/kured
     updateStrategy: RollingUpdate
     configuration:
       startTime: "10pm"
