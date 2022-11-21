@@ -12,8 +12,9 @@
         seconds: 5
   tasks:
     - name: Configuration | Install Longhorn packages
-      ansible.builtin.dnf: 
+      ansible.builtin.apt: 
         name: 
+          - open-iscsi
           - bash
           - curl
           - findmnt
