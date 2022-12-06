@@ -31,4 +31,4 @@ spec:
   storageClassName: minio-nfs
   resources:
     requests:
-      storage: 1Mi
+      storage: 2000Mi
