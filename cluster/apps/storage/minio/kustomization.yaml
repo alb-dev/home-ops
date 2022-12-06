@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
 - helm-release.yaml
 - nfs-pvc.yaml
-- secret.sops.yaml
+- secrets.sops.yaml
