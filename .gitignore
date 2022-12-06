@@ -6,6 +6,5 @@ terrraform.auto.tfvars
 xanmanning.k3s
 variable.tf
 roles
-.sops.yaml
 kubeconfig
 .decrypted*

@@ -1,0 +1,4 @@
+creation_rules:
+  - path_regex: cluster/.*\.sops\.ya?ml
+    encrypted_regex: "^(data|stringData)$"
+    pgp: EC621778D7E4AD9330404D6A6A00CDA35DF9B2BC
