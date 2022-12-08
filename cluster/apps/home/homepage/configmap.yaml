@@ -130,6 +130,10 @@ data:
             description: Dokumentation
   bookmarks.yaml: |
     ---
+        - Cloud-Access:
+            - Hetzner:
+                - icon: awx.png
+                  href: https://youtube.com/
         - Developer:
             - Github:
                 - abbr: GH
