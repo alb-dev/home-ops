@@ -58,6 +58,10 @@ data:
   services.yaml: |
     ---
     - Infrastructure:
+        - Router:
+            href: https://192.168.178.1
+            icon: avmfritzbox.png
+            description: WAN Connection
         - Athena:
             href: https://athena.${SECRET_DOMAIN}
             icon: synology.png
