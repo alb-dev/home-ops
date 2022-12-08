@@ -73,6 +73,14 @@ data:
             href: https://hass.${SECRET_DOMAIN}:8123
             icon: home-assistant-circle.png
             description: Heimautomatisierung
+        - pve-01:
+            href: https://192.168.178.24:8006
+            icon: proxmox.png
+            description: Proxmox Hypervisor-01
+        - pve-02:
+            href: https://192.168.178.25:8006
+            icon: proxmox.png
+            description: Proxmox Hypervisor-02
     - Monitoring:
         - Uptime-Kuma:
             href: https://uptime.${SECRET_DOMAIN}
@@ -100,11 +108,11 @@ data:
             icon: minio.png
             description: Backup Storage
     - Cloud:
-        - Mail:
+        - Mailcow:
             href: https://mail.${SECRET_FAM_DOMAIN}
             icon: mailcow.png
-            description: Mail Admininterface
-        - Mailcow:
+            description: Domain Admininterface
+        - Mail:
             href: https://mail.${SECRET_FAM_DOMAIN}/sogo
             icon: mailcowsogo.png
             description: Webmail
