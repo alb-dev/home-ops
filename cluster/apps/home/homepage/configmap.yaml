@@ -105,7 +105,7 @@ data:
             description: Mediaserver
         - Vaultwarden:
             href: https://pw.${SECRET_DOMAIN}
-            icon: vaultwarden.png
+            icon: bitwarden.png
             description: Passworttool
         - HomeAssistant:
             href: https://hass.${SECRET_DOMAIN}:8123
@@ -130,7 +130,7 @@ data:
         - RSS:
             href: https://minio.${SECRET_FAN_DOMAIN}
             icon: freshrss.png
-            description: RSS Feed Collector
+            description: RSS Aggregator
         - Nextcloud:
             href: https://minio.${SECRET_FAM_DOMAIN}
             icon: nextcloud.png
