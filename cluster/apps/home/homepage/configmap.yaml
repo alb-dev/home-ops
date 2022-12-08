@@ -53,7 +53,7 @@ data:
         label: Home # optional
         latitude: 50.9096219 
         longitude: 6.8081935
-        units: imperial # or metric
+        units: metric # or metric
         cache: 5 # Time in minutes to cache API responses, to stay within limits
   services.yaml: |
     ---
@@ -61,67 +61,65 @@ data:
         - Athena:
             href: https://athena.${SECRET_DOMAIN}
             icon: synology.png
-            # description: Athena NAS
+            description: NAS
         - AdGuard:
             href: https://pihole${SECRET_DOMAIN}
             icon: pihole.png
-            # description: Add-Blocking
+            description: Add-Blocking
             widget:
               type: pihole
               url: https://pihole.int.swalb.io
         - HomeAssistant:
             href: https://hass.${SECRET_DOMAIN}:8123
             icon: home-assistant-circle.png
-            # description: This is my service
+            description: Heimautomatisierung
     - Monitoring:
         - Uptime-Kuma:
             href: https://uptime.${SECRET_DOMAIN}
             icon: uptime-kuma.png
-            description: Uptime-Kuma dashboard
+            description: Service Monitoring
         - Grafana:
             href: https://grafana.${SECRET_DOMAIN}
             icon: grafana.png
-            # description: Grafana Dashboard
+            description: Metric Monitoring
         - Alertmanager:
             href: https://alertmanager.${SECRET_DOMAIN}
             icon: alertmanager.png
-            # description: This is my service
+            description: Metric Altering
         - Prometheus:
             href: https://prometheus.${SECRET_DOMAIN}
             icon: prometheus.png
-            # description: This is my service
+            description: Metric Database
     - Storage:
         - Longhorn:
             href: https://longhorn.${SECRET_DOMAIN}
             icon: longhorn.png
+            description: HCI Storage
         - MinIO:
             href: https://minio.${SECRET_DOMAIN}
             icon: minio.png
-            # description: This is my service
+            description: Backup Storage
     - Cloud:
         - Mail:
-            href: https://longhorn.${SECRET_DOMAIN}
-            icon: longhorn.png
+            href: https://mail.${SECRET_FAM_DOMAIN}
+            icon: mailcow.png
+            description: Mail Admininterface
         - Mailcow:
-            href: https://minio.${SECRET_DOMAIN}
-            icon: minio.png
-            # description: This is my service
+            href: https://mail.${SECRET_FAM_DOMAIN}/sogo
+            icon: mailcowsogo.png
+            description: Webmail
         - RSS:
-            href: https://minio.${SECRET_DOMAIN}
-            icon: minio.png
-            # description: This is my service
+            href: https://minio.${SECRET_FAN_DOMAIN}
+            icon: freshrss.png
+            description: RSS Feed Collector
         - Nextcloud:
-            href: https://minio.${SECRET_DOMAIN}
-            icon: minio.png
-            # description: This is my service
+            href: https://minio.${SECRET_FAM_DOMAIN}
+            icon: nextcloud.png
+            description: Cloudstorage
         - Wiki:
-            href: https://minio.${SECRET_DOMAIN}
-            icon: minio.png
-            # description: This is my service
-        - KDVZ-Mail:
-            href: https://minio.${SECRET_DOMAIN}
-            icon: minio.png
-            # description: This is my service
+            href: https://wiki.${SECRET_FAM_DOMAIN}
+            icon: wikijs.png
+            description: Dokumentation
   bookmarks.yaml: |
     ---
         - Developer:
