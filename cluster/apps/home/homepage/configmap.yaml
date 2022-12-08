@@ -14,7 +14,7 @@ data:
     title: Dashboard
     favicon: https://raw.githubusercontent.com/ahgraber/homelab-gitops-k3s/main/cluster/apps/services/homepage/icons/favicon.png
     theme: dark
-    color: neutral
+    color: indigo
     layout: # key by group name in services.yaml
       Infrastructure:
         # style: row
