@@ -108,9 +108,13 @@ data:
             icon: bitwarden.png
             description: Passworttool
         - HomeAssistant:
-            href: https://hass.${SECRET_DOMAIN}:8123
+            href: https://hass.${SECRET_DOMAIN}
             icon: home-assistant-circle.png
             description: Heimautomatisierung
+        - Zigbee:
+            href: https://zigbee.${SECRET_DOMAIN}
+            icon: zigbee2mqtt.png
+            description: Zigbee2mqtt
         - Pihole:
             href: https://pihole${SECRET_DOMAIN}
             icon: pihole.png
