@@ -12,7 +12,7 @@ data:
   settings.yaml: |
     ---
     title: Dashboard
-    favicon: https://raw.githubusercontent.com/ahgraber/homelab-gitops-k3s/main/cluster/apps/services/homepage/icons/favicon.png
+    #favicon: https://raw.githubusercontent.com/ahgraber/homelab-gitops-k3s/main/cluster/apps/services/homepage/icons/favicon.png
     theme: dark
     color: slate
     layout: # key by group name in services.yaml
@@ -127,7 +127,7 @@ data:
         - Mail:
             href: https://mail.${SECRET_FAM_DOMAIN}/sogo
             icon: mailcowsogo.png
-            description: Webmail
+            description: SOGo Webmail
         - RSS:
             href: https://minio.${SECRET_FAN_DOMAIN}
             icon: freshrss.png
