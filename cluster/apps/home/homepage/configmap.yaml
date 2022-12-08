@@ -51,8 +51,8 @@ data:
         # focus: true # Optional, will set focus to the search bar on page load
     - openmeteo:
         label: Home # optional
-        latitude: 40.008378
-        longitude: -75.290233
+        latitude: 50.9096219 
+        longitude: 6.8081935
         units: imperial # or metric
         cache: 5 # Time in minutes to cache API responses, to stay within limits
   services.yaml: |
