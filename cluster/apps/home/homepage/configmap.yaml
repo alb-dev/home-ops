@@ -74,6 +74,14 @@ data:
             href: https://192.168.178.25:8006
             icon: proxmox.png
             description: Proxmox Hypervisor-02
+        - Longhorn:
+            href: https://longhorn.${SECRET_DOMAIN}
+            icon: longhorn.png
+            description: HCI Storage
+        - MinIO:
+            href: https://minio.${SECRET_DOMAIN}
+            icon: minio.png
+            description: Backup Storage
     - Monitoring:
         - Uptime-Kuma:
             href: https://uptime.${SECRET_DOMAIN}
@@ -91,15 +99,6 @@ data:
             href: https://prometheus.${SECRET_DOMAIN}
             icon: prometheus.png
             description: Metric Database
-    - Storage:
-        - Longhorn:
-            href: https://longhorn.${SECRET_DOMAIN}
-            icon: longhorn.png
-            description: HCI Storage
-        - MinIO:
-            href: https://minio.${SECRET_DOMAIN}
-            icon: minio.png
-            description: Backup Storage
     - Services & Apps:
         - Jellyfin:
             href: https://jelly.${SECRET_DOMAIN}
