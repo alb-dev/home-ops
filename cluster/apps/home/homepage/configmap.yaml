@@ -36,7 +36,7 @@ data:
         # columns: 3
         # icon: home-assistant.png
         # headerStyle: boxed
-      Work:
+      Services:
         # style: row
         # columns: 3
         # icon: home-assistant.png
@@ -62,17 +62,6 @@ data:
             href: https://athena.${SECRET_DOMAIN}
             icon: synology.png
             description: NAS
-        - AdGuard:
-            href: https://pihole${SECRET_DOMAIN}
-            icon: pihole.png
-            description: Add-Blocking
-            widget:
-              type: pihole
-              url: https://pihole.int.swalb.io
-        - HomeAssistant:
-            href: https://hass.${SECRET_DOMAIN}:8123
-            icon: home-assistant-circle.png
-            description: Heimautomatisierung
         - pve-01:
             href: https://192.168.178.24:8006
             icon: proxmox.png
@@ -107,6 +96,26 @@ data:
             href: https://minio.${SECRET_DOMAIN}
             icon: minio.png
             description: Backup Storage
+    - Services & Apps:
+        - Jellyfin:
+            href: https://jelly.${SECRET_DOMAIN}
+            icon: jellyfin.png
+            description: Mediaserver
+        - Vaultwarden:
+            href: https://pw.${SECRET_DOMAIN}
+            icon: vaultwarden.png
+            description: Passworttool
+        - HomeAssistant:
+            href: https://hass.${SECRET_DOMAIN}:8123
+            icon: home-assistant-circle.png
+            description: Heimautomatisierung
+        - Pihole:
+            href: https://pihole${SECRET_DOMAIN}
+            icon: pihole.png
+            description: Add-Blocking
+            widget:
+              type: pihole
+              url: https://pihole.int.swalb.io
     - Cloud:
         - Mailcow:
             href: https://mail.${SECRET_FAM_DOMAIN}
@@ -133,7 +142,7 @@ data:
         - Cloud-Access:
             - Hetzner:
                 - icon: awx.png
-                  href: https://youtube.com/
+                  href: https://www.hetzner.com/
         - Developer:
             - Github:
                 - abbr: GH
