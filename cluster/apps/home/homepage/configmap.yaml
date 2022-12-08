@@ -145,6 +145,9 @@ data:
             - Hetzner:
                 - icon: awx.png
                   href: https://www.hetzner.com/
+            - Cloudflare:
+                - icon: cloudflare.png
+                  href: https://www.cloudflare.com/
         - Developer:
             - Github:
                 - abbr: GH
