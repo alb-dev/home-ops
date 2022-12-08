@@ -45,8 +45,7 @@ data:
     ---
     # - logo:
     - search:
-        provider: custom
-        url: https://search.unlocked.link/search?q=
+        provider: duckduckgo
         target: _blank
         # focus: true # Optional, will set focus to the search bar on page load
     - openmeteo:
