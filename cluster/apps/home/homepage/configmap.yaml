@@ -105,7 +105,7 @@ data:
             description: Mediaserver
             widget:
               type: jellyfin
-              url: http://jellyfin.host.or.ip
+              url: https://jelly.${SECRET_DOMAIN}
               key: ${JELLYFIN_API_KEY}
         - Vaultwarden:
             href: https://pw.${SECRET_DOMAIN}
