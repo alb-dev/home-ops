@@ -103,6 +103,10 @@ data:
             href: https://jelly.${SECRET_DOMAIN}
             icon: jellyfin.png
             description: Mediaserver
+            widget:
+              type: jellyfin
+              url: http://jellyfin.host.or.ip
+              key: ${JELLYFIN_API_KEY}
         - Vaultwarden:
             href: https://pw.${SECRET_DOMAIN}
             icon: bitwarden.png
