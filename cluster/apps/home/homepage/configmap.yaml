@@ -120,7 +120,7 @@ data:
             icon: zigbee2mqtt.png
             description: Zigbee2mqtt
         - Pihole:
-            href: https://pihole${SECRET_DOMAIN}
+            href: https://pihole.${SECRET_DOMAIN}
             icon: pihole.png
             description: Add-Blocking
             widget:
