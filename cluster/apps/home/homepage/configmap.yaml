@@ -136,11 +136,11 @@ data:
             icon: mailcowsogo.png
             description: SOGo Webmail
         - RSS:
-            href: https://minio.${SECRET_FAN_DOMAIN}
+            href: https://rss.${SECRET_FAN_DOMAIN}
             icon: freshrss.png
             description: RSS Aggregator
         - Nextcloud:
-            href: https://minio.${SECRET_FAM_DOMAIN}
+            href: https://cloud.${SECRET_FAM_DOMAIN}
             icon: nextcloud.png
             description: Cloudstorage
         - Wiki:
