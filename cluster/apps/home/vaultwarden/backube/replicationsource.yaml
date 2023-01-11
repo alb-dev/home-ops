@@ -3,6 +3,7 @@ apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
   name: vaultwarden-v1-backup
+  namespace: home
 spec:
   # The PVC to be backed up
   sourcePVC: vaultwarden-v1
