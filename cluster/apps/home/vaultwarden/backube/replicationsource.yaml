@@ -1,21 +1,30 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/replicationsource_v1alpha1.json
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: home-assistant
-  namespace: default
+  name: vaultwarden-v1-backup
 spec:
-  sourcePVC: config-home-assistant-0
+  # The PVC to be backed up
+  sourcePVC: vaultwarden-v1
   trigger:
-    schedule: "0 0 * * *"
-  restic:
-    copyMethod: Snapshot
-    pruneIntervalDays: 10
-    repository: home-assistant-restic-secret
-    cacheCapacity: 2Gi
-    volumeSnapshotClassName: csi-ceph-blockpool
-    storageClassName: ceph-block
-    retain:
-      daily: 10
-      within: 3d
+    # Take a backup every 30 minutes
+    schedule: "*/30 * * * *"
+restic:
+  # Prune the repository (repack to free space) every 2 weeks
+  pruneIntervalDays: 14
+  # Name of the Secret with the connection information
+  repository: restic-config
+  # Retention policy for backups
+  retain:
+    hourly: 6
+    daily: 5
+    weekly: 4
+    monthly: 2
+    yearly: 1
+  # Clone the source volume prior to taking a backup to ensure a
+  # point-in-time image.
+  copyMethod: Clone
+  # The StorageClass to use when creating the PiT copy (same as source PVC if omitted)
+  #storageClassName: my-sc-name
+  # The VSC to use if the copy method is Snapshot (default if omitted)
+  #volumeSnapshotClassName: my-vsc-name
