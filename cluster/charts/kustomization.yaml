@@ -24,3 +24,4 @@ resources:
 - hajimari-charts.yaml
 - bjw-s-charts.yaml
 - stakater-charts.yaml
+- backube.yaml
