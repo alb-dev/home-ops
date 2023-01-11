@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: uptime-kuma-v1
+  name: uptime-kuma-pvc-2
   namespace: monitoring
   labels:
     app.kubernetes.io/name: &name uptime-kuma
