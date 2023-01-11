@@ -4,6 +4,6 @@ resources:
 - home-assistant
 - jellyfin 
 - paperless
-- komga
+#- komga
 - vaultwarden
 - homepage
