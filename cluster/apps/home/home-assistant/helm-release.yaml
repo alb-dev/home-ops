@@ -83,9 +83,11 @@ spec:
               paths:
                 - path: /
                   pathType: Prefix
+              secretName: "hass.${SECRET_DOMAIN}"
           tls:
             - hosts:
                 - "hass-config.${SECRET_DOMAIN}"
+              secretName: "hass-config.${SECRET_DOMAIN}"
         volumeMounts:
           - name: config
             mountPath: /config
