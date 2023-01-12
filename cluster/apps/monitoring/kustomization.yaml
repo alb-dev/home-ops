@@ -5,4 +5,5 @@ resources:
   - node-problem-detector
   - uptime-kuma
   - grafana
+  - kubernetes-dashboard
 

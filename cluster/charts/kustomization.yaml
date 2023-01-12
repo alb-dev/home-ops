@@ -25,3 +25,4 @@ resources:
 - bjw-s-charts.yaml
 - stakater-charts.yaml
 - backube.yaml
+- kubernetes-dashboard.yaml
