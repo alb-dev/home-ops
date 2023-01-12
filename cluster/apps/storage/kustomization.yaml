@@ -3,4 +3,5 @@ kind: Kustomization
 resources:
 - longhorn
 - minio
+- snapscheduler
 - volsync

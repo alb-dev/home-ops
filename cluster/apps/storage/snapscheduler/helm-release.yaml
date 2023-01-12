@@ -28,4 +28,4 @@ spec:
   values:
     manageCRDs: true
     metrics:
-      disableAuth: true
+      disableAuth: truekubectl -n kube-system describe
