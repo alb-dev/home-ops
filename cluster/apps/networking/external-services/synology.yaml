@@ -25,3 +25,19 @@ spec:
   tls:
     - hosts:
         - *host
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: &app synology
+  namespace: networking
+  labels:
+    app.kubernetes.io/name: *app
+    app.kubernetes.io/instance: *app
+spec:
+  type: ExternalName
+  externalName: nas.${SECRET_PRIVATE_DOMAIN}
+  ports:
+    - name: http
+      port: 5000
+      protocol: TCP
