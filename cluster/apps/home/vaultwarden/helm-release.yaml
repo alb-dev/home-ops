@@ -8,13 +8,14 @@ spec:
     interval: 5m
     chart:
       spec:
-        # renovate: registryUrl=https://k8s-at-home.com/charts/
-        chart: vaultwarden
-        version: 5.3.2
-        sourceRef:
-          kind: HelmRepository
-          name: k8s-at-home-charts
-          namespace: flux-system
+        chart:
+          spec:
+            chart: app-template
+            version: 1.2.1
+            sourceRef:
+              kind: HelmRepository
+              name: bjw-s-charts
+              namespace: flux-system
     values:
       image:
         # -- image repository
@@ -65,7 +66,6 @@ spec:
             hajimari.io/enable: "true"
             hajimari.io/appName: "Vault"
             hajimari.io/icon: "mdiLock"
-          #  traefik.ingress.kubernetes.io/router.tls.domains.0.main: "vaultwarden.${SECRET_DOMAIN}"
           hosts:
             - host: "pw.${SECRET_DOMAIN}"
               paths:
@@ -91,8 +91,6 @@ spec:
           tls:
             - hosts:
                 - "pw.${SECRET_DOMAIN}"
-      # -- Configure persistence settings for the chart under this key.
-      # @default -- See values.yaml
       persistence:
           config:
             enabled: true
