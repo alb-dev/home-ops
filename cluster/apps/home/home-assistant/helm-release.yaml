@@ -51,6 +51,7 @@ spec:
         tls:
         - hosts:
             - "hass.${SECRET_DOMAIN}"
+          secretName: "hass.${SECRET_DOMAIN}"
 
     securityContext:
       # -- (bool) Privileged securityContext may be required if USB devics are accessed directly through the host machine
