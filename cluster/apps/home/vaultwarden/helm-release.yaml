@@ -73,8 +73,9 @@ spec:
               - path: /notifications/hub/negotiate
                 pathType: Prefix
           tls:
-          - hosts:
-              - "pw.${SECRET_DOMAIN}"
+            - hosts:
+                - "pw.${SECRET_DOMAIN}"
+              secretName: "pw.${SECRET_DOMAIN}"
         admin:
           enabled: true
           ingressClassName: "nginx"
@@ -86,6 +87,7 @@ spec:
           tls:
             - hosts:
                 - "pw.${SECRET_DOMAIN}"
+              secretName: "pw.${SECRET_DOMAIN}"
       persistence:
           config:
             enabled: true
