@@ -45,7 +45,6 @@ spec:
         tls:
         - hosts:
             - "jelly.${SECRET_DOMAIN}"
-          secretName: "jelly.${SECRET_DOMAIN}"
     persistence:
       transcode:
         enabled: true
