@@ -28,3 +28,4 @@ kubeconfig*
 kubernetes/schemas
 # extras
 config.xml
+*kubernetes
