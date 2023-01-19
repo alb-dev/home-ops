@@ -3,8 +3,28 @@
 terraform.tfstate*
 terraform.tfvars
 terrraform.auto.tfvars
-xanmanning.k3s
 variable.tf
 roles
 kubeconfig
 .decrypted*
+# trash
+.DS_Store
+Thumbs.db
+# temp folders
+.private/
+# ansible
+xanmanning.k3s*
+# terraform
+.terraform
+*.tfvars
+# sops
+.decrypted~*
+*.agekey
+*.pub
+*.key
+*.pem
+# kubernetes
+kubeconfig*
+kubernetes/schemas
+# extras
+config.xml
