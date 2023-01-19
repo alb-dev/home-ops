@@ -26,3 +26,4 @@ resources:
 - stakater-charts.yaml
 - backube.yaml
 - kubernetes-dashboard.yaml
+- jameswynn.yaml
