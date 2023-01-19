@@ -2,66 +2,82 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &app homepage
+  name: homepage
   namespace: home
 spec:
-  interval: 10m0s
+  interval: 15m
   chart:
     spec:
-      chart: homepage
-      version: 1.0.0
-      interval: 10m0s
+      # renovate: registryUrl=https://bjw-s.github.io/helm-charts
+      chart: app-template
+      version: 1.2.1
       sourceRef:
         kind: HelmRepository
-        name: jameswynn
-        namespace: home
-
+        name: bjw-s-charts
+        namespace: flux-system
   values:
+    global:
+      # nameOverride: homepage
+      annotations:
+        reloader.stakater.com/search: "true"
+
     image:
-      repository: ghcr.io/jameswynn/homepage
+      repository: ghcr.io/benphelps/homepage
+      tag: v0.6.0
       pullPolicy: IfNotPresent
-      tag: kubernetes@sha256:aba1848045c44e13b74607d3bfcef016b1b9b5c954a46805c5937ab79c4ec918
 
-    enableRbac: true
-    config:
-      kubernetes:
-        mode: cluster
-      settings:
-        theme: dark
-      widgets:
-        - resources:
-            backend: kubernetes
-            expanded: true
-            cpu: true
-            memory: true
-      bookmarks:
-        - Infrastructure:
-            - "Synology NAS":
-                - abbr: SN
-                  href: https://athena.${SECRET_DOMAIN}
-                  icon: synology.png
-      services:
-
-    podAnnotations:
-      configmap.reloader.stakater.com/reload: *app
+    env:
+      TZ: ${TIMEZONE}
+      LOG_LEVEL: debug
 
     ingress:
       main:
         enabled: true
         ingressClassName: "nginx"
         annotations:
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/name: "Homepage"
-          gethomepage.dev/description: "A modern, secure, highly customizable application dashboard."
-          gethomepage.dev/group: Applications
-          gethomepage.dev/icon: "homepage.png"
-          cert-manager.io/cluster-issuer: "letsencrypt-production"  
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
-          - host: &host "home.${SECRET_DOMAIN}"
+          - host: "home.${SECRET_DOMAIN}"
             paths:
               - path: /
-
+                pathType: Prefix
         tls:
-          - hosts:
-              - *host
-            secretName: letsencrypt-homepage
+        - hosts:
+            - "home.${SECRET_DOMAIN}"
+          secretName: "home.${SECRET_DOMAIN}"
+
+    service:
+      main:
+        ports:
+          http:
+            port: 3000
+            targetPort: 3000
+
+    persistence:
+      config:
+        enabled: true
+        # type: configmap
+        # name: homepage-config
+        # mountPath: /app/config
+        type: custom
+        volumeSpec:
+          configMap:
+            name: homepage-config
+        subPath:
+          - path: settings.yaml
+            mountPath: /app/config/settings.yaml
+          - path: widgets.yaml
+            mountPath: /app/config/widgets.yaml
+          - path: services.yaml
+            mountPath: /app/config/services.yaml
+          - path: bookmarks.yaml
+            mountPath: /app/config/bookmarks.yaml
+          - path: docker.yaml
+            mountPath: /app/config/docker.yaml
+
+    resources:
+      requests:
+        cpu: 25m
+        memory: 105M
+      limits:
+        memory: 225M
