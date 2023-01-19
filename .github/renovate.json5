@@ -14,7 +14,7 @@
   "helm-values": {
     "fileMatch": ["cluster/.+\\.ya?ml$"]
   },
-  "cluster": {
+  "kubernetes": {
     "fileMatch": [
       "cluster/.+\\.ya?ml$",
       "provision/ansible/.+\\.ya?ml.j2$"
