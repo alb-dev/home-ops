@@ -27,3 +27,4 @@ resources:
 - backube.yaml
 - kubernetes-dashboard.yaml
 - jameswynn.yaml
+- pihole.yaml
