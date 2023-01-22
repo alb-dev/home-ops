@@ -18,6 +18,8 @@ spec:
   install:
     createNamespace: true
   values:
+    image:
+        tag: v0.13.2 # TODO: once there's update to this chart, remove tag
     interval: 15m
     logLevel: debug
     provider: pihole
