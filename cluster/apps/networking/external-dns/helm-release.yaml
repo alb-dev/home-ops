@@ -33,5 +33,5 @@ spec:
             name: pihole-secret
             key: EXTERNAL_DNS_PIHOLE_PASSWORD
 
-  serviceMonitor:
-    enabled: true
+    serviceMonitor:
+      enabled: true
