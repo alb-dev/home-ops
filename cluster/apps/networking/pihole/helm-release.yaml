@@ -28,7 +28,7 @@ spec:
       type: LoadBalancer
       annotations:
         metallb.universe.tf/loadBalancerIPs: ${PIHOLE_LB_IP}
-
+        metallb.universe.tf/allow-shared-ip: pihole-svc
     serviceDhcp:
       type: LoadBalancer
 
