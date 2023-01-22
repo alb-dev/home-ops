@@ -21,7 +21,7 @@ spec:
               service:
                 name: *app
                 port:
-                  number: 8080
+                  number: 80
   tls:
     - hosts:
         - *host
@@ -39,5 +39,5 @@ spec:
   externalName: pihole.${SECRET_PRIVATE_DOMAIN}
   ports:
     - name: http
-      port: 8080
+      port: 80
       protocol: TCP
