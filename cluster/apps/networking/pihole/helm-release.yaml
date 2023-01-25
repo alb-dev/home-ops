@@ -21,7 +21,7 @@ spec:
     replicaCount: 1
     image:
       repository: "pihole/pihole"
-      tag: "2023.01.8"
+      tag: "2023.01.10"
       pullPolicy: IfNotPresent
 
     serviceDns:
