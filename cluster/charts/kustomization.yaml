@@ -28,3 +28,4 @@ resources:
 - kubernetes-dashboard.yaml
 - jameswynn.yaml
 - pihole.yaml
+- intel.yaml
