@@ -7,3 +7,4 @@ resources:
   - csi-driver-nfs
   - metrics-server
   - kube-vip
+  - helm-release.yaml
