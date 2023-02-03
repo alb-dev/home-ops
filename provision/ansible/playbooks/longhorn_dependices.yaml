@@ -17,9 +17,6 @@
           - open-iscsi
           - bash
           - curl
-          - findmnt
           - grep
-          - awk
-          - blkid
         state: present
 

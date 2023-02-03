@@ -29,3 +29,4 @@ kubernetes/schemas
 # extras
 config.xml
 *kubernetes
+ansible

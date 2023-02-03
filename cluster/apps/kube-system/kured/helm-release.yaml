@@ -23,8 +23,8 @@ spec:
       endTime: "2am"
       logFormat: "json"
       timeZone: "Europe/Berlin"
-      rebootSentinelCommand: |-
-        sh -c "! needs-restarting --reboothint" 
+#      rebootSentinelCommand: |-
+#        sh -c "! needs-restarting --reboothint" 
     tolerations:
         - key: node-role.kubernetes.io/master
           operator: Exists
