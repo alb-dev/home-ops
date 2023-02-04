@@ -44,6 +44,6 @@ spec:
       scrapeTimeout: 25s
       params:
       - module:
-        - synology
-        name: synology
+        - snmp-docker
+        name: snmp-docker
         target: 192.168.178.35
