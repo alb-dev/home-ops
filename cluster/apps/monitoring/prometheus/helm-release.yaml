@@ -16,9 +16,6 @@ spec:
         name: prometheus-community-charts
         namespace: flux-system
       interval: 5m
-#  dependsOn:
-#    - name: nfs-csi
-#      namespace: nfs-csi-system
   values:
     alertmanager:
         config:
@@ -126,10 +123,6 @@ spec:
         replicaExternalLabelName: __replica__
         externalLabels:
           cluster: home-ops
-        # remoteWrite:
-        #   - url: http://mimir-distributor.monitoring.svc.cluster.local:8080/api/v1/push
-        #     headers:
-        #       X-Scope-OrgID: anonymous
         podAntiAffinity: hard
         retentionSize: "6GB"
         ruleSelectorNilUsesHelmValues: false
