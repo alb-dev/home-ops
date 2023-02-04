@@ -146,7 +146,7 @@ spec:
           limits:
             memory: 8000Mi
         additionalScrapeConfigs:
-          - job_name: athena
+          - job_name: node-docker
             scrape_interval: 1m
             scrape_timeout: 10s
             metrics_path: /metrics
