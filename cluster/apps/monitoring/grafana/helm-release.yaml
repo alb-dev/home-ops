@@ -112,6 +112,11 @@ spec:
               gnetId: 11312
               revision: 8
               datasource: Prometheus
+            # Ref: https://grafana.com/grafana/dashboards/14590-synology-dashboard/
+            athena:
+              gnetId: 14590
+              revision: 3
+              datasource: Prometheus
         sidecar:
           dashboards:
             enabled: true
