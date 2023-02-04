@@ -121,6 +121,10 @@ spec:
               gnetId: 14364
               revision: 8
               datasource: Prometheus
+            fritzbox:
+              gnetId: 12579
+              revision: 8
+              datasource: Prometheus
         sidecar:
           dashboards:
             enabled: true
