@@ -6,7 +6,6 @@ resources:
 - system-upgrade
 - monitoring
 - networking
-- security
 - kube-system
 - tigera-operator
 - storage
