@@ -4,7 +4,7 @@ namespace: monitoring
 configMapGenerator:
   - name: synoglogy_dashboard
     files:
-      - synoglogy_dashboard.json=./config/synology_sashboard.json
+      - synoglogy_dashboard.json=./config/synology_dashboard.json
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
