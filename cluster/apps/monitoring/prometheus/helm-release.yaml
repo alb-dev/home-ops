@@ -153,3 +153,7 @@ spec:
             honor_timestamps: true
             static_configs:
               - targets: ["192.168.178.35:9100"]
+          - job_name: firtz-exporter
+            scrape_interval: 1m 
+            static_configs: 
+              - targets: ["fritz-exporter.monitoring.svc.cluster.local:9787"]
