@@ -30,3 +30,4 @@ resources:
 - pihole.yaml
 - intel.yaml
 - piraeus.yaml
+- cilium.yaml
