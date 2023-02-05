@@ -21,7 +21,7 @@ spec:
     persistence:
       defaultClass: true
       defaultClassReplicaCount: 3
-      reclaimPolicy: retain
+      reclaimPolicy: Delete
     defaultSettings:
       backupstorePollInterval: 300
       backupTarget: nfs://${NFS_SERVER}:/volume3/kubernetes/LonghornBackup
