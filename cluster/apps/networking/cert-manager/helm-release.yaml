@@ -23,7 +23,7 @@ spec:
       retries: 5
   values:
     # TODO | Change to true when new cluster is made
-    installCRDs: false
+    installCRDs: true
     replicaCount: 3
     webhook:
       replicaCount: 3

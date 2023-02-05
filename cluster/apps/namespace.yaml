@@ -47,5 +47,11 @@ metadata:
   name: volsync
   labels:
     kustomize.toolkit.fluxcd.io/prune: disabled
-
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cert-manager
+  labels:
+    kustomize.toolkit.fluxcd.io/prune: disabled
 
