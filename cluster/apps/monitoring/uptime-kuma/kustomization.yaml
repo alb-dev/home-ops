@@ -5,4 +5,4 @@ resources:
 - service.yaml
 - deployment.yaml
 - ingressroute.yaml 
-- volsync
+#- volsync
