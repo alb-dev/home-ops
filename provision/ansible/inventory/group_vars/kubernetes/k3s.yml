@@ -6,8 +6,8 @@
 
 # (string) Use a specific version of k3s
 # renovate: datasource=github-releases depName=k3s-io/k3s
-k3s_release_version: "v1.25.3+k3s1"
-kubevip_address: 192.168.178.11
+k3s_release_version: "v1.25.5+k3s1"
+kubevip_address: 192.168.178.210
 # (bool) Install using hard links rather than symbolic links.
 k3s_install_hard_links: true
 
@@ -27,14 +27,14 @@ k3s_use_unsupported_config: true
 k3s_registration_address: "{{ kubevip_address }}"
 
 # (list) A list of URLs to deploy on the primary control plane. Read notes below.
-k3s_server_manifests_urls:
-  - url: https://docs.projectcalico.org/archive/v3.25/manifests/tigera-operator.yaml
-    filename: tigera-operator.yaml
-  - url: https://kube-vip.io/manifests/rbac.yaml
-    filename: kube-vip-rbac.yaml
+#k3s_server_manifests_urls:
+#  - url: https://docs.projectcalico.org/archive/v3.25/manifests/tigera-operator.yaml
+#    filename: tigera-operator.yaml
+#  - url: https://kube-vip.io/manifests/rbac.yaml
+#    filename: kube-vip-rbac.yaml
 
 # (list) A flat list of templates to deploy on the primary control plane
 # /var/lib/rancher/k3s/server/manifests
-k3s_server_manifests_templates:
-  - "kube-vip-daemonset.yaml.j2"
-  - "calico-installation.yaml.j2"
+#k3s_server_manifests_templates:
+#  - "kube-vip-daemonset.yaml.j2"
+#  - "calico-installation.yaml.j2"

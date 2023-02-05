@@ -3,10 +3,11 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - home
-- system-upgrade
+- cilium
+#- system-upgrade
 - monitoring
 - networking
 - kube-system
-- tigera-operator
+#- tigera-operator
 - storage
 - kube-tools

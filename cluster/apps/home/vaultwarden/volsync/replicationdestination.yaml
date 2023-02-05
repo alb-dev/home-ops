@@ -1,0 +1,13 @@
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationDestination
+metadata:
+  name: vaultwarden-restic-restore
+  namespace: home
+spec:
+  trigger:
+    manual: restore-once
+  restic:
+    destinationPVC: vaultwarden-v1
+    repository: vaultwarden-restic-config
+    copyMethod: Direct
