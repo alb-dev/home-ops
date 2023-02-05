@@ -16,6 +16,7 @@ restic:
   # Name of the Secret with the connection information
   repository: vaultwarden-v1-backup
   # Retention policy for backups
+  cacheCapacity: 2Gi  
   retain:
     hourly: 6
     daily: 5
@@ -24,8 +25,8 @@ restic:
     yearly: 1
   # Clone the source volume prior to taking a backup to ensure a
   # point-in-time image.
-  copyMethod: Clone
+  copyMethod: Snapshot
   # The StorageClass to use when creating the PiT copy (same as source PVC if omitted)
-  #storageClassName: my-sc-name
+  storageClassName: longhorn
   # The VSC to use if the copy method is Snapshot (default if omitted)
   volumeSnapshotClassName: longhorn-snapshot
