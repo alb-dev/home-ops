@@ -5,6 +5,6 @@ resources:
 - cert-manager
 - external-dns
 - ingress-nginx
-- wildcard
+#- wildcard
 - external-services
 - pihole
