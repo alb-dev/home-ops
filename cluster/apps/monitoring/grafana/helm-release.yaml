@@ -122,12 +122,8 @@ spec:
               revision: 8
               datasource: Prometheus
             fritzbox:
-              gnetId: 17751
-              revision: 1
-              datasource: Prometheus
-            fritzbox-channel:
-              gnetId: 13983
-              revision: 10
+              gnetId: 13377
+              revision: 8
               datasource: Prometheus
 
               
