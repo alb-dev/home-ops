@@ -7,4 +7,4 @@ resources:
 - ingress-nginx
 - wildcard
 - external-services
-- pihole
+#- pihole
