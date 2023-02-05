@@ -7,7 +7,7 @@ metadata:
 spec:
   sourcePVC: vaultwarden-v1
   trigger:
-    schedule: "*/30 * * * *"
+    schedule: "30 20 * * *"
   restic:
     pruneIntervalDays: 15
     repository: vaultwarden-restic-config
