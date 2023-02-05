@@ -122,9 +122,15 @@ spec:
               revision: 8
               datasource: Prometheus
             fritzbox:
-              gnetId: 12579
-              revision: 8
+              gnetId: 17751
+              revision: 1
               datasource: Prometheus
+            fritzbox-channel:
+              gnetId: 13983
+              revision: 10
+              datasource: Prometheus
+
+              
         sidecar:
           dashboards:
             enabled: true
