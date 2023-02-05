@@ -25,8 +25,8 @@ restic:
     yearly: 1
   # Clone the source volume prior to taking a backup to ensure a
   # point-in-time image.
-  copyMethod: Snapshot
+  copyMethod: Clone
   # The StorageClass to use when creating the PiT copy (same as source PVC if omitted)
-  storageClassName: longhorn
+  #storageClassName: longhorn
   # The VSC to use if the copy method is Snapshot (default if omitted)
-  volumeSnapshotClassName: longhorn-snapshot
+  #volumeSnapshotClassName: longhorn-snapshot
