@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - node-feature-discovery
   - snapshot-controller
+  - snapshot-validation-webhook
   - kured
   - descheduler
   - csi-driver-nfs
