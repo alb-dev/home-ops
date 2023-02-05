@@ -28,5 +28,5 @@ kubeconfig*
 kubernetes/schemas
 # extras
 config.xml
-*kubernetes
+kubernetes_new
 ansible

@@ -1,4 +1,27 @@
+---
 creation_rules:
-  - path_regex: cluster/.*\.sops\.ya?ml
+  - path_regex: kubernetes/.*\.sops\.ya?ml
     encrypted_regex: "^(data|stringData)$"
-    pgp: EC621778D7E4AD9330404D6A6A00CDA35DF9B2BC
+    key_groups:
+      - age:
+          - age1ce6neraa02llughs9qcw75u0jr9avef64fy2zln7vy8qu98mky2qxm59ju
+  - path_regex: kubernetes/.*\.sops\.ini
+    key_groups:
+      - age:
+          - age1ce6neraa02llughs9qcw75u0jr9avef64fy2zln7vy8qu98mky2qxm59ju
+  - path_regex: kubernetes/.*\.sops\.toml
+    key_groups:
+      - age:
+          - age1ce6neraa02llughs9qcw75u0jr9avef64fy2zln7vy8qu98mky2qxm59ju
+  - path_regex: kubernetes/.*\.sops\.json
+    key_groups:
+      - age:
+          - age1ce6neraa02llughs9qcw75u0jr9avef64fy2zln7vy8qu98mky2qxm59ju
+  - path_regex: ansible/.*\.sops\.ya?ml
+    key_groups:
+      - age:
+          - age1ce6neraa02llughs9qcw75u0jr9avef64fy2zln7vy8qu98mky2qxm59ju
+  - path_regex: terraform/.*\.sops\.ya?ml
+    key_groups:
+      - age:
+          - age1ce6neraa02llughs9qcw75u0jr9avef64fy2zln7vy8qu98mky2qxm59ju
