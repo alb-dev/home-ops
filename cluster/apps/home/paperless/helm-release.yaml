@@ -55,9 +55,6 @@ spec:
         ingressClassName: "nginx"
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
-          hajimari.io/enable: "true"
-          hajimari.io/appName: "DMS"
-          hajimari.io/icon: "mdiFolderArrowDown"
         hosts:
           - host: "paperless.${SECRET_DOMAIN}"
             paths:
