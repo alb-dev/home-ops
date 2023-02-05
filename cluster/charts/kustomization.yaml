@@ -29,3 +29,4 @@ resources:
 - jameswynn.yaml
 - pihole.yaml
 - intel.yaml
+- piraeus.yaml
