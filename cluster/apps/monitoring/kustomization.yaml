@@ -8,5 +8,4 @@ resources:
   - grafana
   - kubernetes-dashboard
   - snmp-exporter-synology
-  - fritz-exporter
 
