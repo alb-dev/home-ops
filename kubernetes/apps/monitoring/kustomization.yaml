@@ -4,7 +4,7 @@ resources:
   - dashboards
   - prometheus
   - node-problem-detector
- # - uptime-kuma
+  - uptime-kuma
   - grafana
   - kubernetes-dashboard
   - snmp-exporter-synology
