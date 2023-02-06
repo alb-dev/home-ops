@@ -4,5 +4,5 @@ resources:
   - config-pv-config.yaml
   - config-pvc-config.yaml
   - helm-release.yaml
-#  - volsync
+  - volsync
 
