@@ -91,4 +91,4 @@ spec:
       persistence:
           config:
             enabled: true
-            existingClaim: vaultwarden-v3
+            existingClaim: vaultwarden-v1
