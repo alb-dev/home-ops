@@ -21,6 +21,7 @@ spec:
       pullPolicy: IfNotPresent
     env:
       TZ: UTC
+      JELLYFIN_CACHE_DIR: "/config/cache"
     service:
       main:
         ports:
@@ -65,6 +66,7 @@ spec:
     podSecurityContext: 
        supplementalGroups:
         - 44
+        - 100
         - 109
 
     resources:
