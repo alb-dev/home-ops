@@ -5,7 +5,7 @@ metadata:
   name: cluster-apps-cloudnative-pg
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/dev/cloudnative-pg/app
+  path: ./kubernetes/apps/databases/cloudnative-pg/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -25,14 +25,13 @@ metadata:
   name: cluster-apps-cloudnative-pg-cluster
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/dev/cloudnative-pg/cluster
+  path: ./kubernetes/apps/databases/cloudnative-pg/cluster
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
   dependsOn:
     - name: cluster-apps-cloudnative-pg
-    - name: cluster-apps-external-secrets-stores
   wait: true
   interval: 30m
   retryInterval: 1m
