@@ -31,3 +31,4 @@ resources:
 - intel.yaml
 - piraeus.yaml
 - cilium.yaml
+- cloudnative-pg.yaml
