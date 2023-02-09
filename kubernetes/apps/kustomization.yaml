@@ -11,4 +11,3 @@ resources:
 - kube-system
 - tigera-operator
 - storage
-- kube-tools

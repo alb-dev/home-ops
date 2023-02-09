@@ -8,5 +8,6 @@ resources:
   - descheduler
   - csi-driver-nfs
   - metrics-server
+  - reloader
 #  - kube-vip
   - intel-device-plugin
