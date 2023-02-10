@@ -1,0 +1,32 @@
+# yamllint disable
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+    name: paperless
+    namespace: default
+stringData:
+    PAPERLESS_DBPASS: ENC[AES256_GCM,data:SmDZyHd08nhOp4Hn2mLa+0FiC0BcUeZjl/yaCNZz,iv:rErsrlRxjDgghinDdJ1/8bPzn8XjgIgIE2YNxmGNB0o=,tag:5O9Tx9SXgsTOnrcLw69q6A==,type:str]
+    PAPERLESS_DBUSER: ENC[AES256_GCM,data:0JbuUtwEC96Ct2iw,iv:Wvlbo2AlUC+hFtDoArRLh/g40CDuAlO9OthYCDPMWwA=,tag:YKeubHhjLKV0PJI2h3pZYw==,type:str]
+    SUPER_USER: ENC[AES256_GCM,data:k6/nicYY3rsq,iv:o2XO/xeKwqdJNMseWBAIT3bJcutOX032uRWw+Z+Wlfc=,tag:9LJjw22yGSxDgYyOsOvZkg==,type:str]
+    SUPER_PASSWORD: ENC[AES256_GCM,data:zW12ZV8SF2WCP+lIeMWvzsiX4Rzsa/vNZHA+,iv:h80RVRogOpQz+Yqbn/NUpuH4AFewnWlmcBDciyM7U5s=,tag:kfzdfrXIvO78T0ZRan0wWw==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1ce6neraa02llughs9qcw75u0jr9avef64fy2zln7vy8qu98mky2qxm59ju
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA2T095dE9UTXAzNlFFRHF3
+            M1pPVTNqRUwvN0ZiNERxNCtORnZBNTI5UzJvClFKdjJjQll5WW03N3IyWUpYOFlw
+            Y3lFR3Avd0dvS2JZS1lnL1Y3am56d2sKLS0tIG9zMkJqb1pvREVOMTdFcVZxanNs
+            ZnZqT2xFSWhGK3ZQTFNrdzh4c0JjNFEKOl/ugEHuVlUuu5uyDSNgolB0bAih4i9+
+            N9UlTrHFwlKILYJJQIzUDbduzpPk2S8PAH0z9LWg8qz0xsGvvzjmKg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-02-10T22:27:28Z"
+    mac: ENC[AES256_GCM,data:g/3TQxLAkP3bHXe0X3g2goCCzAvKT9R7+0MXYgD0P0RsB85THolNhL26Y69vzwaTDghCSQjlBx4/k0l+UrdAjgOPGxpPWv+qeuzYynDnFPVUhC6CpgGurBJEDhc6xm5Kc+x+/TcjV8dssK3EuXEDsua5ti953UN/WXODCO3mr/I=,iv:UySEkMeEJGn7LIcafAALfQY3Pq6aunUsR0wyTJybCZI=,tag:1kZgMdQtm0H688GobeT9rg==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.3
