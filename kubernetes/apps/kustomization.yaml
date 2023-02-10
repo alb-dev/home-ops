@@ -11,3 +11,5 @@ resources:
 - kube-system
 - tigera-operator
 - storage
+- volsync
+- default
