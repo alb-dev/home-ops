@@ -4,6 +4,7 @@ kind: HelmRelease
 metadata:
   name: paperless-ngx-redis
   namespace: default
+spec:
   interval: 5m
   chart:
     spec:
