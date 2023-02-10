@@ -22,7 +22,7 @@ spec:
         image: ghcr.io/onedr0p/postgres-initdb:14.6@sha256:f2d6d7a172ce0c427bda01f4f68b8730b906fba96db3b34c2ec363d3693166c3
         env:
           - name: POSTGRES_HOST
-            value: postgres-rw.database.svc.cluster.local
+            value: postgres-rw.databases.svc.cluster.local
           - name: POSTGRES_DB
             value: "paperless"
           - name: POSTGRES_SUPER_PASS
@@ -50,7 +50,7 @@ spec:
       repository: ghcr.io/paperless-ngx/paperless-ngx
       tag: 1.12.0
     env:
-      PAPERLESS_DBHOST: postgres-rw.database.svc.cluster.local
+      PAPERLESS_DBHOST: postgres-rw.databases.svc.cluster.local
       COMPOSE_PROJECT_NAME: paperless-ngx
       PAPERLESS_TIME_ZONE: Europe/Berlin
       PAPERLESS_URL: https://paperless.${SECRET_DOMAIN}
