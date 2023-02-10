@@ -9,7 +9,7 @@ spec:
 #  dependsOn:
 #    - name: cluster-apps-cloudnative-pg
 #    - name: cluster-apps-volsync
-  path: ./kubernetes/apps/volsync/app
+  path: ./kubernetes/apps/volsync/volsync/app
   prune: true
   sourceRef:
     kind: GitRepository
