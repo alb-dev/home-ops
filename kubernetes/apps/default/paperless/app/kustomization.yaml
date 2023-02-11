@@ -6,3 +6,4 @@ resources:
   - ./paperless.sops.yaml
   - ./pvc-paperless-data.yaml
   - ./pvc-paperless-redis.yaml
+  - ./helm-release-pgsql.yaml

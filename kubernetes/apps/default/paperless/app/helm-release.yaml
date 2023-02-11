@@ -17,40 +17,11 @@ spec:
   values:
     controller:
       strategy: RollingUpdate
-    initContainers:
-      init-db:
-        image: ghcr.io/onedr0p/postgres-initdb:14.6@sha256:f2d6d7a172ce0c427bda01f4f68b8730b906fba96db3b34c2ec363d3693166c3
-        env:
-          - name: POSTGRES_HOST
-            value: postgres-rw.databases.svc.cluster.local
-          - name: POSTGRES_DB
-            value: "paperless"
-          - name: POSTGRES_SUPER_PASS
-            valueFrom:
-              secretKeyRef:
-                name: paperless
-                key: SUPER_PASSWORD
-          - name: POSTGRES_SUPER_USER
-            valueFrom:
-              secretKeyRef:
-                name: paperless
-                key: SUPER_USER
-          - name: POSTGRES_USER
-            valueFrom:
-              secretKeyRef:
-                name: paperless
-                key: PAPERLESS_DBUSER
-          - name: POSTGRES_PASS
-            valueFrom:
-              secretKeyRef:
-                name: paperless
-                key: PAPERLESS_DBPASS
-
     image:
       repository: ghcr.io/paperless-ngx/paperless-ngx
       tag: 1.12.0
     env:
-      PAPERLESS_DBHOST: postgres-rw.databases.svc.cluster.local
+      PAPERLESS_DBHOST: paperless-postgresql
       COMPOSE_PROJECT_NAME: paperless-ngx
       PAPERLESS_TIME_ZONE: Europe/Berlin
       PAPERLESS_URL: https://paperless.${SECRET_DOMAIN}
