@@ -21,14 +21,16 @@ spec:
       repository: ghcr.io/paperless-ngx/paperless-ngx
       tag: 1.12.0
     env:
-      PAPERLESS_DBHOST: paperless-postgresql
       COMPOSE_PROJECT_NAME: paperless-ngx
       PAPERLESS_TIME_ZONE: Europe/Berlin
       PAPERLESS_URL: https://paperless.${SECRET_DOMAIN}
+      PAPERLESS_DBHOST: paperless-postgresql
       PAPERLESS_DBNAME: paperless-db
       PAPERLESS_DBUSER: paperless-db
       PAPERLESS_DBPASS: ${SECRET_PAPERLESS_NGX_DB_PASSWORD}
       PAPERLESS_REDIS: redis://paperless-ngx-redis-master:6379
+      USERMAP_UID: 33
+      USERMAP_GID: 33
       PAPERLESS_CONSUMPTION_DIR: /paperless/consume
       PAPERLESS_DATA_DIR: /paperless/data
       PAPERLESS_MEDIA_ROOT: /paperless/media
