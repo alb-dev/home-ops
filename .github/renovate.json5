@@ -9,21 +9,21 @@
     "enabled": true
   },
   "flux": {
-    "fileMatch": ["cluster/.+\\.ya?ml$"]
+    "fileMatch": ["kubernetes/.+\\.ya?ml$"]
   },
   "helm-values": {
-    "fileMatch": ["cluster/.+\\.ya?ml$"]
+    "fileMatch": ["kubernetes/.+\\.ya?ml$"]
   },
   "kubernetes": {
     "fileMatch": [
-      "cluster/.+\\.ya?ml$",
+      "kubernetes/.+\\.ya?ml$",
       "provision/ansible/.+\\.ya?ml.j2$"
     ]
   },
   "regexManagers": [
     {
       "description": "Process CRD dependencies",
-      "fileMatch": ["cluster/flux/flux-system/.+\\.ya?ml$"],
+      "fileMatch": ["kubernetes/flux/.+\\.ya?ml$"],
       "matchStrings": [
         // GitRepository and Flux Kustomization where 'Git release/tag' matches 'Helm' version
         "registryUrl=(?<registryUrl>\\S+) chart=(?<depName>\\S+)\n.*?(?<currentValue>[^-\\s]*)\n",
