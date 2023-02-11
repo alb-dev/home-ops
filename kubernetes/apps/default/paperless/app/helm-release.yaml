@@ -24,26 +24,26 @@ spec:
           - name: POSTGRES_HOST
             value: postgres-rw.database.svc.cluster.local
           - name: POSTGRES_DB
-            value: "paperless"
+            value: "paperless-db"
           - name: POSTGRES_SUPER_PASS
             valueFrom:
               secretKeyRef:
-                name: paperless
+                name: paperless-secrets
                 key: SUPER_PASSWORD
           - name: POSTGRES_SUPER_USER
             valueFrom:
               secretKeyRef:
-                name: paperless
+                name: paperless-secrets
                 key: SUPER_USER
           - name: POSTGRES_USER
             valueFrom:
               secretKeyRef:
-                name: paperless
+                name: paperless-secrets
                 key: PAPERLESS_DBUSER
           - name: POSTGRES_PASS
             valueFrom:
               secretKeyRef:
-                name: paperless
+                name: paperless-secrets
                 key: PAPERLESS_DBPASS
 
     image:
