@@ -3,7 +3,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: paperless-ngx-postgresql
-  namespace: default
+  namespace: paperless-ngx
 spec:
   storageClassName: longhorn
   accessModes:
