@@ -3,7 +3,7 @@ apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
   name: uptime-kuma-restic-backup
-  namespace: home
+  namespace: monitoring
 spec:
   sourcePVC: uptime-kuma-v1
   trigger:
