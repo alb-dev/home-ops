@@ -53,7 +53,7 @@ spec:
       PAPERLESS_DBHOST: postgres-rw.databases.svc.cluster.local
       COMPOSE_PROJECT_NAME: paperless-ngx
       PAPERLESS_TIME_ZONE: Europe/Berlin
-      PAPERLESS_URL: https://paperless.${SECRET_DOMAIN}
+      PAPERLESS_URL: https://paperless.int.swalb.io
       PAPERLESS_DBNAME: paperless-db
       PAPERLESS_DBUSER: paperless-db
       PAPERLESS_DBPASS: ${SECRET_PAPERLESS_NGX_DB_PASSWORD}
