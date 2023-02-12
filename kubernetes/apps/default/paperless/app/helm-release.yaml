@@ -57,7 +57,7 @@ spec:
       PAPERLESS_DBNAME: paperless-db
       PAPERLESS_DBUSER: paperless-db
       PAPERLESS_DBPASS: ${SECRET_PAPERLESS_NGX_DB_PASSWORD}
-      PAPERLESS_REDIS: redis://paperless-ngx-redis-master:6379
+      PAPERLESS_REDIS: redis://redis.databases.svc.cluster.local:6379
       USERMAP_UID: 50000
       USERMAP_GID: 50000
       PAPERLESS_CONSUMPTION_DIR: /paperless/consume
