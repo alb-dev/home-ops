@@ -17,45 +17,45 @@ spec:
   values:
     controller:
       strategy: RollingUpdate
-    initContainers:
-      init-db:
-        image: ghcr.io/onedr0p/postgres-initdb:14.7
-        env:
-          - name: POSTGRES_HOST
-            value: postgres-rw.databases.svc.cluster.local
-          - name: POSTGRES_DB
-            value: paperless-db
-          - name: POSTGRES_SUPER_PASS
-            valueFrom:
-              secretKeyRef:
-                name: paperless-secrets
-                key: SUPER_PASSWORD
-          - name: POSTGRES_SUPER_USER
-            valueFrom:
-              secretKeyRef:
-                name: paperless-secrets
-                key: SUPER_USER
-          - name: POSTGRES_USER
-            valueFrom:
-              secretKeyRef:
-                name: paperless-secrets
-                key: PAPERLESS_DBUSER
-          - name: POSTGRES_PASS
-            valueFrom:
-              secretKeyRef:
-                name: paperless-secrets
-                key: PAPERLESS_DBPASS
+#    initContainers:
+#      init-db:
+#        image: ghcr.io/onedr0p/postgres-initdb:14.7
+#        env:
+#          - name: POSTGRES_HOST
+#            value: postgres-rw.databases.svc.cluster.local
+#          - name: POSTGRES_DB
+#            value: paperless-db
+#          - name: POSTGRES_SUPER_PASS
+#            valueFrom:
+#              secretKeyRef:
+#                name: paperless-secrets
+#                key: SUPER_PASSWORD
+#          - name: POSTGRES_SUPER_USER
+#            valueFrom:
+#              secretKeyRef:
+#                name: paperless-secrets
+#                key: SUPER_USER
+#          - name: POSTGRES_USER
+#            valueFrom:
+#              secretKeyRef:
+#                name: paperless-secrets
+#                key: PAPERLESS_DBUSER
+#          - name: POSTGRES_PASS
+#            valueFrom:
+#              secretKeyRef:
+#                name: paperless-secrets
+#                key: PAPERLESS_DBPASS
 
     image:
       repository: ghcr.io/paperless-ngx/paperless-ngx
       tag: 1.12.2
     env:
-      PAPERLESS_DBHOST: postgres-rw.databases.svc.cluster.local
+#      PAPERLESS_DBHOST: postgres-rw.databases.svc.cluster.local
       COMPOSE_PROJECT_NAME: paperless-ngx
       PAPERLESS_TIME_ZONE: Europe/Berlin
       PAPERLESS_URL: "https://paperless.${SECRET_DOMAIN}"
-      PAPERLESS_DBNAME: paperless-db
-      PAPERLESS_DBUSER: paperless-db
+#      PAPERLESS_DBNAME: paperless-db
+#      PAPERLESS_DBUSER: paperless-db
       PAPERLESS_DBPASS: ${SECRET_PAPERLESS_NGX_DB_PASSWORD}
       PAPERLESS_REDIS: redis://redis.databases.svc.cluster.local:6379
       USERMAP_UID: 50000
