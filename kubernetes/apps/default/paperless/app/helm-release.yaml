@@ -24,7 +24,7 @@ spec:
           - name: POSTGRES_HOST
             value: postgres-rw.databases.svc.cluster.local
           - name: POSTGRES_DB
-            value: "paperless-db"
+            value: paperless-db
           - name: POSTGRES_SUPER_PASS
             valueFrom:
               secretKeyRef:
