@@ -5,7 +5,7 @@ metadata:
   name: vaultwarden-restic-backup
   namespace: home
 spec:
-  sourcePVC: vaultwarden-v1
+  sourcePVC: vaultwarden-v5
   trigger:
     schedule: "30 20 * * *"
   restic:
