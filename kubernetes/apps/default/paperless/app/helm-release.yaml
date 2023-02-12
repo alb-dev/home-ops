@@ -56,7 +56,7 @@ spec:
       PAPERLESS_URL: "https://paperless.${SECRET_DOMAIN}"
 #      PAPERLESS_DBNAME: paperless-db
 #      PAPERLESS_DBUSER: paperless-db
-      PAPERLESS_DBPASS: ${SECRET_PAPERLESS_NGX_DB_PASSWORD}
+#      PAPERLESS_DBPASS: "${SECRET_PAPERLESS_NGX_DB_PASSWORD}"
       PAPERLESS_REDIS: redis://redis.databases.svc.cluster.local:6379
       USERMAP_UID: 50000
       USERMAP_GID: 50000
@@ -70,7 +70,7 @@ spec:
       PAPERLESS_CONSUMER_RECURSIVE: true
       PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS: true
       PAPERLESS_OCR_LANGUAGE: deu+eng
-      PAPERLESS_SECRET_KEY: ${SECRET_PAPERLESS_NGX_SECRET_KEY}
+      PAPERLESS_SECRET_KEY: "${SECRET_PAPERLESS_NGX_SECRET_KEY}"
     persistence:
       data:
         enabled: true
