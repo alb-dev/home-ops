@@ -2,9 +2,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./helm-release.yaml
-  - ./helm-release-redis.yaml
+#  - ./helm-release-redis.yaml
   - ./paperless.sops.yaml
   - ./pvc-paperless-data.yaml
-  - ./pvc-paperless-redis.yaml
+#  - ./pvc-paperless-redis.yaml
 #  - ./helm-release-pgsql.yaml
 #  - ./pvc-paperless-pgsql.yaml
