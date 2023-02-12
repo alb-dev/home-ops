@@ -59,6 +59,7 @@ spec:
       PAPERLESS_REDIS: "redis://paperless-ngx-redis-master:6379"
       PAPERLESS_FILENAME_FORMAT: "{created_year}/{correspondent}/{title}"
       PAPERLESS_OCR_LANGUAGE: "deu+eng"
+      PAPERLESS_PORT: 8000
       PAPERLESS_SECRET_KEY: "${SECRET_PAPERLESS_NGX_SECRET_KEY}"
     persistence:
       data:
