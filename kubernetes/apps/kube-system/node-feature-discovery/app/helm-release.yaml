@@ -37,12 +37,6 @@ spec:
             deviceClassWhitelist: ["02", "03", "0e", "ef", "fe", "ff"]
             deviceLabelFields: ["class", "vendor", "device"]
           custom:
-            - name: "zwave"
-              matchOn:
-                - usbId:
-                    class: ["ff"]
-                    vendor: ["10c4"]
-                    device: ["ea60"]
             - name: "zigbee"
               matchOn:
                 - usbId:
