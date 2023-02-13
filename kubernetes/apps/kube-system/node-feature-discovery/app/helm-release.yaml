@@ -1,4 +1,3 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -31,27 +30,8 @@ spec:
     worker:
       config:
         core:
-          sources:
-            - custom
-            - pci
-            - usb
+          sources: ["custom", "pci", "usb"]
         sources:
           usb:
-            deviceClassWhitelist:
-              - "02"
-              - "03"
-              - "0e"
-              - "ef"
-              - "fe"
-              - "ff"
-            deviceLabelFields:
-              - class
-              - vendor
-              - device
-          custom:
-            - name: "zigbee"
-              matchOn:
-                - usbId:
-                    class: ["02"]
-                    vendor: ["1cf1"]
-                    device: ["0030"]
+            deviceClassWhitelist: ["02", "03", "0e", "ef", "fe", "ff"]
+            deviceLabelFields: ["class", "vendor", "device"]
