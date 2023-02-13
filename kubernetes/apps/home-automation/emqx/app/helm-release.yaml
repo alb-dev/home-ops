@@ -34,6 +34,7 @@ spec:
     emqxConfig:
       EMQX_ALLOW_ANONYMOUS: "false"
       EMQX_AUTH__MNESIA__PASSWORD_HASH: plain
+      EMQX_DASHBOARD__DEFAULT_PASSWORD: ${SECRET_MQTT_PASSWORD}
       EMQX_AUTH__USER__1__USERNAME: ${SECRET_MQTT_USER}
       EMQX_AUTH__USER__1__PASSWORD: ${SECRET_MQTT_PASSWORD}
     emqxAclConfig: >
@@ -85,8 +86,3 @@ spec:
         memory: 150Mi
       limits:
         memory: 512Mi
-  valuesFrom:
-    - targetPath: emqxConfig.EMQX_DASHBOARD__DEFAULT_PASSWORD
-      kind: Secret
-      name: emqx-config
-      valuesKey: admin_password
