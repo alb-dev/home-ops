@@ -10,7 +10,7 @@ resources:
 #- cilium-charts.yaml
 - falco-security-charts.yaml
 - metrics-server-charts.yaml
-- node-feature-discovery-charts.yaml
+- node-feature-discovery.yaml
 - coredns-charts.yaml
 - deliveryhero-charts.yaml
 - descheduler-charts.yaml
