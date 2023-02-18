@@ -48,7 +48,7 @@ spec:
 
     image:
       repository: ghcr.io/paperless-ngx/paperless-ngx
-      tag: 1.12.2
+      tag: 1.13.0
     env:
 #      PAPERLESS_DBHOST: postgres-rw.databases.svc.cluster.local
       PAPERLESS_TIME_ZONE: "Europe/Berlin"
