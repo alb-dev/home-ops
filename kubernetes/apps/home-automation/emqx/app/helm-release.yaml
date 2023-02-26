@@ -46,7 +46,7 @@ spec:
 
     service:
       type: LoadBalancer
-      loadBalancerIP: ${SVC_MQTT_ADDR}
+      loadBalancerIP: '${SVC_MQTT_ADDR}'
       externalTrafficPolicy: Local
     ingress:
       dashboard:
