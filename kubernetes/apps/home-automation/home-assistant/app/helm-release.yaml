@@ -4,7 +4,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: home-assistant
-  namespace: default
+  namespace: home-automation
 spec:
   interval: 15m
   chart:
@@ -39,7 +39,7 @@ spec:
     service:
       main:
         type: LoadBalancer
-        externalIPs: ["${SVC_HASS_IP}"]
+        externalIPs: ["${LB_HOMEASSISTANT_IP}"]
         externalTrafficPolicy: Local
         ports:
           http:

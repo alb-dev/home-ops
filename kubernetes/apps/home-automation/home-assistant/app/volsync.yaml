@@ -1,0 +1,36 @@
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: home-assistant
+  namespace: home-automation
+spec:
+  sourcePVC: config-home-assistant-0
+  trigger:
+    schedule: "0 0 * * *"
+  restic:
+    pruneIntervalDays: 15
+    repository: home-assistant-restic-secret
+    retain:
+      hourly: 1
+      daily: 1
+      weekly: 1
+      monthly: 1
+      yearly: 1
+    copyMethod: Clone
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: home-assistant-restic-secret
+  namespace: home-automation
+type: Opaque
+stringData:
+  # The repository url
+  RESTIC_REPOSITORY: s3:http://minio.storage.svc.cluster.local:9000/home-assistant
+  # The repository encryption key
+  RESTIC_PASSWORD: "${RESTIC_PW}"
+  # ENV vars specific to the back end
+  # https://restic.readthedocs.io/en/stable/030_preparing_a_new_repo.html
+  AWS_ACCESS_KEY_ID: "${MINIO_USER}"
+  AWS_SECRET_ACCESS_KEY: "${MINIO_PASSWORD}"
