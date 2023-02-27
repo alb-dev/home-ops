@@ -13,3 +13,4 @@ resources:
 - storage
 - volsync
 - default
+- system-upgrade
