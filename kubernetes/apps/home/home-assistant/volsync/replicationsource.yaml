@@ -2,7 +2,7 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: hass-restic-backup
+  name: hass-restic
   namespace: home
 spec:
   sourcePVC: hass-config-v1
@@ -10,7 +10,7 @@ spec:
     schedule: "30 20 * * *"
   restic:
     pruneIntervalDays: 15
-    repository: hass-restic-config
+    repository: hass-restic
     retain:
       hourly: 1
       daily: 1

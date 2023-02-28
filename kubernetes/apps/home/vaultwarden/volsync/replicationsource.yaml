@@ -2,7 +2,7 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: vaultwarden-restic-backup
+  name: vaultwarden-restic
   namespace: home
 spec:
   sourcePVC: vaultwarden-v1
@@ -10,7 +10,7 @@ spec:
     schedule: "30 20 * * *"
   restic:
     pruneIntervalDays: 15
-    repository: vaultwarden-restic-config
+    repository: vaultwarden-restic
     retain:
       hourly: 1
       daily: 1
