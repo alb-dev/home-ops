@@ -6,13 +6,7 @@ metadata:
   name: cluster-apps-cert-manager
   namespace: flux-system
 spec:
-#  dependsOn:
-#    - name: cluster-apps-emqx
-#    - name: cluster-apps-cloudnative-pg
-#    - name: cluster-apps-external-secrets-stores
-#    - name: cluster-apps-rook-ceph-cluster
-#    - name: cluster-apps-volsync
-  path: ./kubernetes/apps/cert-manager/app
+  path: ./kubernetes/apps/cert-manager/cert-manager/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -22,6 +16,23 @@ spec:
       kind: HelmRelease
       name: cert-manager
       namespace: cert-manager
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: cluster-apps-cert-manager-issuers
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: cluster-apps-cert-manager
+  path: ./kubernetes/apps/cert-manager/cert-manager/issuers
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-ops-kubernetes
   interval: 30m
   retryInterval: 1m
   timeout: 3m
