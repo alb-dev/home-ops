@@ -12,5 +12,5 @@ resources:
 - tigera-operator
 - storage
 - volsync
-- default
+#- default
 - system-upgrade
