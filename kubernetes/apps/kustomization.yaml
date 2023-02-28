@@ -5,7 +5,7 @@ resources:
 - cert-manager
 #- databases
 - home
-#- home-automation
+- home-automation
 - monitoring
 - networking
 - kube-system
