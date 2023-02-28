@@ -5,7 +5,7 @@ resources:
 - databases
 - home
 #- cilium
-- home-automation
+#- home-automation
 - monitoring
 - networking
 - kube-system
