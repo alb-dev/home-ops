@@ -4,5 +4,5 @@ kind: Kustomization
 resources:
 #  - zigbee2mqtt.yaml
   - synology.yaml
-  - adguard.yaml
+#  - adguard.yaml
   - pihole.yaml
