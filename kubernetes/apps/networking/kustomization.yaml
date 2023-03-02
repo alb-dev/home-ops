@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
 - metallb
 - external-dns
-- ingress-nginx
+- ./ingress-nginx/ks.yaml
 #- wildcard
 - external-services
