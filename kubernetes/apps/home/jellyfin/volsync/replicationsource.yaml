@@ -7,7 +7,7 @@ metadata:
 spec:
   sourcePVC: jellyfin-config-v1
   trigger:
-    schedule: "30 20 * * *"
+    schedule: "0 0 * * *"
   restic:
     pruneIntervalDays: 15
     repository: jellyfin-restic
