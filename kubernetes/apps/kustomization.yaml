@@ -5,8 +5,8 @@ resources:
 - cert-manager
 #- databases
 - home
-- home-automation
-- monitoring
+#- home-automation
+#- monitoring
 - networking
 - kube-system
 - tigera-operator
