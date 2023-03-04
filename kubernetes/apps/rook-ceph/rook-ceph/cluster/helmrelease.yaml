@@ -67,7 +67,7 @@ spec:
         config:
           osdsPerDevice: "1"
         nodes:
-          - name: hyoerion
+          - name: hyperion
             devices:
               - name: /dev/disk/by-id/nvme-WDS100T3X0C-00SJG0_2104BQ451713
           - name: kronos
