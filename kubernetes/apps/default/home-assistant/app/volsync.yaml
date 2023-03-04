@@ -2,13 +2,13 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: hass-restic-restore-1
+  name: hass-restic-restore-2
   namespace: default
 spec:
   trigger:
     manual: restore-once
   restic:
-    destinationPVC: config-hass-0
+    destinationPVC: config-home-assistant-0
     repository: hass-restic
     copyMethod: Direct
 ---
