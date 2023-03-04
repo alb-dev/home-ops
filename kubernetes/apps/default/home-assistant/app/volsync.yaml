@@ -2,25 +2,25 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: vaultwarden-restic-restore
+  name: hass-restic-restore
   namespace: default
 spec:
   trigger:
     manual: restore-once
   restic:
-    destinationPVC: vaultwarden-v1
-    repository: vaultwarden-restic
+    destinationPVC: config-hass-0
+    repository: hass-restic
     copyMethod: Direct
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: vaultwarden-restic
+  name: hass-restic
   namespace: default
 type: Opaque
 stringData:
   # The repository url
-  RESTIC_REPOSITORY: s3:http://minio.storage.svc.cluster.local:9000/vaultwarden-restic
+  RESTIC_REPOSITORY: s3:http://minio.storage.svc.cluster.local:9000/hass-restic
   # The repository encryption key
   RESTIC_PASSWORD: "${RESTIC_PW}"
   # ENV vars specific to the back end

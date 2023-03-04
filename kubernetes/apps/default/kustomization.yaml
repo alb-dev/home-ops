@@ -6,4 +6,6 @@ resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
   # Flux-Kustomizations
-#  - ./paperless/ks.yaml
+  - ./vaultwarden/ks.yaml
+  - ./jellyfin/ks.yaml
+  - ./home-assistant/ks.yaml

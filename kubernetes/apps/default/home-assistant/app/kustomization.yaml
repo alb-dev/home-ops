@@ -2,11 +2,13 @@
 # yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: home-automation
+namespace: default
 resources:
-  - ./secret.sops.yaml
   - ./helm-release.yaml
+  - ./volsync.yaml
+patchesStrategicMerge:
+  - ./patches/addons.yaml
 labels:
   - pairs:
-      app.kubernetes.io/name: emqx
-      app.kubernetes.io/instance: emqx
+      app.kubernetes.io/name: home-assistant
+      app.kubernetes.io/instance: home-assistant
