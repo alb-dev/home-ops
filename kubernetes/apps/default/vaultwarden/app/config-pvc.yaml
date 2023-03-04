@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: vaultwarden-v2
+  name: vaultwarden-v1
   namespace: default
   labels:
     app.kubernetes.io/name: &name vaultwarden
