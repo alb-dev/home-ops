@@ -29,5 +29,5 @@ spec:
         - key: node-role.kubernetes.io/master
           operator: Exists
           effect: NoSchedule
-    metrics:
-      create: true
+#    metrics:
+#      create: true
