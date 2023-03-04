@@ -31,8 +31,6 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: 'true'
 spec:
-  dependsOn:
-    - name: cluster-apps-metallb
   path: './kubernetes/apps/networking/metallb/config/'
   prune: true
   sourceRef:
