@@ -4,24 +4,24 @@ creation_rules:
     encrypted_regex: "^(data|stringData)$"
     key_groups:
       - age:
-          - age1ce6neraa02llughs9qcw75u0jr9avef64fy2zln7vy8qu98mky2qxm59ju
+          - age14zezx8350dxxh9kpqhpcna7a3gsma24n63qppqy0vfq47vvfkatqry5e9q
   - path_regex: kubernetes/.*\.sops\.ini
     key_groups:
       - age:
-          - age1ce6neraa02llughs9qcw75u0jr9avef64fy2zln7vy8qu98mky2qxm59ju
+          - age14zezx8350dxxh9kpqhpcna7a3gsma24n63qppqy0vfq47vvfkatqry5e9q
   - path_regex: kubernetes/.*\.sops\.toml
     key_groups:
       - age:
-          - age1ce6neraa02llughs9qcw75u0jr9avef64fy2zln7vy8qu98mky2qxm59ju
+          - age14zezx8350dxxh9kpqhpcna7a3gsma24n63qppqy0vfq47vvfkatqry5e9q
   - path_regex: kubernetes/.*\.sops\.json
     key_groups:
       - age:
-          - age1ce6neraa02llughs9qcw75u0jr9avef64fy2zln7vy8qu98mky2qxm59ju
+          - age14zezx8350dxxh9kpqhpcna7a3gsma24n63qppqy0vfq47vvfkatqry5e9q
   - path_regex: ansible/.*\.sops\.ya?ml
     key_groups:
       - age:
-          - age1ce6neraa02llughs9qcw75u0jr9avef64fy2zln7vy8qu98mky2qxm59ju
+          - age14zezx8350dxxh9kpqhpcna7a3gsma24n63qppqy0vfq47vvfkatqry5e9q
   - path_regex: terraform/.*\.sops\.ya?ml
     key_groups:
       - age:
-          - age1ce6neraa02llughs9qcw75u0jr9avef64fy2zln7vy8qu98mky2qxm59ju
+          - age14zezx8350dxxh9kpqhpcna7a3gsma24n63qppqy0vfq47vvfkatqry5e9q
