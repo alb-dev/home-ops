@@ -12,5 +12,6 @@ resources:
 - tigera-operator
 - storage
 - volsync
+#- rook-ceph
 #- default
 #- system-upgrade
