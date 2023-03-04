@@ -43,5 +43,5 @@ spec:
         - --source=ingress
         - --domain-filter=${SECRET_DOMAIN}
 
-    serviceMonitor:
-      enabled: true
+#    serviceMonitor:
+#      enabled: true
