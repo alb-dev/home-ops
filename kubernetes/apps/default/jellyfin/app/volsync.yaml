@@ -2,7 +2,7 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: jellyfin-restic-restore-2
+  name: jellyfin-restic-restore
   namespace: default
 spec:
   trigger:
