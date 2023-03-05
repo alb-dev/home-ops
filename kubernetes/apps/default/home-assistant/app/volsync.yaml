@@ -1,22 +1,28 @@
 ---
 apiVersion: volsync.backube/v1alpha1
-kind: ReplicationDestination
+kind: ReplicationSource
 metadata:
-  name: hass-restic-restore
+  name: home-assistant
   namespace: default
 spec:
+  sourcePVC: config-home-assistant-0
   trigger:
-    manual: restore-once
+    schedule: "0 0 * * *"
   restic:
-    destinationPVC: config-home-assistant-0
-    repository: hass-restic
-    copyMethod: Direct
-    cacheCapacity: 5Gi
+    copyMethod: Snapshot
+    pruneIntervalDays: 10
+    repository: hass-restic-secret
+    cacheCapacity: 10Gi
+    volumeSnapshotClassName: csi-ceph-blockpool
+    storageClassName: ceph-block
+    retain:
+      daily: 10
+      within: 3d
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: hass-restic
+  name: hass-restic-secret
   namespace: default
 type: Opaque
 stringData:
