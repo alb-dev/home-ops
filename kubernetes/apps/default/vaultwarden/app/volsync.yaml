@@ -1,21 +1,32 @@
 ---
 apiVersion: volsync.backube/v1alpha1
-kind: ReplicationDestination
+kind: ReplicationSource
 metadata:
-  name: vaultwarden-restic-restore
+  name: vaultwarden
   namespace: default
 spec:
+  sourcePVC: vaultwarden-v1
   trigger:
-    manual: restore-once
+    schedule: "0 0 * * *"
   restic:
-    destinationPVC: vaultwarden-v1
-    repository: vaultwarden-restic
-    copyMethod: Direct
+    copyMethod: Snapshot
+    pruneIntervalDays: 10
+    repository: vaultwarden-restic-secret
+    cacheCapacity: 2Gi
+    volumeSnapshotClassName: csi-ceph-blockpool
+    storageClassName: ceph-block
+    moverSecurityContext:
+      runAsUser: 0
+      runAsGroup: 0
+      fsGroup: 0
+    retain:
+      daily: 10
+      within: 3d
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: vaultwarden-restic
+  name: vaultwarden-restic-secret
   namespace: default
 type: Opaque
 stringData:
