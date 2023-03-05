@@ -14,4 +14,4 @@ resources:
 - volsync
 - rook-ceph
 - default
-#- system-upgrade
+- system-upgrade
