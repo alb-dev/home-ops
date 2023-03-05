@@ -36,6 +36,8 @@ spec:
       tag: 2023.3.1
     env:
       TZ: "Europe/Berlin"
+    hostNetwork: true
+    dnsPolicy: ClusterFirstWithHostNet    
     service:
       main:
         type: LoadBalancer
