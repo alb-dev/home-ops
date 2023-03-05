@@ -27,7 +27,7 @@ metadata:
 type: Opaque
 stringData:
   # The repository url
-  RESTIC_REPOSITORY: s3:http://minio.storage.svc.cluster.local:9000/hass-restic
+  RESTIC_REPOSITORY: s3:http://minio.storage.svc.cluster.local:9000/home-assistant
   # The repository encryption key
   RESTIC_PASSWORD: "${RESTIC_PW}"
   # ENV vars specific to the back end
