@@ -6,6 +6,7 @@ namespace: default
 resources:
   - ./helmrelease.yaml
   - ./volsync.yaml
+  - ./pvc.yaml
 labels:
   - pairs:
       app.kubernetes.io/name: jellyfin
