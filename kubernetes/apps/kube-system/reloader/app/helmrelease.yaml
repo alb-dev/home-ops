@@ -25,6 +25,6 @@ spec:
     fullnameOverride: *name
     reloader:
       reloadStrategy: annotations
-      podMonitor:
-        enabled: true
-        namespace: *namespace
+#      podMonitor:
+#        enabled: true
+#        namespace: *namespace
