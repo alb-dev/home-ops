@@ -3,7 +3,7 @@ apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
   name: mosquitto
-  namespace: home-automation
+  namespace: default
 spec:
   sourcePVC: mosquitto-data-v1
   trigger:
@@ -23,7 +23,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: mosquitto-restic
-  namespace: home-automation
+  namespace: default
 type: Opaque
 stringData:
   # The repository url
