@@ -10,4 +10,4 @@ resources:
   - metrics-server
   - reloader
 #  - kube-vip
-  - intel-device-plugin
+  - ./intel-device-plugin/ks.yaml
