@@ -2,13 +2,13 @@
 # yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: home-automation
+namespace: default
 resources:
-  - ./helm-release.yaml
- # - ./volsync.yaml
+  - ./helmrelease.yaml
+  - ./volsync.yaml
   - ./pvc.yaml
-  - ./configmap.yaml
+  - ./secret.sops.yaml
 labels:
   - pairs:
-      app.kubernetes.io/name: mosquitto
-      app.kubernetes.io/instance: mosquitto
+      app.kubernetes.io/name: zigbee2mqtt
+      app.kubernetes.io/instance: zigbee2mqtt

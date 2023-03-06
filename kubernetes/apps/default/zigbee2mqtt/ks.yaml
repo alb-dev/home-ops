@@ -6,10 +6,9 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-#    - name: cluster-apps-node-feature-discovery
-#    - name: cluster-apps-rook-ceph-cluster
-    - name: cluster-apps-volsync-app
-    - name: cluster-apps-emqx-app
+    - name: cluster-apps-node-feature-discovery
+    - name: cluster-apps-rook-ceph-cluster
+    - name: cluster-apps-volsync
   path: './kubernetes/apps/default/zigbee2mqtt/app'
   prune: true
   sourceRef:
