@@ -31,7 +31,7 @@ spec:
       tag: 1.30.2
     env:
       TZ: Europe/Berlin
-      ZIGBEE2MQTT_DATA: /config
+      ZIGBEE2MQTT_DATA: /data
       ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_DISCOVERY_TOPIC: homeassistant
       ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_LEGACY_ENTITY_ATTRIBUTES: "false"
       ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_LEGACY_TRIGGERS: "false"
@@ -82,15 +82,15 @@ spec:
             secretName: zigbee2mqtt-tls
 
     persistence:
-      config:
-        enabled: true
-        existingClaim: zigbee2mqtt-config-v1
-        mountPath: "/config"
       usb:
         enabled: true
         type: hostPath
         hostPath: /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2486924-if00
-
+    volumeClaimTemplates:
+      - name: config
+        mountPath: /data
+        accessMode: ReadWriteOnce
+        size: 1Gi
     securityContext:
       privileged: true
 
