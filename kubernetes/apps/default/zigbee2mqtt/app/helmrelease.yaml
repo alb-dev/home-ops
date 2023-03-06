@@ -82,10 +82,10 @@ spec:
             secretName: zigbee2mqtt-tls
 
     persistence:
-      usb:
+     usb:
         enabled: true
         type: hostPath
-        hostPath: /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2486924-if00
+        hostPath: /dev/ttyUSB0
     volumeClaimTemplates:
       - name: config
         mountPath: /data
