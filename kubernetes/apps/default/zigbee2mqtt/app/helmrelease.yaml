@@ -86,7 +86,7 @@ spec:
      usb:
         enabled: true
         type: hostPath
-        hostPath: /dev/ttyUSB0
+        hostPath: /dev/ttyACM0
     volumeClaimTemplates:
       - name: config
         mountPath: /data
