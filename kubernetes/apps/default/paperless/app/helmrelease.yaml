@@ -30,7 +30,7 @@ spec:
       PAPERLESS_ENABLE_HTTP_REMOTE_USER: "true"
       PAPERLESS_OCR_LANGUAGE: "deu+eng"
       PAPERLESS_PORT: 8000
-      PAPERLESS_REDIS: redis://paperless-ngx-redis.default.svc.cluster.local:6379
+      PAPERLESS_REDIS: redis://paperless-redis.default.svc.cluster.local:6379
       PAPERLESS_TASK_WORKERS: 2
       PAPERLESS_TIME_ZONE: "Europe/Berlin"
       PAPERLESS_URL: "https://paperless.${SECRET_DOMAIN}"
