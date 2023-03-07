@@ -3,7 +3,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: paperless-ngx-data
-  namespace: paperless-ngx
+  namespace: default
 spec:
   storageClassName: ceph-block
   accessModes:
