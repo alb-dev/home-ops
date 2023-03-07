@@ -7,8 +7,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: cluster-apps-cloudnative-pg
-    - name: cluster-apps-redis
+    - name: cluster-apps-redis-paperless
     - name: cluster-apps-volsync
   path: ./kubernetes/apps/default/paperless/app
   prune: true
@@ -19,7 +18,28 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
       name: paperless
-      namespace: paperless-ngx
+      namespace: default
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/kustomization_v1beta2.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: cluster-apps-paperless-redis
+  namespace: flux-system
+spec:
+  path: ./kubernetes/apps/default/paperless/redis
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-ops-kubernetes
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: paperless-redis
+      namespace: default
   interval: 30m
   retryInterval: 1m
   timeout: 3m
