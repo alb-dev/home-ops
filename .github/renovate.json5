@@ -29,7 +29,7 @@
   },
   "kubernetes": {
     "fileMatch": [
-      "provision/.+\\.ya?ml.j2$",
+      "ansible/.+\\.ya?ml.j2$",
       "kubernetes/.+\\.ya?ml$"
     ]
   },
