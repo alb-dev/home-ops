@@ -24,7 +24,6 @@ spec:
     remediation:
       retries: 3
   values:
-    fullnameOverride: postgresql-ngx-paperless
     image:
       repository: bitnami/postgresql
       tag: 15.2.0
