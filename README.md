@@ -23,4 +23,4 @@ _... managed with Flux and Renovate_ :robot:
 
 ## :book:&nbsp; Overview
 
-This is home to my personal Kubernetes cluster. [Flux](https://github.com/fluxcd/flux2) watches this Git repository and makes the changes to my cluster based on the manifests in the [cluster](./cluster/) directory. [Renovate](https://github.com/renovatebot/renovate) also watches this Git repository and creates pull requests when it finds updates to Docker images, Helm charts, and other dependencies. All infrastructere is hosted on my personal proxmox server powered by a intel nuc.
+This is home to my personal Kubernetes cluster. [Flux](https://github.com/fluxcd/flux2) watches this Git repository and makes the changes to my cluster based on the manifests in the [cluster](./kubernetes/) directory. [Renovate](https://github.com/renovatebot/renovate) also watches this Git repository and creates pull requests when it finds updates to Docker images, Helm charts, and other dependencies. All infrastructere is hosted on my personal proxmox server powered by a intel nuc.
