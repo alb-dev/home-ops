@@ -13,7 +13,7 @@ _... managed with Flux and Renovate_ :robot:
 <div align="center">
 
 [![Discord](https://img.shields.io/discord/673534664354430999?style=for-the-badge&label=discord&logo=discord&logoColor=white)](https://discord.gg/k8s-at-home)
-[![k3s](https://img.shields.io/badge/rke2-v1.23.5-brightgreen?style=for-the-badge&logo=kubernetes&logoColor=white)](https://docs.rke2.io/)
+[![k3s](https://img.shields.io/badge/rke2-v1.25.6-brightgreen?style=for-the-badge&logo=kubernetes&logoColor=white)](https://docs.rke2.io/)
 [![renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?style=for-the-badge&logo=renovatebot&logoColor=white)](https://github.com/renovatebot/renovate)
 
 </div>
