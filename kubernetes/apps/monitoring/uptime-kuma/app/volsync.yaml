@@ -1,0 +1,40 @@
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: uptime-kuma
+  namespace: default
+spec:
+  sourcePVC: uptime-kuma-config-v1
+  trigger:
+    schedule: "0 0 * * *"
+  restic:
+    copyMethod: Snapshot
+    pruneIntervalDays: 10
+    repository: uptime-kuma-restic-secret
+    cacheCapacity: 5Gi
+    volumeSnapshotClassName: csi-ceph-blockpool
+    storageClassName: ceph-block
+    moverSecurityContext:
+      runAsUser: 0
+      runAsGroup: 0
+      fsGroup: 0
+    retain:
+      daily: 10
+      within: 3d
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: uptime-kuma-restic-secret
+  namespace: default
+type: Opaque
+stringData:
+  # The repository url
+  RESTIC_REPOSITORY: s3:http://minio.storage.svc.cluster.local:9000/uptime-kuma-restic
+  # The repository encryption key
+  RESTIC_PASSWORD: "${RESTIC_PW}"
+  # ENV vars specific to the back end
+  # https://restic.readthedocs.io/en/stable/030_preparing_a_new_repo.html
+  AWS_ACCESS_KEY_ID: "${MINIO_USER}"
+  AWS_SECRET_ACCESS_KEY: "${MINIO_PASSWORD}"

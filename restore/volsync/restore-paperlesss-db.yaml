@@ -1,0 +1,17 @@
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationDestination
+metadata:
+  name: paperless-db-data-v1
+  namespace: default
+spec:
+  trigger:
+    manual: restore-once
+  restic:
+    repository:  paperless-db-restic
+    destinationPVC: paperless-db-data-v1
+    copyMethod: Direct
+    storageClassName: ceph-block
+    # IMPORTANT NOTE:
+    #   Set to the last X number of snapshots to restore from
+    previous: 2

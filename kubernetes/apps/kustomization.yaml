@@ -6,7 +6,7 @@ resources:
 #- databases
 #- home
 #- home-automation
-#- monitoring
+- monitoring
 - networking
 - kube-system
 - tigera-operator
