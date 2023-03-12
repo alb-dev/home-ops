@@ -3,14 +3,14 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: paperless-ngx-data
+  name: uptime-kuma-restic
   namespace: default
 spec:
   trigger:
     manual: restore-once
   restic:
-    repository: paperless-restic
-    destinationPVC: paperless-ngx-data
+    repository: uptime-kuma-restic
+    destinationPVC: uptime-kuma-restic
     copyMethod: Direct
     storageClassName: ceph-block
     # IMPORTANT NOTE:

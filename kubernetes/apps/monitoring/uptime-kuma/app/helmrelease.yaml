@@ -22,8 +22,10 @@ spec:
       retries: 3
       remediateLastFailure: true
   values:
-    global:
-      nameOverride: *app
+    controller:
+      type: statefulset
+      annotations:
+        reloader.stakater.com/auto: "true"
     image:
       repository: louislam/uptime-kuma
       tag: 1.20.2
