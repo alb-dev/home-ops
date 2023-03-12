@@ -2,7 +2,7 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: paperless-db
+  name: paperless-ngx-postgresql
   namespace: default
 spec:
   sourcePVC: paperless-db-data-v1
