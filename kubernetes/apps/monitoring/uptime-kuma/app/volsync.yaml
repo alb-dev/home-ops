@@ -11,7 +11,7 @@ spec:
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 10
-    repository: uptime-kuma-restic-secret
+    repository: uptime-kuma-restic
     cacheCapacity: 5Gi
     volumeSnapshotClassName: csi-ceph-blockpool
     storageClassName: ceph-block
@@ -26,7 +26,7 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: uptime-kuma-restic-secret
+  name: uptime-kuma-restic
   namespace: monitoring
 type: Opaque
 stringData:
