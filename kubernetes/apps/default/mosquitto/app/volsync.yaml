@@ -9,15 +9,19 @@ spec:
   trigger:
     schedule: "0 0 * * *"
   restic:
-    pruneIntervalDays: 15
+    copyMethod: Snapshot
+    pruneIntervalDays: 10
     repository: mosquitto-restic
+    cacheCapacity: 50Gi
+    volumeSnapshotClassName: csi-ceph-blockpool
+    storageClassName: ceph-block
+    moverSecurityContext:
+      runAsUser: 0
+      runAsGroup: 0
+      fsGroup: 0
     retain:
-      hourly: 1
-      daily: 1
-      weekly: 1
-      monthly: 1
-      yearly: 1
-    copyMethod: Clone
+      daily: 10
+      within: 3d
 ---
 apiVersion: v1
 kind: Secret
