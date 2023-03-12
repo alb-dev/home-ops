@@ -79,7 +79,7 @@ This Git repository contains the following directories under [kubernetes](./kube
 | Kubernetes pods (Calico)                      | `10.56.0.0/16`    |
 | Kubernetes services (Calico)                  | `10.57.0.0/16`    |
 
-- Since my home-network is just one subnet at this time everything is managed by calicos overlaynetwork in cluster
+- Since my home-network is just one subnet everything is managed by calico's overlay-network in cluster.
 
 ---
 
@@ -91,9 +91,9 @@ The alternative solution to these two problems would be to host a Kubernetes clu
 
 | Service                                         | Use                                                               | Cost           |
 |-------------------------------------------------|-------------------------------------------------------------------|----------------|
-| [B2 Storage](https://www.backblaze.com/b2)      | Offsite application backups                                       | ~$5/mo         |
-| [Cloudflare](https://www.cloudflare.com/)       | Domain, DNS and proxy management                                  | ~$30/yr        |
-| [Hetzner](https://Hetner.com/)                  | Email & VPS hosting                                                 | ~€90/yr        |
+| [B2 Storage](https://www.backblaze.com/b2)      | Offsite application backups                                       | ~$€5/mo         |
+| [Cloudflare](https://www.cloudflare.com/)       | Domain, DNS and proxy management                                  | ~€30/yr        |
+| [Hetzner](https://Hetner.com/)                  | Email & VPS hosting                                               | ~€90/yr        |
 | [GitHub](https://github.com/)                   | Hosting this repository and continuous integration/deployments    | Free           |
 
 ---
@@ -117,6 +117,6 @@ The alternative solution to these two problems would be to host a Kubernetes clu
 
 ---
 
-## Thanks to
+## Special thanks
 A lot of inspiration is taken form the k8s at home community. If you are intrested in learning kubernetes i highly recommand to visit them over at discord
 [![Discord](https://img.shields.io/discord/673534664354430999?style=for-the-badge&label&logo=discord&logoColor=white&color=blue)](https://discord.gg/k8s-at-home)
