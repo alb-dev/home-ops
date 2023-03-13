@@ -91,7 +91,7 @@ The alternative solution to these two problems would be to host a Kubernetes clu
 
 | Service                                         | Use                                                               | Cost           |
 |-------------------------------------------------|-------------------------------------------------------------------|----------------|
-| [B2 Storage](https://www.backblaze.com/b2)      | Offsite application backups                                       | ~$€5/mo         |
+| [B2 Storage](https://www.backblaze.com/b2)      | Offsite application backups                                       | ~€5/mo         |
 | [Cloudflare](https://www.cloudflare.com/)       | Domain, DNS and proxy management                                  | ~€30/yr        |
 | [Hetzner](https://Hetner.com/)                  | Email & VPS hosting                                               | ~€90/yr        |
 | [GitHub](https://github.com/)                   | Hosting this repository and continuous integration/deployments    | Free           |
@@ -108,8 +108,8 @@ The alternative solution to these two problems would be to host a Kubernetes clu
 
 | Device                           | Count | OS Disk Size | Data Disk Size              | Ram  | Operating System | Purpose             |
 |----------------------------------|-------|--------------|-----------------------------|------|------------------|---------------------|
-| Lenovo ThinkCentre M900 i5 6500t | 1     | 1TB SSD      | -                           | 16GB | Ubuntu           | Kubernetes Masters  |
-| IdeaCentre Mini 5i 10400t        | 3     | 256GB SSD    | 1TB NVMe (rook-ceph)        | 16GB | Ubuntu           | Kubernetes Worker   |
+| Lenovo ThinkCentre M900 i5 6500t | 1     | 1TB SSD      | -                           | 16GB | Ubuntu 22.04     | Kubernetes Masters  |
+| IdeaCentre Mini 5i 10400t        | 3     | 256GB SSD    | 1TB NVMe (rook-ceph)        | 16GB | Ubuntu 22.04     | Kubernetes Worker   |
 | Synology RS1221+                 | 1     | 60TB HDD     | -                           | 4GB  | DSM 7.1          | NFS Storage         |
 | MinisForum HM80                  | 1     | 512GB NVMe   | -                           | 32GB | Proxmox 7.1      | Hypervisor DNS etc. |
 | TP-Link TL-SG1016DE 16-Port      | 1     | -            | -                           | -    | -                | Rack-Switch         |
