@@ -33,7 +33,7 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: ghcr.io/home-assistant/home-assistant
-      tag: 2023.3.3
+      tag: 2023.3.4
     env:
       TZ: "Europe/Berlin"
     hostNetwork: true
