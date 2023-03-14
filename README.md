@@ -103,7 +103,7 @@ The alternative solution to these two problems would be to host a Kubernetes clu
 <details>
   <summary>Click to see da rack!</summary>
 
-  <img src="https://user-images.githubusercontent.com/213795/172947261-65a82dcd-3274-45bd-aabf-140d60a04aa9.png" align="center" width="200px" alt="rack"/>
+  <img src="https://user-images.githubusercontent.com/71972864/225144867-8657dd4e-09fb-4f39-9a2a-9945a1c20a30.png" align="center" width="200px" alt="rack"/>
 </details>
 
 | Device                           | Count | OS Disk Size | Data Disk Size              | Ram  | Operating System | Purpose             |
