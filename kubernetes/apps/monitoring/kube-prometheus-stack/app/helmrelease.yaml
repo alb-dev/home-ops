@@ -44,7 +44,7 @@ spec:
           storage:
             volumeClaimTemplate:
               spec:
-                storageClassName: "longhorn"
+                storageClassName: "ceph-block"
                 resources:
                   requests:
                     # TODO(kube-prometheus-stack): change alertmanager volume to 250Mi
@@ -127,7 +127,7 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: "longhorn"
+              storageClassName: "ceph-block"
               resources:
                 requests:
                   storage: 40Gi
@@ -137,16 +137,16 @@ spec:
             memory: 1000Mi
           limits:
             memory: 8000Mi
-        additionalScrapeConfigs:
-          - job_name: node-docker
-            scrape_interval: 1m
-            scrape_timeout: 10s
-            metrics_path: /metrics
-            honor_timestamps: true
-            static_configs:
-              - targets: ["192.168.178.35:9100"]
-          - job_name: firtz-exporter
-            scrape_interval: 1m 
-            metrics_path: /metrics
-            static_configs: 
-              - targets: ["fritz-exporter.monitoring.svc.cluster.local:9787"]
+#        additionalScrapeConfigs:
+#          - job_name: node-docker
+#            scrape_interval: 1m
+#            scrape_timeout: 10s
+#            metrics_path: /metrics
+#            honor_timestamps: true
+#            static_configs:
+#              - targets: ["192.168.178.35:9100"]
+#          - job_name: firtz-exporter
+#            scrape_interval: 1m 
+#            metrics_path: /metrics
+#            static_configs: 
+#              - targets: ["fritz-exporter.monitoring.svc.cluster.local:9787"]
