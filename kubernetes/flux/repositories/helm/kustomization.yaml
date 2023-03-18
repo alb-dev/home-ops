@@ -34,3 +34,4 @@ resources:
 - cloudnative-pg.yaml
 - emqx.yaml
 - rook-ceph.yaml
+- forgejo.yaml
