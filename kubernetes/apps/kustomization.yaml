@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - cert-manager
-#- databases
+- databases
 #- home
 #- home-automation
 - monitoring
