@@ -27,9 +27,9 @@ spec:
   uninstall:
     keepHistory: false
   values:
-#    monitoring:
-#      enabled: true
-#      createPrometheusRules: true
+    monitoring:
+      enabled: true
+      createPrometheusRules: true
     ingress:
       dashboard:
         ingressClassName: nginx
