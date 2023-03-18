@@ -32,6 +32,5 @@ resources:
 - piraeus.yaml
 - cilium.yaml
 - cloudnative-pg.yaml
-- emqx.yaml
 - rook-ceph.yaml
 - forgejo.yaml
