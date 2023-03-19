@@ -5,14 +5,14 @@ metadata:
   name: uptime-kuma
   namespace: monitoring
 spec:
-  sourcePVC: uptime-kuma-config-v1
+  sourcePVC: uptime-kuma-v1
   trigger:
     schedule: "0 0 * * *"
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 10
-    repository: uptime-kuma-restic
-    cacheCapacity: 5Gi
+    repository: uptime-kuma-restic-secret
+    cacheCapacity: 10Gi
     volumeSnapshotClassName: csi-ceph-blockpool
     storageClassName: ceph-block
     moverSecurityContext:
@@ -26,12 +26,12 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: uptime-kuma-restic
+  name: uptime-kuma-restic-secret
   namespace: monitoring
 type: Opaque
 stringData:
   # The repository url
-  RESTIC_REPOSITORY: s3:http://minio.storage.svc.cluster.local:9000/uptimekuma-restic
+  RESTIC_REPOSITORY: s3:http://minio.storage.svc.cluster.local:9000/uptime-kuma-restic
   # The repository encryption key
   RESTIC_PASSWORD: "${RESTIC_PW}"
   # ENV vars specific to the back end
