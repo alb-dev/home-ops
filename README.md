@@ -93,7 +93,7 @@ The alternative solution to these two problems would be to host a Kubernetes clu
 |-------------------------------------------------|-------------------------------------------------------------------|----------------|
 | [B2 Storage](https://www.backblaze.com/b2)      | Offsite application backups                                       | ~€5/mo         |
 | [Cloudflare](https://www.cloudflare.com/)       | Domain, DNS and proxy management                                  | ~€30/yr        |
-| [Hetzner](https://Hetner.com/)                  | Email & VPS hosting                                               | ~€90/yr        |
+| [Hetzner](https://www.hetzner.com/)             | Email & VPS hosting                                               | ~€90/yr        |
 | [GitHub](https://github.com/)                   | Hosting this repository and continuous integration/deployments    | Free           |
 
 ---
