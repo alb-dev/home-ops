@@ -168,6 +168,10 @@ spec:
             kubernetes-pods:
               url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-pods.json
               datasource: Prometheus
+            kured:
+              gnetId: 16207
+              revision: 3
+              datasource: Prometheus
             synology:
               gnetId: 14284
               revision: 3
