@@ -1,0 +1,128 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app forgejo
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: *app
+      version: 7.0.4
+      sourceRef:
+        kind: HelmRepository
+        name: forgejo-chart
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    gitea:
+      admin:
+        existingSecret: forgejo-admin-secrets
+        username: gitea_admin
+        password: r8sA8CPHD9!bt6d
+        email: "gitea@local.domain"
+      config:
+        database:
+          DB_TYPE: postgres
+          HOST: ${POSTGRESQL_HOST}
+        server:
+          LANDING_PAGE: login
+          ROOT_URL: https://forgejo.${ROOT_DOMAIN}
+          SSH_DOMAIN: &host forgejo.${ROOT_DOMAIN}
+        metrics:
+          enabled: true
+          serviceMonitor:
+            enabled: true
+      replicaCount: 1
+      clusterDomain: cluster.local
+      image:
+        registry: "codeberg.org"
+        repository: forgejo/forgejo
+      podSecurityContext:
+        fsGroup: 1000
+
+      ## @param containerSecurityContext Security context
+      containerSecurityContext: {}
+      securityContext: {}
+
+      ## @section Service
+      service:
+        http:
+          type: ClusterIP
+          port: 3000
+        ssh:
+          type: ClusterIP
+          port: 22
+
+      ingress:
+        enabled: true
+        className: nginx
+        annotations: 
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          nginx.ingress.kubernetes.io/proxy-body-size: "0"
+        hosts:
+          - host: git.example.com
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: chart-example-tls
+            hosts:
+              - git.example.com
+      resources: 
+        limits:
+          cpu: 1000m
+          memory: 2048Mi
+        requests:
+          cpu: 1000m
+          memory: 1280Mi
+      persistence:
+        enabled: true
+        existingClaim:
+        size: 50Gi
+        accessModes:
+          - ReadWriteOnce
+        storageClass: ceph-block
+        subPath:
+      gitea:
+        admin:
+          #existingSecret: gitea-admin-secret
+          existingSecret:
+          username: gitea_admin
+          password: r8sA8CPHD9!bt6d
+          email: "gitea@local.domain"
+        metrics:
+          enabled: true
+          serviceMonitor:
+            enabled: true
+            #  additionalLabels:
+            #    prometheus-release: prom1
+        ## @param gitea.config  Configuration for the Forgejo server,ref: [config-cheat-sheet](https://docs.gitea.io/en-us/config-cheat-sheet/)
+        config: {}
+        #  APP_NAME: "Forgejo: Git with a cup of tea"
+        #  RUN_MODE: dev
+        #
+        #  server:
+        #    SSH_PORT: 22
+        #
+        #  security:
+        #    PASSWORD_COMPLEXITY: spec
+
+        ## @param gitea.additionalConfigSources Additional configuration from secret or configmap
+        additionalConfigSources: []
+        #   - secret:
+        #       secretName: gitea-app-ini-oauth
+        #   - configMap:
+        #       name: gitea-app-ini-plaintext
+
+        ## @param gitea.additionalConfigFromEnvs Additional configuration sources from environment variables
+        additionalConfigFromEnvs: []
+
