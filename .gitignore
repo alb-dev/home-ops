@@ -4,7 +4,6 @@ terraform.tfstate*
 terraform.tfvars
 terrraform.auto.tfvars
 variable.tf
-roles
 kubeconfig
 .decrypted*
 # trash

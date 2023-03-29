@@ -6,8 +6,8 @@
   gather_facts: "yes"
   hosts: all
   roles:
-#    - homelab
-#    - users
-#    - configure
+    - homelab
+    - users
+    - configure
     - autoupdates
-#    - clean
+    - clean

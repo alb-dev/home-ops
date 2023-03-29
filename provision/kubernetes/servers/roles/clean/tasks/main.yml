@@ -1,0 +1,59 @@
+---
+- name: packages | remove crufty packages
+  block:
+  - name: packages | remove snapd
+    ansible.builtin.apt:
+      name: snapd
+      state: absent
+      autoremove: true
+  - name: packages | remove crufty packages | remove crufty files
+    ansible.builtin.file:
+      state: absent
+      path: "{{ item }}"
+    loop:
+    - "/home/alb-home/.snap"
+ #   - "/snap"
+    - "/var/snap"
+    - "/var/lib/snapd"
+    - "/var/cache/snapd"
+    - "/usr/lib/snapd"
+- name: "Cleaning all audit logs."
+  shell: |
+    if [ -f /var/log/audit/audit.log ]; then
+    cat /dev/null > /var/log/audit/audit.log
+    fi
+    if [ -f /var/log/wtmp ]; then
+    cat /dev/null > /var/log/wtmp
+    fi
+    if [ -f /var/log/lastlog ]; then
+    cat /dev/null > /var/log/lastlog
+    fi
+- name: "Cleaning persistent udev rules."
+  shell: |
+    if [ -f /etc/udev/rules.d/70-persistent-net.rules ]; then
+    rm /etc/udev/rules.d/70-persistent-net.rules
+    fi
+
+- name: "Cleaning the /tmp directories"
+  shell: |
+    rm -rf /tmp/*
+    rm -rf /var/tmp/*
+    rm -rf /var/cache/dnf/*
+
+- name: "Cleaning the shell history."
+  shell: |
+    unset HISTFILE
+    history -cw
+    echo > ~/.bash_history
+    rm -fr /root/.bash_history
+
+- name: "Cleaning the resolve.conf."
+  shell: |
+    mv /etc/resolv.conf /etc/resolv.conf.backup
+    ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+
+
+- name: "Running a sync."
+  shell: |
+    sync && sync
+

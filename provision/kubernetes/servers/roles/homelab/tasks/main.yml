@@ -1,0 +1,91 @@
+---
+  - name: "Updating the guest operating system."
+    ansible.builtin.apt:
+      force_apt_get: true
+      name: "*"
+      state: latest     # noqa package-latest
+      update_cache: "yes"
+      autoclean: true
+      autoremove: true
+    register: apt_upgrade
+    retries: 5
+    until: apt_upgrade is success
+  - name: "{{ ansible_facts['distribution'] }} - Remove additional packages."
+    ansible.builtin.apt:
+        name:
+          - apport
+          - bcache-tools
+          - btrfs-progs
+          - byobu
+          - friendly-recovery
+          - fwupd
+          - landscape-common
+          - lxd-agent-loader
+          - ntfs-3g
+          - plymouth
+          - plymouth-theme-ubuntu-text
+          - popularity-contest
+          - snapd
+          - sosreport
+          - tmux
+          - ubuntu-advantage-tools
+          - ufw
+          - snapd
+          - unattended-upgrades
+        state: absent
+  - name: "Installing additional packages."
+    apt:
+      name:
+        - bash-completion
+        - curl
+        - wget
+        - vim
+        - git
+        - net-tools
+        - unzip
+        - ca-certificates
+        - nfs-common
+        - unattended-upgrades
+      state: latest     # noqa package-latest
+
+  - name: "{{ ansible_facts['distribution'] }} - update grub disable ipv6 "
+    command: update-grub
+  - name: "{{ ansible_facts['distribution'] }} - disable ipv6"
+    lineinfile:
+          path: /etc/default/grub
+          line: 'GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX ipv6.disable=1"'
+          state: present
+
+  - name: Disable APT recommends
+    ansible.builtin.blockinfile:
+      path: /etc/apt/apt.conf.d/02norecommends
+      mode: 0644
+      create: true
+      block: |
+        APT::Install-Recommends "false";
+        APT::Install-Suggests "false";
+        APT::Get::Install-Recommends "false";
+        APT::Get::Install-Suggests "false";
+  - name: System Configuration (2) | Set sysctls
+    ansible.posix.sysctl:
+      name: "{{ item.key }}"
+      value: "{{ item.value }}"
+      sysctl_file: /etc/sysctl.d/99-kubernetes.conf
+      reload: true
+    with_dict: "{{ sysctl_config }}"
+    vars:
+      sysctl_config:
+        net.ipv4.ip_forward: 1
+        net.ipv4.conf.all.forwarding: 1
+        net.ipv4.conf.all.rp_filter: 0
+        net.ipv4.conf.default.rp_filter: 0
+        net.ipv6.conf.all.forwarding: 1
+        fs.inotify.max_user_watches: 1048576
+        fs.inotify.max_user_instances: 8192
+        net.ipv6.conf.all.disable_ipv6: 1
+        net.ipv6.conf.default.disable_ipv6: 1
+        net.ipv6.conf.lo.disable_ipv6: 1
+
+
+
+
