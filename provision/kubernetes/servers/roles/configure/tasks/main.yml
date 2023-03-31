@@ -18,3 +18,6 @@
 - name: "Restarting the SSH daemon."
   shell: |
     sudo systemctl restart sshd
+- name: "Set Timezone"
+  shell: |
+    sudo timedatectl set-timezone Europe/Berlin
