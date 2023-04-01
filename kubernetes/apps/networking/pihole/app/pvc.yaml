@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pihole-data-v1
+  namespace: networking
+  labels:
+    app.kubernetes.io/name: &name pihole
+    app.kubernetes.io/instance: *name
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+  storageClassName: ceph-filesystem

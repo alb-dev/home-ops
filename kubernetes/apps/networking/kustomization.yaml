@@ -5,4 +5,5 @@ resources:
 - ./external-dns/ks.yaml
 - ./ingress-nginx/ks.yaml
 - ./cloudflare-ddns/ks.yaml
+- ./pihole/ks.yaml
 - external-services
