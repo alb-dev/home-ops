@@ -5,7 +5,7 @@ metadata:
   name: pihole-data-v1
   namespace: networking
   labels:
-    app.kubernetes.io/name: &name pihole
+    app.kubernetes.io/name: &name pihole-k8s
     app.kubernetes.io/instance: *name
 spec:
   accessModes:
