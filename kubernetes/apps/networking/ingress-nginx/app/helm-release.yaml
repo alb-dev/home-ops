@@ -24,9 +24,11 @@ spec:
         - name: TZ
           value: Europe/Berlin
       service:
+        enabled: true
         type: LoadBalancer
-        loadBalancerIP: "${NGINX_LB_IP}"
-        externalTrafficPolicy: Local
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${NGINX_LB_IP}"
+        externalTrafficPolicy: Local        
       publishService:
         enabled: true
       ingressClassResource:
