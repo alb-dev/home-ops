@@ -56,7 +56,6 @@ spec:
     virtualHost: "adblock.${SECRET_DOMAIN}"
     ingress:
       enabled: true
-      path: /
       ingressClassName: nginx
       hosts:
         - "adblock.${SECRET_DOMAIN}"
