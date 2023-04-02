@@ -23,6 +23,10 @@ spec:
     remediation:
       retries: 3
   values:
+    image:
+      repository: "pihole/pihole"
+      tag: "2023.03.1"
+      pullPolicy: IfNotPresent
     replicaCount: 1
     strategyType: RollingUpdate
     maxSurge: 1
@@ -34,9 +38,9 @@ spec:
       type: LoadBalancer
       port: 53
       externalTrafficPolicy: Local
-      loadBalancerIP: ${PIHOLE_LB_IP}
       annotations:
         metallb.universe.tf/allow-shared-ip: pihole-svc
+        metallb.universe.tf/loadBalancerIPs: "${PIHOLE_LB_IP}"
     serviceWeb:
       http:
         enabled: true
@@ -46,19 +50,14 @@ spec:
         port: 443
       type: LoadBalancer
       externalTrafficPolicy: Local
-      loadBalancerIP: ${PIHOLE_LB_IP}
       annotations:
         metallb.universe.tf/allow-shared-ip: pihole-svc
+        metallb.universe.tf/loadBalancerIPs: "${PIHOLE_LB_IP}"
     virtualHost: "adblock.${SECRET_DOMAIN}"
     ingress:
       enabled: true
       path: /
       ingressClassName: nginx
-      annotations:
-        nginx.ingress.kubernetes.io/affinity: "cookie"
-        nginx.ingress.kubernetes.io/session-cookie-name: "pihole"
-        nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
-        nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
       hosts:
         - "adblock.${SECRET_DOMAIN}"
       tls:
@@ -71,11 +70,9 @@ spec:
       accessModes:
         - ReadWriteMany
       size: "2Gi"
-
-    adminPassword: ${PIHOLE_PASSWORD}
-
     extraEnvVars:
       TZ: "Europe/Berlin"
+      WEBPASSWORD: ${PIHOLE_PASSWORD}
     DNS1: "192.168.178.5"
     adlists:
       # DEFAULT LISTS
