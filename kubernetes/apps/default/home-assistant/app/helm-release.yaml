@@ -41,7 +41,8 @@ spec:
     service:
       main:
         type: LoadBalancer
-        externalIPs: ["${LB_HOMEASSISTANT_IP}"]
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${LB_HOMEASSISTANT_IP}"
         externalTrafficPolicy: Local
         ports:
           http:
