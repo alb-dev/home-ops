@@ -23,7 +23,7 @@ spec:
     remediation:
       retries: 3
   values:
-    replicaCount: 3
+    replicaCount: 1
     strategyType: RollingUpdate
     maxSurge: 1
     maxUnavailable: 1
