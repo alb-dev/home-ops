@@ -54,7 +54,7 @@ spec:
       ZIGBEE2MQTT_CONFIG_MQTT_REJECT_UNAUTHORIZED: "true"
       ZIGBEE2MQTT_CONFIG_MQTT_SERVER: mqtt://mosquitto.default.svc.cluster.local
       ZIGBEE2MQTT_CONFIG_MQTT_VERSION: 5
-      ZIGBEE2MQTT_CONFIG_SERIAL_PORT: /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2486924-if00
+      ZIGBEE2MQTT_CONFIG_SERIAL_PORT: /dev/ttyUSB0
       ZIGBEE2MQTT_CONFIG_MQTT_USER: ${SECRET_MQTT_USERNAME}
       ZIGBEE2MQTT_CONFIG_MQTT_PASSWORD: ${SECRET_MQTT_PASSWORD}
       ZIGBEE2MQTT_CONFIG_PERMIT_JOIN: "false"
@@ -86,8 +86,14 @@ spec:
      usb:
         enabled: true
         type: hostPath
+        mountPath: /dev/ttyUSB0
         hostPath: /dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2486924-if00
+        hostPathType: CharDevice
 
+    podSecurityContext:
+      supplementalGroups:
+        - 20 # dialout for /dev/ttyUSB0
+        
     volumeClaimTemplates:
       - name: config
         mountPath: /data
