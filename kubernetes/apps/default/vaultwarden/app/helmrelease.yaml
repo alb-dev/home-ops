@@ -36,7 +36,7 @@ spec:
       # -- image pull policy
       pullPolicy: IfNotPresent
       # -- image tag
-      tag: 1.28.0
+      tag: 1.28.1
 
     strategy:
       type: Recreate
