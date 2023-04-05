@@ -15,3 +15,4 @@ resources:
   - ./smtp-relay/ks.yaml
   - ./zigbee2mqtt/ks.yaml
   - ./paperless/ks.yaml
+  - ./excalidraw/ks.yaml
