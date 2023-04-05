@@ -28,7 +28,7 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: louislam/uptime-kuma
-      tag: 1.21.1
+      tag: 1.21.2
     service:
       main:
         ports:
