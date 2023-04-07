@@ -7,7 +7,7 @@ metadata:
 spec:
   sourcePVC: zigbee2mqtt-data-v1
   trigger:
-    schedule: "0 0 * * *"
+    schedule: "0 22 * * *"
   restic:
     pruneIntervalDays: 15
     repository: zigbee2mqtt-restic
