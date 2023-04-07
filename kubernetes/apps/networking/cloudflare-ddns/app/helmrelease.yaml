@@ -46,7 +46,7 @@ spec:
       config:
         enabled: true
         type: configMap
-        name: cloudflare-ddns-configmap
+        name: cloudflare-ddns-configmap-self
         subPath: cloudflare-ddns.sh
         mountPath: /app/cloudflare-ddns.sh
         defaultMode: 0775
