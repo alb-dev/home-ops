@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 RECORD_TYPE="A"
 
 # Get the zone ID for the domain
