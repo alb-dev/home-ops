@@ -20,6 +20,7 @@ EXISTING_RECORD=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$ZO
 # New records / ip
 echo "Set A record: ${CLOUDFLARE_RECORD_NAME} with IP: ${IP}"
 
+update_ipv4=""
 # If the record does not exist, create it with the current IP address
 if [[ $(echo "$EXISTING_RECORD" | jq '.result | length') -eq 0 ]]; then
   echo "Creating DNS record..."
@@ -27,8 +28,7 @@ if [[ $(echo "$EXISTING_RECORD" | jq '.result | length') -eq 0 ]]; then
   -H "X-Auth-Email: ${CLOUDFLARE_EMAIL}" \
   -H "X-Auth-Key: ${CLOUDFLARE_APIKEY}" \
   -H "Content-Type: application/json" \
-  --data "{\"type\":\"$RECORD_TYPE\",\"name\":\"${CLOUDFLARE_RECORD_NAME}\",\"content\":\"$IP\",\"ttl\":120}")
-  echo $update_ipv4 
+  --data "{\"type\":\"$RECORD_TYPE\",\"name\":\"${CLOUDFLARE_RECORD_NAME}\",\"content\":\"$IP\",\"ttl\":120,\"proxied\":true}")
 else
   # Update the existing record with the new IP address
   RECORD_ID=$(echo "$EXISTING_RECORD" | jq -r '.result[0].id')
@@ -37,7 +37,7 @@ else
   -H "X-Auth-Email: ${CLOUDFLARE_EMAIL}" \
   -H "X-Auth-Key: ${CLOUDFLARE_APIKEY}" \
   -H "Content-Type: application/json" \
-  --data "{\"type\":\"$RECORD_TYPE\",\"name\":\"${CLOUDFLARE_RECORD_NAME}\",\"content\":\"$IP\",\"ttl\":120}")
+  --data "{\"type\":\"$RECORD_TYPE\",\"name\":\"${CLOUDFLARE_RECORD_NAME}\",\"content\":\"$IP\",\"ttl\":120,\"proxied\":true}")
 fi
 
 if [[ "$(echo "$update_ipv4" | jq --raw-output '.success')" == "true" ]]; then
