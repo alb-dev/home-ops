@@ -38,6 +38,12 @@ spec:
       annotations:
         metallb.universe.tf/loadBalancerIPs: "${GATEWAY_DNS_LB}"
       externalTrafficPolicy: Local
+    resources:
+      requests:
+        cpu: 10m
+        memory: 30Mi
+      limits:
+        memory: 50Mi
     extraZonePlugins:
       - name: log
       - name: errors
