@@ -35,3 +35,4 @@ resources:
 - rook-ceph.yaml
 - forgejo.yaml
 - weave-gitops.yaml
+- k8s-gateway.yaml
