@@ -66,6 +66,7 @@ spec:
     - kind: Secret
       name: weave-gitops-secret
       valuesKey: adminPassword
+      targetPath: adminUser.passwordHash
     # - kind: Secret
     #   name: weave-gitops-secret
     #   valuesKey: WEAVEGITOPS_OAUTH_CLIENT_SECRET
