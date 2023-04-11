@@ -34,3 +34,4 @@ resources:
 - cloudnative-pg.yaml
 - rook-ceph.yaml
 - forgejo.yaml
+- weave-gitops.yaml
