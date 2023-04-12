@@ -3,14 +3,14 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: uptime-kuma-v1
-  namespace: monitoring
+  name: jellyfin-config-v1
+  namespace: default
 spec:
   trigger:
     manual: restore-once
   restic:
-    repository: uptime-kuma-restic
-    destinationPVC: uptime-kuma-v1
+    repository: jellyfin-restic-secret
+    destinationPVC: jellyfin-config-v1
     copyMethod: Direct
     storageClassName: ceph-block
     # IMPORTANT NOTE:
