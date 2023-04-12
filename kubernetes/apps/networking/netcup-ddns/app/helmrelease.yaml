@@ -1,0 +1,53 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: netcup-ddns
+  namespace: networking
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.3.2
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controller:
+      type: cronjob
+      cronjob:
+        concurrencyPolicy: Forbid
+        schedule: "@hourly"
+    restartPolicy: OnFailure
+    image:
+      repository: ghcr.io/onedr0p/kubernetes-kubectl
+      tag: 1.26.3@sha256:e0607ef3a8d8347e715fdf1b087160bde7cc496fa051deba5aa7484903c61276
+    command: ["/bin/bash", "/app/netcup-ddns.sh"]
+    envFrom:
+      - secretRef:
+          name: netcup-ddns-secret
+    service:
+      main:
+        enabled: false
+    persistence:
+      config:
+        enabled: true
+        type: configMap
+        name: netcup-ddns-configmap
+        subPath: netcup-ddns.sh
+        mountPath: /app/netcup-ddns.sh
+        defaultMode: 0775
+        readOnly: true
