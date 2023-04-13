@@ -9,3 +9,4 @@ resources:
 - ./pihole/ks.yaml
 - ./k8s-gateway/ks.yaml
 - external-services
+- namespace.yaml
