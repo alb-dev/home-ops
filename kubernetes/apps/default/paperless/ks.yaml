@@ -9,6 +9,7 @@ spec:
   dependsOn:
     - name: cluster-apps-paperless-redis
     - name: cluster-apps-volsync
+    - name: cluster-apps-rook-ceph-cluster
   path: ./kubernetes/apps/default/paperless/app
   prune: true
   sourceRef:
@@ -32,6 +33,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-paperless-redis
+    - name: cluster-apps-rook-ceph-cluster
     - name: cluster-apps-volsync
   path: ./kubernetes/apps/default/paperless/db
   prune: true
