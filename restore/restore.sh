@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # restore volumes via volsync
-kubectl -k volsync/
+kubectl apply -k volsync/
 # Array which includes all namespaces in which pods should be restartet
-NAMESPACE_LIST=("default" "monitoring")
+NAMESPACE_LIST=("default")
 
 # Loop through each namespace in the list [@] creates 
 for NAMESPACE in "${NAMESPACE_LIST[@]}"; do

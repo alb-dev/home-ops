@@ -11,8 +11,13 @@ spec:
   restic:
     repository: hass-restic-secret
     destinationPVC: config-home-assistant-0
+    cacheCapacity: 10Gi
     copyMethod: Direct
     storageClassName: ceph-block
     # IMPORTANT NOTE:
     #   Set to the last X number of snapshots to restore from
     previous: 2
+    moverSecurityContext:
+      runAsUser: 0
+      runAsGroup: 0
+      fsGroup: 0
