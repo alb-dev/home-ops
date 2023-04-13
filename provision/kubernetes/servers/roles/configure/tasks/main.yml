@@ -21,3 +21,7 @@
 - name: "Set Timezone"
   shell: |
     sudo timedatectl set-timezone Europe/Berlin
+
+- name: Set a hostname
+  ansible.builtin.hostname:
+    name: "{{ inventory_hostname}}"

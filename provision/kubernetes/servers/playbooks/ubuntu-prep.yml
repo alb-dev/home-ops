@@ -8,6 +8,6 @@
   roles:
     - homelab
     - users
-    - configure
+  #  - configure
     - autoupdates
     - clean

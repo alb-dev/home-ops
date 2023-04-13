@@ -1,0 +1,14 @@
+---
+- name: reboot nodes
+  hosts:
+    - all
+  become: true
+  gather_facts: true
+  any_errors_fatal: true
+  pre_tasks:
+    - name: Pausing for 5 seconds...
+      ansible.builtin.pause:
+        seconds: 2
+  tasks:
+    - name: Unconditionally reboot the machine with all defaults
+      ansible.builtin.reboot:

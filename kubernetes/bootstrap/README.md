@@ -12,7 +12,7 @@ sops --decrypt kubernetes/flux/vars/cluster-secrets.sops.yaml | kubectl apply -f
 
 ## Force reconile for imidiate bootstrap
 ```bash
-flux reconcile -n flux-system kustomization flux
+flux reconcile -n flux-system kustomization home-ops-kubernetes
 ```
 ## Force git sync 
 ```bash
