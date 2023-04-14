@@ -4,12 +4,10 @@ kind: PersistentVolumeClaim
 metadata:
   name: mealie-config-v1
   namespace: default
-  labels:
-    k10.kasten.io/backup: "true"
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 500Mi
-  storageClassName: rook-ceph-block
+  storageClassName: ceph-block
