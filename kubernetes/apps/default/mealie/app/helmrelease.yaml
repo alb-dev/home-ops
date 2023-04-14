@@ -70,7 +70,7 @@ spec:
         mountPath: /app/data/
         accessMode: ReadWriteOnce
         size: 10Gi
-        existingClaim: mealie-config-v1
+        existingClaim: mealie-config
     resources:
       requests:
         cpu: 100m
