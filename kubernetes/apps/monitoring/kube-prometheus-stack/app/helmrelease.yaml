@@ -142,10 +142,10 @@ spec:
         resources:
           requests:
             cpu: 1000m
-            memory: 5000Mi
+            memory: 4000Mi
           limits:
             cpu: 3000m
-            memory: 8000Mi
+            memory: 6000Mi
 #        additionalScrapeConfigs:
 #          - job_name: node-docker
 #            scrape_interval: 1m
