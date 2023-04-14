@@ -16,6 +16,6 @@ spec:
       kind: HelmRelease
       name: kube-vip
       namespace: kube-system
-  interval: 30m
+  interval: 5m
   retryInterval: 1m
   timeout: 3m
