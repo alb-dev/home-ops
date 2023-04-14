@@ -1,0 +1,40 @@
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: mealie
+  namespace: default
+spec:
+  sourcePVC: mealie-config-v1
+  trigger:
+    schedule: "0 22 * * *"
+  restic:
+    copyMethod: Snapshot
+    pruneIntervalDays: 10
+    repository: mealie-restic
+    cacheCapacity: 1Gi
+    volumeSnapshotClassName: csi-ceph-blockpool
+    storageClassName: ceph-block
+    moverSecurityContext:
+      runAsUser: 0
+      runAsGroup: 0
+      fsGroup: 0
+    retain:
+      daily: 10
+      within: 3d
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mosquitto-restic
+  namespace: default
+type: Opaque
+stringData:
+  # The repository url
+  RESTIC_REPOSITORY: s3:http://minio.storage.svc.cluster.local:9000/mealie-restic
+  # The repository encryption key
+  RESTIC_PASSWORD: "${RESTIC_PW}"
+  # ENV vars specific to the back end
+  # https://restic.readthedocs.io/en/stable/030_preparing_a_new_repo.html
+  AWS_ACCESS_KEY_ID: "${MINIO_USER}"
+  AWS_SECRET_ACCESS_KEY: "${MINIO_PASSWORD}"
