@@ -84,18 +84,26 @@ spec:
       enabled: true
       endpoints:
         - 192.168.178.210
+        - 192.168.178.211
+        - 192.168.178.212
     kubeScheduler:
       enabled: true
       endpoints:
         - 192.168.178.210
+        - 192.168.178.211
+        - 192.168.178.212
     kubeProxy:
       enabled: true
       endpoints:
         - 192.168.178.210
+        - 192.168.178.211
+        - 192.168.178.212
     kubeEtcd:
       enabled: true
       endpoints:
         - 192.168.178.210
+        - 192.168.178.211
+        - 192.168.178.212
       service:
         enabled: true
         port: 2379
