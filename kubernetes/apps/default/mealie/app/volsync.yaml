@@ -5,7 +5,7 @@ metadata:
   name: mealie
   namespace: default
 spec:
-  sourcePVC: mealie-config-v1
+  sourcePVC: mealie-config
   trigger:
     schedule: "0 22 * * *"
   restic:
