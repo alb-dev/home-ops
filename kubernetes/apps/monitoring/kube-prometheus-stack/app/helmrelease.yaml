@@ -141,9 +141,10 @@ spec:
                   storage: 40Gi
         resources:
           requests:
-            cpu: 10m
+            cpu: 1000m
             memory: 1000Mi
           limits:
+            cpu: 3000m
             memory: 8000Mi
 #        additionalScrapeConfigs:
 #          - job_name: node-docker
