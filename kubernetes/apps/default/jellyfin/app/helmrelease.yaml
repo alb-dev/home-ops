@@ -79,6 +79,8 @@ spec:
         readOnly: false
     podSecurityContext: 
       supplementalGroups: [44, 109, 10000]
+    nodeSelector:
+      intel.feature.node.kubernetes.io/gpu: "true"
     resources:
       requests:
         gpu.intel.com/i915: 1
