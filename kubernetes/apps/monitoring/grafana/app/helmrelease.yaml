@@ -214,7 +214,7 @@ spec:
             nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
             nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
           hosts:
-            - &host "grafana.${SECRET_DOMAIN}"
+            - &host "grafana.${DOMAIN}"
           tls:
             - hosts:
                 - *host

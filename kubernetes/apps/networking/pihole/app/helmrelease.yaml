@@ -53,16 +53,16 @@ spec:
       annotations:
         metallb.universe.tf/allow-shared-ip: pihole-svc
         metallb.universe.tf/loadBalancerIPs: "${PIHOLE_LB_IP}"
-    virtualHost: "adblock.${SECRET_DOMAIN}"
+    virtualHost: "adblock.${DOMAIN}"
     ingress:
       enabled: true
       ingressClassName: nginx
       hosts:
-        - "adblock.${SECRET_DOMAIN}"
+        - "adblock.${DOMAIN}"
       tls:
-        - secretName: "adblock.${SECRET_DOMAIN}"
+        - secretName: "adblock.${DOMAIN}"
           hosts:
-            - "adblock.${SECRET_DOMAIN}"
+            - "adblock.${DOMAIN}"
     persistentVolumeClaim:
       enabled: true
       existingClaim: pihole-data-v1

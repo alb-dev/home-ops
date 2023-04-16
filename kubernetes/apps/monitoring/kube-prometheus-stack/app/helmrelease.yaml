@@ -34,10 +34,10 @@ spec:
           pathType: Prefix
           ingressClassName: "nginx"
           hosts:
-            - "alert-manager.${SECRET_DOMAIN}"
+            - "alert-manager.${DOMAIN}"
           tls:
             - hosts:
-                - alert-manager.${SECRET_DOMAIN}
+                - alert-manager.${DOMAIN}
         alertmanagerSpec:
           replicas: 3
           podAntiAffinity: hard
@@ -114,10 +114,10 @@ spec:
         pathType: Prefix
         ingressClassName: "nginx"
         hosts:
-          - "prometheus.${SECRET_DOMAIN}"
+          - "prometheus.${DOMAIN}"
         tls:
           - hosts:
-              - prometheus.${SECRET_DOMAIN}
+              - prometheus.${DOMAIN}
       prometheusSpec:
         replicas: 3
         replicaExternalLabelName: __replica__

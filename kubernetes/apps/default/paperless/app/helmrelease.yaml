@@ -46,7 +46,7 @@ spec:
       PAPERLESS_REDIS: redis://paperless-redis.default.svc.cluster.local:6379
       PAPERLESS_TASK_WORKERS: 2
       PAPERLESS_TIME_ZONE: "Europe/Berlin"
-      PAPERLESS_URL: "https://paperless.${SECRET_DOMAIN}"
+      PAPERLESS_URL: "https://paperless.${DOMAIN}"
       USERMAP_GID: 65543
       PAPERLESS_ADMIN_USER:
         valueFrom:
@@ -83,7 +83,7 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt-production
           nginx.ingress.kubernetes.io/proxy-body-size: 4G
         hosts:
-          - host: &host "paperless.${SECRET_DOMAIN}"
+          - host: &host "paperless.${DOMAIN}"
             paths:
               - path: /
         tls:

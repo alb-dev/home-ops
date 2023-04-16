@@ -5,4 +5,4 @@ resources:
 #  - zigbee2mqtt.yaml
   - synology.yaml
 #  - adguard.yaml
-  - pihole.yaml
+#  - pihole.yaml
