@@ -36,3 +36,4 @@ resources:
 - forgejo.yaml
 - weave-gitops.yaml
 - k8s-gateway.yaml
+- kyverno.yaml

@@ -16,3 +16,4 @@ resources:
 - default
 - system-upgrade
 - flux-system
+- kyverno
