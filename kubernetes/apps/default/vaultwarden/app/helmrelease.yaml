@@ -76,7 +76,6 @@ spec:
         ingressClassName: "nginx"
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"  
-          external-dns.home.arpa/enabled: "true"
         hosts:
           - host: "vault.${SECRET_DOMAIN}"
             paths:
