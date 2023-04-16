@@ -9,25 +9,21 @@ spec:
   trigger:
     schedule: "0 22 * * *"
   restic:
-    pruneIntervalDays: 15
-    repository: zigbee2mqtt-restic
+    copyMethod: Snapshot
+    pruneIntervalDays: 14
+    repository: zigbee2mqtt-restic-secret
     retain:
-      hourly: 1
-      daily: 1
-      weekly: 1
-      monthly: 1
-      yearly: 1
-    copyMethod: Clone
+      daily: 14
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: zigbee2mqtt-restic
+  name: zigbee2mqtt-restic-secret
   namespace: default
 type: Opaque
 stringData:
   # The repository url
-  RESTIC_REPOSITORY: s3:http://minio.storage.svc.cluster.local:9000/zigbee2mqtt-restic
+  RESTIC_REPOSITORY: s3:http://minio.storage.svc.cluster.local:9000/zigbee2mqtt
   # The repository encryption key
   RESTIC_PASSWORD: "${RESTIC_PW}"
   # ENV vars specific to the back end
