@@ -30,7 +30,7 @@ spec:
       repository: oriedge/k8s_gateway
       tag: v0.3.4
     replicaCount: 2
-    domain: ${SECRET_DOMAIN}
+    domain: ${DOMAIN}
     ttl: 30
     service:
       type: LoadBalancer
