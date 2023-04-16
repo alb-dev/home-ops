@@ -72,8 +72,8 @@ spec:
     extraEnvVars:
       TZ: "Europe/Berlin"
       WEBPASSWORD: ${PIHOLE_PASSWORD}
-    DNS1: "192.168.178.5"
-    DNS2: "192.168.178.5"
+    DNS1: "192.168.178.248"
+    DNS2: "192.168.178.248"
     adlists:
       # DEFAULT LISTS
       - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
