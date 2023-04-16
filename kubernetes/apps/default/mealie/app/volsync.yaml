@@ -18,7 +18,7 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: mosquitto-restic-secret
+  name: mealie-restic-secret
   namespace: default
 type: Opaque
 stringData:
