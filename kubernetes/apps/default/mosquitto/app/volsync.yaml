@@ -2,7 +2,7 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: mosquitto
+  name: mosquitto-backup
   namespace: default
 spec:
   sourcePVC: mosquitto-data-v1
