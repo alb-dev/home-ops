@@ -2,7 +2,7 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: vaultwarden
+  name: vaultwarden-backup
   namespace: default
 spec:
   sourcePVC: vaultwarden-v1

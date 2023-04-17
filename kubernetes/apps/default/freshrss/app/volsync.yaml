@@ -2,7 +2,7 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: freshrss
+  name: freshrss-backup
   namespace: default
 spec:
   sourcePVC: freshrss-config-v1
