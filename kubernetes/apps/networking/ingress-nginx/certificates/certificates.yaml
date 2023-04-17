@@ -6,6 +6,8 @@ metadata:
   namespace: networking
 spec:
   secretName: alb-home-tls
+  keyAlgorithm: ecdsa
+  keySize: 256
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
