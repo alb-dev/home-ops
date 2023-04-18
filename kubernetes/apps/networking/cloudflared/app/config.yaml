@@ -25,9 +25,4 @@ data:
     ### Proxy traffic to the Kubernetes Services directly
     # - hostname: "echo.${SECRET_EXT_DOMAIN}"
     #   service: http://echo-server.default:8080
-#   - hostname: "cr.${SECRET_EXT_DOMAIN}"
-#     service: https://harbor.development:443
-#     originRequest:
-#       noTLSVerify: true
-    ### "Else" rule matches any traffic which didn't match a previous rule, and responds with HTTP 404.
     - service: http_status:404
