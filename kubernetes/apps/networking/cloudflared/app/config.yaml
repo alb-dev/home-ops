@@ -20,21 +20,14 @@ data:
     ### Proxy nginx to the k8s ingress (ingress-nginx) to hand off to Services
     # internet --> cloudflared tunnel --> local DNS --> ingress --> service
     ### NOTE: relies on split-brain DNS / local overrides
-    - hostname: "${SECRET_OTHER_DOMAIN_1}"
-      service: https://etherpad.${SECRET_DOMAIN}
-    ### Proxy traffic directly to ingress-nginx controller service (ingress created)
-    - hostname: "status.${SECRET_EXT_DOMAIN}"
-      service: http://ingress-nginx-controller.networking
-    - hostname: "flux.${SECRET_EXT_DOMAIN}"
-      service: http://ingress-nginx-controller.networking
-    - hostname: "echo.${SECRET_EXT_DOMAIN}"
-      service: http://ingress-nginx-controller.networking
+    - hostname: "mealie.${DOMAIN}"
+      service: http://ingress-nginx-controller.networking:443
     ### Proxy traffic to the Kubernetes Services directly
     # - hostname: "echo.${SECRET_EXT_DOMAIN}"
     #   service: http://echo-server.default:8080
-    - hostname: "cr.${SECRET_EXT_DOMAIN}"
-      service: https://harbor.development:443
-      originRequest:
-        noTLSVerify: true
+#   - hostname: "cr.${SECRET_EXT_DOMAIN}"
+#     service: https://harbor.development:443
+#     originRequest:
+#       noTLSVerify: true
     ### "Else" rule matches any traffic which didn't match a previous rule, and responds with HTTP 404.
     - service: http_status:404
