@@ -1,28 +1,25 @@
 ---
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: cloudflared-config
-  namespace: networking
-  labels:
-    app.kubernetes.io/name: cloudflared
-  annotations:
-    reloader.stakater.com/match: "true"
-data:
-  config.yaml: |
-    # Name of the tunnel you want to run
-    tunnel: home-cluster
-    credentials-file: /etc/cloudflared/creds/credentials.json
-    # Serves the metrics server under /metrics and the readiness server under /ready
-    metrics: 0.0.0.0:2000
-    no-autoupdate: true
-    ingress:
-    ### Proxy nginx to the k8s ingress (ingress-nginx) to hand off to Services
-    # internet --> cloudflared tunnel --> local DNS --> ingress --> service
-    ### NOTE: relies on split-brain DNS / local overrides
-    - hostname: "mealie.${DOMAIN}"
-      service: http://ingress-nginx-controller.networking:443
-    ### Proxy traffic to the Kubernetes Services directly
-    # - hostname: "echo.${SECRET_EXT_DOMAIN}"
-    #   service: http://echo-server.default:8080
-    - service: http_status:404
+tunnel: ${SECRET_CLOUDFLARE_TUNNEL_ID}
+credentials-file: /etc/cloudflared/cred.json
+originRequest: # Top-level configuration
+  connectTimeout: 30s
+warp-routing:
+  enabled: false
+
+ingress:
+  # The localhost:8000 service inherits all root-level configuration.
+  # In other words, it will use a connectTimeout of 30 seconds.
+  - hostname: grafana.${SECRET_DOMAIN}
+    service: https://grafana.${SECRET_DOMAIN}
+    originRequest:
+      httpHostHeader: grafana.${SECRET_DOMAIN}
+  # - hostname: example2.com
+  #   service: localhost:8001
+  # The localhost:8002 service overrides some root-level config.
+  # - service: localhost:8002
+  #   originRequest:
+  #     connectTimeout: 10s
+  #     disableChunkedEncoding: true
+  # Some built-in services such as `http_status` do not use any configuration.
+  # The service below will simply respond with HTTP 404.
+  - service: http_status:404
