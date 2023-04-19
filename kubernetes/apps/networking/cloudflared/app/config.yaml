@@ -7,7 +7,7 @@ warp-routing:
   enabled: false
 
 ingress:
-  - hostname: "*.${SECRET_DOMAIN_CASA}"
+  - hostname: "*.${DOMAIN}"
     service: https://ingress-nginx-controller.networking
     originRequest:
       noTLSVerify: true
