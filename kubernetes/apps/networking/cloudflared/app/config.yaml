@@ -1,16 +1,14 @@
 ---
 tunnel: ${SECRET_CLOUDFLARE_TUNNEL_ID}
 credentials-file: /etc/cloudflared/credentials.json
-originRequest: # Top-level configuration
+originRequest:
   connectTimeout: 30s
 warp-routing:
   enabled: false
 
 ingress:
-  # The localhost:8000 service inherits all root-level configuration.
-  # In other words, it will use a connectTimeout of 30 seconds.
-  - hostname: grafana.${DOMAIN}
-    service: https://grafana.${DOMAIN}
+  - hostname: "*.${SECRET_DOMAIN_CASA}"
+    service: https://ingress-nginx-controller.networking
     originRequest:
-      httpHostHeader: grafana.${DOMAIN}
+      noTLSVerify: true
   - service: http_status:404
