@@ -29,6 +29,8 @@ spec:
   values:
     global:
       nameOverride: *app
+    controller:
+      replicas: 3
     image:
       repository: cloudflare/cloudflared
       tag: 2023.4.1-amd64
@@ -75,3 +77,15 @@ spec:
     podAnnotations:
       secret.reloader.stakater.com/reload: *secret
       configmap.reloader.stakater.com/reload: *config
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - cloudflared
+              topologyKey: kubernetes.io/hostname
