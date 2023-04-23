@@ -32,7 +32,7 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: jellyfin/jellyfin
-      tag: 10.8.9
+      tag: 10.8.10
       pullPolicy: IfNotPresent
     env:
       TZ: ${TIMEZONE}
