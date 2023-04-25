@@ -10,6 +10,9 @@ spec:
     name: letsencrypt-production
     kind: ClusterIssuer
   commonName: "${DOMAIN}"
+  privateKey:
+    algorithm: ECDSA
+    size: 256
   dnsNames:
     - "${DOMAIN}"
     - "*.${DOMAIN}"
