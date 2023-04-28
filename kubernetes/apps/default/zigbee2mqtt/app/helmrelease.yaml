@@ -82,7 +82,6 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: zigbee2mqtt-tls
 
     volumeClaimTemplates:
       - name: config

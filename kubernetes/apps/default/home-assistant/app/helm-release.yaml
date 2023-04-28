@@ -61,7 +61,6 @@ spec:
         tls:
         - hosts:
             - "hass.${DOMAIN}"
-          secretName: "hass.${DOMAIN}"
     probes:
       liveness:
         enabled: false

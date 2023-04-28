@@ -90,7 +90,6 @@ spec:
         tls:
           - hosts:
               - "vault.${DOMAIN}"
-            secretName: "vault.${DOMAIN}"
       admin:
         enabled: true
         ingressClassName: "nginx"
@@ -104,7 +103,6 @@ spec:
         tls:
           - hosts:
               - "vault.${DOMAIN}"
-            secretName: "vault.${DOMAIN}"
     persistence:
         config:
           enabled: true
