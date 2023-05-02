@@ -33,7 +33,7 @@ spec:
       replicas: 3
     image:
       repository: cloudflare/cloudflared
-      tag: 2023.4.2-amd64
+      tag: 2023.5.0-amd64
     args:
       - tunnel
       - --config
