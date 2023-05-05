@@ -4,10 +4,6 @@ credentials-file: /etc/cloudflared/credentials.json
 no-autoupdate: true
 
 ingress:
-  - hostname: "${DOMAIN}"
-    service: https://ingress-nginx-controller.networking.svc.cluster.local:443
-    originRequest:
-      originServerName: "ingress.${DOMAIN}"
   - hostname: "*.${DOMAIN}"
     service: https://ingress-nginx-controller.networking.svc.cluster.local:443
     originRequest:
