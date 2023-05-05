@@ -7,8 +7,12 @@ warp-routing:
   enabled: false
 
 ingress:
-  - hostname: "*.${DOMAIN}"
-    service: https://ingress-nginx-controller.networking
+  - hostname: "${DOMAIN}"
+    service: https://ingress-nginx-controller.networking.svc.cluster.local:443
     originRequest:
-      noTLSVerify: true
+      originServerName: "ingress.${DOMAIN}"
+  - hostname: "*.${DOMAIN}"
+    service: https://ingress-nginx-controller.networking.svc.cluster.local:443
+    originRequest:
+      originServerName: "ingress.${DOMAIN}"
   - service: http_status:404
