@@ -27,23 +27,12 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    global:
-      nameOverride: *app
     controller:
-      replicas: 3
+      type: daemonset
     image:
       repository: cloudflare/cloudflared
       tag: 2023.5.0-amd64
-    env: 
-      NO_AUTOUPDATE: "true"
-      TUNNEL_CRED_FILE: /etc/cloudflared/credentials.json
-      TUNNEL_METRICS: 0.0.0.0:8080
-      TUNNEL_TRANSPORT_PROTOCOL: auto     
-    args:
-      - tunnel
-      - --config
-      - /etc/cloudflared/config.yaml
-      - run
+    args: ['tunnel', '--config', '/etc/cloudflared/config.yaml', '--metrics', '0.0.0.0:9090', 'run']
     service:
       main:
         nameOverride: metrics

@@ -1,5 +1,7 @@
 ---
 tunnel: ${SECRET_CLOUDFLARE_TUNNEL_ID}
+credentials-file: /etc/cloudflared/credentials.json
+no-autoupdate: true
 
 ingress:
   - hostname: "${DOMAIN}"
