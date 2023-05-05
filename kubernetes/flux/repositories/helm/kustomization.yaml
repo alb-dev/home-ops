@@ -37,3 +37,4 @@ resources:
 - weave-gitops.yaml
 - k8s-gateway.yaml
 - kyverno.yaml
+- netcup-webhook.yaml
