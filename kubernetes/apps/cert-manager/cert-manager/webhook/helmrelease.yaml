@@ -8,11 +8,11 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: netcup-webhook
+      chart: cert-manager-webhook-netcup
       version: 1.0.14
       sourceRef:
         kind: HelmRepository
-        name: cert-manager-webhook-netcup
+        name: netcup-webhook
         namespace: flux-system
   install:
     createNamespace: true
