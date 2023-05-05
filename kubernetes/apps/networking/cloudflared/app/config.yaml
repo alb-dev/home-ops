@@ -1,4 +1,6 @@
 ---
+tunnel: ${SECRET_CLOUDFLARE_TUNNEL_ID}
+
 ingress:
   - hostname: "${DOMAIN}"
     service: https://ingress-nginx-controller.networking.svc.cluster.local:443
