@@ -34,13 +34,18 @@ spec:
     image:
       repository: cloudflare/cloudflared
       tag: 2023.5.0-amd64
+    env: 
+      NO_AUTOUPDATE: "true"
+      TUNNEL_CRED_FILE: /etc/cloudflared/creds/credentials.json
+      TUNNEL_METRICS: 0.0.0.0:8080
+      TUNNEL_TRANSPORT_PROTOCOL: auto
+      TUNNEL_ID: "${SECRET_CLOUDFLARE_TUNNEL_ID}"
     args:
       - tunnel
       - --config
       - /etc/cloudflared/config.yaml
-      - --metrics
-      - 0.0.0.0:9090
       - run
+      - "${TUNNEL_ID}"
     service:
       main:
         nameOverride: metrics
