@@ -2,7 +2,21 @@
 version: '3'
 
 vars:
-  GREETING: Hello, World!
+  KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
+  ANSIBLE_DIR: "{{.ROOT_DIR}}/provision/kubernetes/servers"
+
+dotenv: [".config.env"]
+
+env:
+  KUBECONFIG: "{{.ROOT_DIR}}/kubeconfig"
+  SOPS_AGE_KEY_FILE: ~/.config/sops/age/keys.txt
+
+includes:
+  ansible: .taskfiles/AnsibleTasks.yml
+  cluster: .taskfiles/ClusterTasks.yml
+  precommit: .taskfiles/PrecommitTasks.yml
+  terraform: .taskfiles/TerraformTasks.yml
+
 
 tasks:
   init:
@@ -35,7 +49,3 @@ tasks:
         weaveworks/tap/gitops
         yamllint
         yq
-  default:
-    cmds:
-      - echo "{{.GREETING}}"
-    silent: true
