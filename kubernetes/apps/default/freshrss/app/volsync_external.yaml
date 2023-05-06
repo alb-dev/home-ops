@@ -2,7 +2,7 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: freshrss-backup
+  name: freshrss-backup-external
   namespace: default
 spec:
   sourcePVC: freshrss-config-v1
@@ -11,22 +11,22 @@ spec:
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 14
-    repository: freshrss-restic-secret
+    repository: freshrss-restic-secret-external
     retain:
       daily: 14
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: freshrss-restic-secret
+  name: freshrss-restic-secret-external
   namespace: default
 type: Opaque
 stringData:
   # The repository url
-  RESTIC_REPOSITORY: s3:http://minio.storage.svc.cluster.local:9000/freshrss
+  RESTIC_REPOSITORY: s3:https://s3api.nosync.eu/nao
   # The repository encryption key
   RESTIC_PASSWORD: "${RESTIC_PW}"
   # ENV vars specific to the back end
   # https://restic.readthedocs.io/en/stable/030_preparing_a_new_repo.html
-  AWS_ACCESS_KEY_ID: "${MINIO_USER}"
-  AWS_SECRET_ACCESS_KEY: "${MINIO_PASSWORD}"
+  AWS_ACCESS_KEY_ID: "${CK_ACCESS_KEY}"
+  AWS_SECRET_ACCESS_KEY: "${CK_SECRET_KEY}"
