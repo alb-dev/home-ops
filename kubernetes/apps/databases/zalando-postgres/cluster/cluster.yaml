@@ -3,7 +3,7 @@ apiVersion: "acid.zalan.do/v1"
 kind: postgresql
 metadata:
   name: postgres
-  namespace: database
+  namespace: databases
 spec:
   teamId: "alb-home"
 

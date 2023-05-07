@@ -2,28 +2,28 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: freshrss-backup-ck
+  name: home-assistant-backup-ck
   namespace: default
 spec:
-  sourcePVC: freshrss-config-v1
+  sourcePVC: config-home-assistant-0
   trigger:
     schedule: "0 22 * * *"
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 14
-    repository: freshrss-restic-secret-ck
+    repository: home-assistant-restic-secret-ck
     retain:
       daily: 14
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: freshrss-restic-secret-ck
+  name: home-assistant-restic-secret-ck
   namespace: default
 type: Opaque
 stringData:
   # The repository url
-  RESTIC_REPOSITORY: s3:https://${S3_EXTERNAL}/freshrss
+  RESTIC_REPOSITORY: s3:https://${S3_EXTERNAL}/home-assistant
   # The repository encryption key
   RESTIC_PASSWORD: "${RESTIC_PW}"
   # ENV vars specific to the back end
