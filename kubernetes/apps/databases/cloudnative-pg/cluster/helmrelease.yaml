@@ -24,7 +24,7 @@ spec:
         compression: bzip2
         maxParallel: 8
       destinationPath: s3://postgresql/
-      endpointURL: https://s3.${DOMAIN}
+      endpointURL: https://s3api.nosync.eu
       serverName: postgres-v1
       s3Credentials:
         accessKeyId:
