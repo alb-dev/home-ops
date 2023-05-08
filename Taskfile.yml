@@ -13,9 +13,9 @@ env:
 
 includes:
   ansible: .taskfiles/AnsibleTasks.yml
-  cluster: .taskfiles/ClusterTasks.yml
-  precommit: .taskfiles/PrecommitTasks.yml
-  terraform: .taskfiles/TerraformTasks.yml
+#  cluster: .taskfiles/ClusterTasks.yml
+#  precommit: .taskfiles/PrecommitTasks.yml
+#  terraform: .taskfiles/TerraformTasks.yml
 
 
 tasks:
@@ -49,3 +49,7 @@ tasks:
         weaveworks/tap/gitops
         yamllint
         yq
+  default:
+    silent: true
+    cmds:
+      - task -l

@@ -74,8 +74,7 @@ spec:
               - path: /
                 pathType: Prefix
         tls:
-          - secretName: chart-example-tls
-            hosts:
+          - hosts:
               - git.example.com
       resources: 
         limits:
