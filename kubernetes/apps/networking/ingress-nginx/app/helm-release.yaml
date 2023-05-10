@@ -19,9 +19,6 @@ spec:
     createNamespace: true
   values:
     controller:
-      image:
-        config:
-          tcp-services-configmap: networking/tcp-services
       replicaCount: 3
       extraEnvs:
         - name: TZ
