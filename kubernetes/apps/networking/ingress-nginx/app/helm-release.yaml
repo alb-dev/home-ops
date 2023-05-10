@@ -19,6 +19,11 @@ spec:
     createNamespace: true
   values:
     controller:
+      image:
+        containerPort:
+          http: 80
+          https: 443
+          yacy: 8080
       replicaCount: 3
       extraEnvs:
         - name: TZ
@@ -28,7 +33,7 @@ spec:
         type: LoadBalancer
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${NGINX_LB_IP}"
-        externalTrafficPolicy: Local        
+        externalTrafficPolicy: Local
       publishService:
         enabled: true
       ingressClassResource:
