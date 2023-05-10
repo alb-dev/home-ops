@@ -21,9 +21,7 @@ spec:
     controller:
       image:
         config:
-          tcp-services:
-            service1: "namespace1/service1:1234"
-            service2: "namespace2/service2:5678"
+          tcp-services-configmap: networking/tcp-services
       replicaCount: 3
       extraEnvs:
         - name: TZ
