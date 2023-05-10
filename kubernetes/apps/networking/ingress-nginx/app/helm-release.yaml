@@ -20,10 +20,9 @@ spec:
   values:
     controller:
       image:
-        containerPort:
-          http: 80
-          https: 443
-          proxied-tcp-9000: 9000
+        config:
+          tcp-services:
+            jellyfin: "default/jellyfin:8096"
       replicaCount: 3
       extraEnvs:
         - name: TZ
@@ -33,11 +32,9 @@ spec:
         ports:
           http: 80
           https: 443
-          proxied-tcp-9000: 9000
         targetPorts:
           http: http
           https: https
-          proxied-tcp-9000: proxied-tcp-9000
         type: LoadBalancer
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${NGINX_LB_IP}"
