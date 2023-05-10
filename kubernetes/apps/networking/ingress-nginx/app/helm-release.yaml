@@ -32,7 +32,7 @@ spec:
         targetPorts:
           http: http
           https: https
-          proxied-tcp-9000: 9000
+          proxied-tcp-9000: proxied-tcp-9000
         type: LoadBalancer
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${NGINX_LB_IP}"
