@@ -28,11 +28,11 @@ spec:
         ports:
           http: 80
           https: 443
-          yacy: 8080
+          proxied-tcp-9000: 9000
         targetPorts:
           http: http
           https: https
-          yacy: yacy
+          proxied-tcp-9000: 9000
         type: LoadBalancer
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${NGINX_LB_IP}"
