@@ -22,7 +22,8 @@ spec:
       image:
         config:
           tcp-services:
-            jellyfin: "default/jellyfin:8096"
+            service1: "namespace1/service1:1234"
+            service2: "namespace2/service2:5678"
       replicaCount: 3
       extraEnvs:
         - name: TZ
