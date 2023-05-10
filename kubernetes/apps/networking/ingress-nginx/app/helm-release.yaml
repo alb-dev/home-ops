@@ -28,20 +28,24 @@ spec:
           value: Europe/Berlin
       service:
         enabled: true
-        ports:
-          http: 80
-          https: 443
-        targetPorts:
-          http: http
-          https: https
         type: LoadBalancer
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${NGINX_LB_IP}"
         externalTrafficPolicy: Local
+        ports:
+          http: 80
+          https: 443
+          jellyfin: 8086
+        targetPorts:
+          http: http
+          https: https
+          jellyfin: jellyfin
       publishService:
         enabled: true
       ingressClassResource:
         default: true
+      tcp:
+        "8086": "default/jellyfin:8086"
       config:
         client-body-buffer-size: "100M"
         client-body-timeout: 120
