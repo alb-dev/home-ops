@@ -19,6 +19,11 @@ spec:
     createNamespace: true
   values:
     controller:
+      image:
+        containerPort:
+          http: 80
+          https: 443
+          proxied-tcp-9000: 9000
       replicaCount: 3
       extraEnvs:
         - name: TZ
