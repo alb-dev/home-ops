@@ -19,17 +19,20 @@ spec:
     createNamespace: true
   values:
     controller:
-      image:
-        containerPort:
-          http: 80
-          https: 443
-          yacy: 8080
       replicaCount: 3
       extraEnvs:
         - name: TZ
           value: Europe/Berlin
       service:
         enabled: true
+        ports:
+          http: 80
+          https: 443
+          yacy: 8080
+        targetPorts:
+          http: http
+          https: https
+          yacy: yacy
         type: LoadBalancer
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${NGINX_LB_IP}"
