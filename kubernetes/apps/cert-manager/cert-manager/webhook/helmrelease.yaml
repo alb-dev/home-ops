@@ -30,7 +30,7 @@ spec:
 
     image:
       repository: elvino76/cert-manager-webhook-netcup
-      tag: 1.0.14
+      tag: 1.0.15
       pullPolicy: IfNotPresent
 
     service:
