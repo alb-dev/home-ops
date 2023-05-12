@@ -1,0 +1,13 @@
+debug = true
+[ldap]
+    enabled = true
+    listen = "0.0.0.0:389"
+[ldaps]
+    enabled = false
+[api]
+    enabled = true
+    tls = false
+    listen = "0.0.0.0:5555"
+[backend]
+    datastore = "config"
+    baseDN = "dc=home,dc=arpa"
