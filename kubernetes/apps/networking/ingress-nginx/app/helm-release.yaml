@@ -37,8 +37,6 @@ spec:
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${NGINX_LB_IP}"
         externalTrafficPolicy: Local
-    tcp:
-      "5432": "databases/postgres:5432"
       publishService:
         enabled: true
       ingressClassResource:
@@ -89,3 +87,5 @@ spec:
           memory: 250Mi
         limits:
           memory: 500Mi
+    tcp:
+      "5432": "databases/postgres:5432"
