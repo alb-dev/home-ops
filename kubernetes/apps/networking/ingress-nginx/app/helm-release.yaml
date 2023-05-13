@@ -32,17 +32,17 @@ spec:
         ports:
           http: 80
           https: 443
-          jellyfin: 8086
+          postgres: 5432
         targetPorts:
           http: http
           https: https
-          jellyfin: jellyfin
+          postgres: postgres
       publishService:
         enabled: true
       ingressClassResource:
         default: true
       tcp:
-        "8086": "default/jellyfin:8086"
+        "5432": "databases/postgres:5432"
       config:
         client-body-buffer-size: "100M"
         client-body-timeout: 120
