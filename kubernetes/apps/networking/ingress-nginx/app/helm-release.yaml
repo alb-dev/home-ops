@@ -42,7 +42,7 @@ spec:
       ingressClassResource:
         default: true
       tcp:
-        "5432": "databases/postgres:5432"
+        5432: "databases/postgres:5432"
       config:
         client-body-buffer-size: "100M"
         client-body-timeout: 120
@@ -76,7 +76,7 @@ spec:
         default-ssl-certificate: |-
           networking/alb-home-tls
       topologySpreadConstraints:
-        - maxSkew: 1
+        - maxSkew: 3
           topologyKey: kubernetes.io/hostname
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
