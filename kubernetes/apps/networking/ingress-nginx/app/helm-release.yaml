@@ -25,10 +25,6 @@ spec:
           value: Europe/Berlin
       service:
         enabled: true
-        type: LoadBalancer
-        annotations:
-          metallb.universe.tf/loadBalancerIPs: "${NGINX_LB_IP}"
-        externalTrafficPolicy: Local
         ports:
           http: 80
           https: 443
@@ -37,12 +33,16 @@ spec:
           http: http
           https: https
           postgres: postgres
+        type: LoadBalancer
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${NGINX_LB_IP}"
+        externalTrafficPolicy: Local
+    tcp:
+      "5432": "databases/postgres:5432"
       publishService:
         enabled: true
       ingressClassResource:
         default: true
-      tcp:
-        "5432": "databases/postgres:5432"
       config:
         client-body-buffer-size: "100M"
         client-body-timeout: 120
