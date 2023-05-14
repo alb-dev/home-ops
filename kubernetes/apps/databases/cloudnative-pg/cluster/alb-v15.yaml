@@ -42,7 +42,7 @@ spec:
     retentionPolicy: 30d
     barmanObjectStore:
       destinationPath: s3://cnpg/v15/v1
-      endpointURL: https://${S3_EXTERNAL}
+      endpointURL: "https://${S3_EXTERNAL}"
       wal:
         compression: bzip2
       s3Credentials:
