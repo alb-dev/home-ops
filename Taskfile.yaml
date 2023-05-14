@@ -38,6 +38,7 @@ tasks:
         helm
         ipcalc
         jq
+        minio
         kubernetes-cli
         kustomize
         pre-commit
