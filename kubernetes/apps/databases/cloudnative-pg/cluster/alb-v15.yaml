@@ -25,7 +25,7 @@ spec:
     size: 20Gi
     storageClass: ceph-block
   superuserSecret:
-    name: cloudnative-pg-superuser
+    name: cloudnative-pg
 
   resources:
     requests:
