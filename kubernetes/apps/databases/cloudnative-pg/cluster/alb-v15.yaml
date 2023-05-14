@@ -41,7 +41,7 @@ spec:
   backup:
     retentionPolicy: 30d
     barmanObjectStore:
-      destinationPath: s3://cnpg/v15
+      destinationPath: s3://cnpg/
       endpointURL: https://s3api.nosync.eu
       wal:
         compression: bzip2
