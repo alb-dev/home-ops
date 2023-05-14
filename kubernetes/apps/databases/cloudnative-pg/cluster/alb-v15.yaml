@@ -41,8 +41,9 @@ spec:
   backup:
     retentionPolicy: 30d
     barmanObjectStore:
-      destinationPath: s3://postgresql/
-      endpointURL: http://minio.storage.svc.cluster.local:9000
+      destinationPath: s3://cnpg/
+      endpointURL: https://s3api.nosync.eu
+      serverName: postgres-v1
       wal:
         compression: bzip2
       s3Credentials:
