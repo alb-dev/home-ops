@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Secret
 type: kubernetes.io/basic-auth
 metadata:
-    name: postgres-superuser
+    name: cloudnative-pg-superuser
     namespace: databases
 stringData:
     username: ENC[AES256_GCM,data:7So9F/pNfQ==,iv:TMyNC4KlZysueDfYDbp7DcU0JhNg/mkFJFHDcVjzn2U=,tag:crTpHa57xUbgCGSuMmexeA==,type:str]
@@ -22,8 +22,8 @@ sops:
             UmZKaGZraVVuNGREUGRqUnRIVmJTZlEKB0Kyu/Xx2N8ncZfTa4TLqsRQQB4EpUwY
             /4JuuNmKLCfwWkEJCZ9MA0sjUmnerXyBGuKFy8zycxjVNtGXpS+b7A==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-05-14T10:48:43Z"
-    mac: ENC[AES256_GCM,data:drtQkkvsx0+jw34qcxxYl4lu5b2A4BTewOyeLPDVq8p94EnZY41l66x+6VrGkwRDJ6uw+6k4ehZzgu02dpHtS2CX8pLDYhiMG+Lo4iAQ5ea6a7eZPXQvmV34CYZW67M3JQs3u1b1rQVbPf6F7k5cO40lw4rMriHM8XDCkNIGz2Q=,iv:hxrzW+nYOnKBWKTkE4vjJ1oVbFP6fWDHIXD9FOaEzIo=,tag:e/cnx/taA7kGpDPRJMxQVg==,type:str]
+    lastmodified: "2023-05-14T11:15:08Z"
+    mac: ENC[AES256_GCM,data:5IwNm/kh8hk7CXA7XAq+G1bf1NhCIN+Y401PRTIW2wH6twcheD9NTRunZ5rm3Jm0gWmxR5iwLsOG4cgsmRP1tS+OqGXVd++ZGefc27GVw1WAsV3Y0QVjWjHljkVMZ1ZsWl7XTM36fZKqScuSKVhpG26ESU3Uz5sI+IVA2rOFdSA=,iv:MmwuFonGGi/fBjYCXsluBJSoMQdar953z8FNQOXU7p4=,tag:C2utvd66VMS4BK0HNpyE2Q==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.7.3
