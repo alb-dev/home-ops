@@ -41,7 +41,7 @@ spec:
   backup:
     retentionPolicy: 30d
     barmanObjectStore:
-      destinationPath: s3://cnpg/v15/v1
+      destinationPath: s3://cnpg/v15
       endpointURL: "https://${S3_EXTERNAL}"
       wal:
         compression: bzip2
