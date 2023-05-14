@@ -6,3 +6,4 @@ resources:
   - backup.yaml
   - secret.sops.yaml
   - service.yaml
+  - superuser.sops.yaml
