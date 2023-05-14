@@ -48,11 +48,11 @@ spec:
       existingSecret:
         enabled: true
         secretName: nextcloud-secret
-      host: &host cloud.${CLUSTER_DOMAIN}
+      host: &host cloud.${DOMAIN}
       mail:
         enabled: true
         fromAddress: admin
-        domain: ${CLUSTER_DOMAIN}
+        domain: ${DOMAIN}
         smtp:
           host: ${SECRET_SMTP_RELAY}
           port: ${SECRET_SMTP_RELAY_PORT}
@@ -68,7 +68,7 @@ spec:
     externalDatabase:
       enabled: true
       type: postgresql
-      host: kochhaus-v15-rw.dbms.svc.cluster.local.
+      host: alb-v15-rw.dbms.svc.cluster.local.
     ingress:
       enabled: true
       className: nginx
