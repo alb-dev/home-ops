@@ -1,0 +1,97 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: alb-v15
+  namespace: databases
+  annotations:
+    kyverno.io/ignore: "true"
+spec:
+
+  description: Postgresql cluster for alb
+
+  imageName: ghcr.io/cloudnative-pg/postgresql:15.3
+
+  instances: 3
+
+  # Example of rolling update strategy:
+  # - unsupervised: automated update of the primary once all
+  #                 replicas have been upgraded (default)
+  # - supervised: requires manual supervision to perform
+  #               the switchover of the primary
+  primaryUpdateStrategy: unsupervised
+
+  storage:
+    size: 20Gi
+    storageClass: ceph-block
+  superuserSecret:
+    name: cloudnative-pg
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 640Mi
+
+  monitoring:
+    enablePodMonitor: true
+
+  backup:
+    retentionPolicy: 30d
+    barmanObjectStore:
+      destinationPath: s3://cnpg/v15/v1
+      endpointURL: https://${S3_EXTERNAL}
+      wal:
+        compression: bzip2
+      s3Credentials:
+        accessKeyId:
+          name: cnpg-backup
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: cnpg-backup
+          key: ACCESS_SECRET_KEY
+
+  # the recovery source here is taken from the externalClusters section below.
+  # bootstrap:
+  #   # upgrade or recover from another running instance
+  #   initdb:
+  #     import:
+  #       type: monolith
+  #       databases:
+  #         - "*"
+  #       roles:
+  #         - "*"
+  #       source:
+  #         externalCluster: alb-pg14
+
+  # normal restore from backup + WALs
+  #   recovery:
+  #     source: alb-v15
+
+  externalClusters: []
+    # must be the name of the cluster instance that was backed up
+    # - name: alb-v1
+    #   barmanObjectStore:
+    #     destinationPath: s3://cnpg/v15/v2
+    #     endpointURL: http://${SECRET_BACKUP_SERVER}:9000
+    #     s3Credentials:
+    #       accessKeyId:
+    #         name: cnpg-backup
+    #         key: ACCESS_KEY_ID
+    #       secretAccessKey:
+    #         name: cnpg-backup
+    #         key: ACCESS_SECRET_KEY
+    #     wal:
+    #       compression: bzip2
+    #       maxParallel: 12
+    # - name: alb-pg14
+    #   connectionParameters:
+    #     host: alb-ro.datbases
+    #     user: postgres
+    #     dbname: postgres
+    #     sslmode: require
+    #   password:
+    #     name: alb-superuser
+    #     key: password
