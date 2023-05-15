@@ -6,3 +6,4 @@ resources:
   - alb-v15.yaml
   - backup.yaml
   - service.yaml
+  - secret.sops.yaml
