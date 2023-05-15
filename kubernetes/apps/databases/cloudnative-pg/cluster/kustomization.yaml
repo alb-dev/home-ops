@@ -4,6 +4,4 @@ kind: Kustomization
 resources:
   - alb-v15.yaml
   - backup.yaml
-  - secret.sops.yaml
   - service.yaml
-  - superuser.sops.yaml
