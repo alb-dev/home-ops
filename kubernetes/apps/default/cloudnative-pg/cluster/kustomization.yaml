@@ -1,9 +1,0 @@
----
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-namespace: default
-resources:
-  - ./alb-v15.yaml
-  - ./backup.yaml
-  - ./service.yaml
-  - ./secret.sops.yaml
