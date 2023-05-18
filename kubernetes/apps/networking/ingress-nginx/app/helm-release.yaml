@@ -28,13 +28,13 @@ spec:
         ports:
           http: 80
           https: 443
-          postgres: 5432
-          jellyfin: 8096
+#          postgres: 5432
+#          jellyfin: 8096
         targetPorts:
           http: http
           https: https
-          postgres: postgres
-          jellyfin: jellyfin
+#          postgres: postgres
+#          jellyfin: jellyfin
         type: LoadBalancer
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${NGINX_LB_IP}"
@@ -89,6 +89,6 @@ spec:
           memory: 250Mi
         limits:
           memory: 500Mi
-    tcp:
-      "5432": "databases/postgres:5432"
-      "8096": "default/jellyfin:8096"
+#    tcp:
+#      "5432": "databases/postgres:5432"
+#      "8096": "default/jellyfin:8096"
