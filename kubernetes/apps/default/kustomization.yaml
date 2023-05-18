@@ -6,6 +6,7 @@ resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
   # Flux-Kustomizations
+  - ./cloudnative-pg/ks.yaml
   - ./vaultwarden/ks.yaml
   - ./freshrss/ks.yaml
   - ./libreddit/ks.yaml
