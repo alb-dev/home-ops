@@ -32,33 +32,6 @@ There is a template over at [onedr0p/flux-cluster-template](https://github.com/o
 
 ### Installation
 
-My cluster is [k3s](https://k3s.io/) provisioned overtop bare-metal Ubuntu Server using the [Ansible](https://www.ansible.com/) galaxy role [ansible-role-k3s](https://github.com/PyratLabs/ansible-role-k3s). This is a semi hyper-converged cluster, workloads and block storage are sharing the same available resources on my nodes while I have a separate server for (NFS) file storage.
-
-🔸 _[Click here](./provision/kubernetes/servers/) to see my Ansible playbooks and roles._
-
-As this is a monorepo for my whole homelab i will also include other parts like my pihole and DNS configuration later on. 
-
-
-### Core Components
-
-- [actions-runner-controller](https://github.com/actions/actions-runner-controller): Self-hosted Github runners.
-- [calico](https://github.com/projectcalico/calico): Internal Kubernetes networking plugin.
-- [cert-manager](https://cert-manager.io/docs/): Creates SSL certificates for services in my Kubernetes cluster.
-- [external-dns](https://github.com/kubernetes-sigs/external-dns): Automatically manages DNS records from my cluster in a cloud DNS provider.
-- [ingress-nginx](https://github.com/kubernetes/ingress-nginx/): Ingress controller to expose HTTP traffic to pods over DNS.
-- [rook](https://github.com/rook/rook): Distributed block storage for peristent storage.
-- [sops](https://toolkit.fluxcd.io/guides/mozilla-sops/): Managed secrets for Kubernetes, Ansible and Terraform which are commited to Git.
-- [volsync](https://github.com/backube/volsync) and [snapscheduler](https://github.com/backube/snapscheduler): Backup and recovery of persistent volume claims.
-
-
-### GitOps
-
-[Flux](https://github.com/fluxcd/flux2) watches my [kubernetes](./kubernetes/) folder (see Directories below) and makes the changes to my cluster based on the YAML manifests.
-
-The way Flux works for me here is it will recursively search the [kubernetes/apps](./kubernetes/apps) folder until it finds the most top level `kustomization.yaml` per directory and then apply all the resources listed in it. That aforementioned `kustomization.yaml` will generally only have a namespace resource and one or many Flux kustomizations. Those Flux kustomizations will generally have a `HelmRelease` or other resources related to the application underneath it which will be applied.
-
-[Renovate](https://github.com/renovatebot/renovate) watches my **entire** repository looking for dependency updates, when they are found a PR is automatically created. When some PRs are merged [Flux](https://github.com/fluxcd/flux2) applies the changes to my cluster.
-
 ### Directories
 
 This Git repository contains the following directories under [kubernetes](./kubernetes/).
@@ -85,13 +58,8 @@ This Git repository contains the following directories under [kubernetes](./kube
 
 ## ☁️ Cloud Dependencies
 
-While most of my infrastructure and workloads are selfhosted I do rely upon the cloud for certain key parts of my setup. This saves me from having to worry about two things. (1) Dealing with chicken/egg scenarios and (2) services I critically need whether my cluster is online or not.
-
-The alternative solution to these two problems would be to host a Kubernetes cluster in the cloud and deploy applications like [HCVault](https://www.vaultproject.io/), [Vaultwarden](https://github.com/dani-garcia/vaultwarden), [ntfy](https://ntfy.sh/), and [Gatus](https://gatus.io/). However, maintaining another cluster and monitoring another group of workloads is a lot more time and effort than I am willing to put in.
-
 | Service                                         | Use                                                               | Cost           |
 |-------------------------------------------------|-------------------------------------------------------------------|----------------|
-| [B2 Storage](https://www.backblaze.com/b2)      | Offsite application backups                                       | ~€5/mo         |
 | [Cloudflare](https://www.cloudflare.com/)       | Domain, DNS and proxy management                                  | ~€30/yr        |
 | [Hetzner](https://www.hetzner.com/)             | Email & VPS hosting                                               | ~€90/yr        |
 | [GitHub](https://github.com/)                   | Hosting this repository and continuous integration/deployments    | Free           |
@@ -101,7 +69,7 @@ The alternative solution to these two problems would be to host a Kubernetes clu
 ## 🔧 Hardware
 
 <details>
-  <summary>Click to see da rack!</summary>
+  <summary>Click to see mini rack!</summary>
 
   <img src="https://user-images.githubusercontent.com/71972864/225144867-8657dd4e-09fb-4f39-9a2a-9945a1c20a30.png" align="center" width="200px" alt="rack"/>
 </details>
