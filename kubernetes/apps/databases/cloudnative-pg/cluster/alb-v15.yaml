@@ -46,6 +46,7 @@ spec:
       serverName: postgres-v1
       wal:
         compression: bzip2
+        maxParallel: 8
       s3Credentials:
         accessKeyId:
           name: cnpg-backup
