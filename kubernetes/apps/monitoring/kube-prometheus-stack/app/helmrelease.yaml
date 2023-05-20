@@ -5,7 +5,7 @@ metadata:
   name: kube-prometheus-stack
   namespace: monitoring
 spec:
-  interval: 5m 
+  interval: 5m
   chart:
     spec:
       # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
@@ -18,17 +18,17 @@ spec:
       interval: 5m
   values:
     alertmanager:
-        config:
-          global:
-            resolve_timeout: 5m
-          receivers:
-            - name: "null"
-          inhibit_rules:
-            - source_matchers:
-                - severity = "critical"
-              target_matchers:
-                - severity = "warning"
-              equal: ["alertname", "namespace"]
+      config:
+        global:
+          resolve_timeout: 5m
+        receivers:
+          - name: "null"
+        inhibit_rules:
+          - source_matchers:
+              - severity = "critical"
+            target_matchers:
+              - severity = "warning"
+            equal: ["alertname", "namespace"]
         ingress:
           enabled: true
           pathType: Prefix
@@ -119,8 +119,15 @@ spec:
           - hosts:
               - prometheus.${DOMAIN}
       prometheusSpec:
-        replicas: 3
+        replicas: 1
         replicaExternalLabelName: __replica__
+        resources:
+          requests:
+            cpu: 1000m
+            memory: 4000Mi
+          limits:
+            cpu: 3000m
+            memory: 8000Mi
         externalLabels:
           cluster: home-ops
         podAntiAffinity: hard
@@ -139,13 +146,18 @@ spec:
               resources:
                 requests:
                   storage: 40Gi
-        resources:
-          requests:
-            cpu: 1000m
-            memory: 4000Mi
-          limits:
-            cpu: 3000m
-            memory: 6000Mi
+        thanos:
+          image: quay.io/thanos/thanos:v0.31.0@sha256:e7d337d6ac2aea3f0f9314ec9830291789e16e2b480b9d353be02d05ce7f2a7e
+          objectStorageConfig:
+            name: thanos-objstore-secret
+            key: objstore.yml
+          # renovate: datasource=docker depName=quay.io/thanos/thanos
+          version: "v0.31.0"
+      thanosService:
+        enabled: true
+
+      thanosServiceMonitor:
+        enabled: true
 #        additionalScrapeConfigs:
 #          - job_name: node-docker
 #            scrape_interval: 1m
@@ -155,7 +167,7 @@ spec:
 #            static_configs:
 #              - targets: ["192.168.178.35:9100"]
 #          - job_name: firtz-exporter
-#            scrape_interval: 1m 
+#            scrape_interval: 1m
 #            metrics_path: /metrics
-#            static_configs: 
+#            static_configs:
 #              - targets: ["fritz-exporter.monitoring.svc.cluster.local:9787"]
