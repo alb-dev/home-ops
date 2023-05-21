@@ -2,7 +2,7 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: alb-v15
+  name: postgres
   namespace: databases
   annotations:
     kyverno.io/ignore: "true"
@@ -69,7 +69,7 @@ spec:
 
   # normal restore from backup + WALs
   #   recovery:
-  #     source: alb-v15
+  #     source: postgres
 
   externalClusters: []
     # must be the name of the cluster instance that was backed up

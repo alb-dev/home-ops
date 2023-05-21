@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: databases
 resources:
   - ./secret.sops.yaml
-  - ./alb-v15.yaml
+  - ./cluster.yaml
   - ./backup.yaml
   - ./service.yaml
