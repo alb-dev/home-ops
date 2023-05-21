@@ -42,7 +42,7 @@ spec:
     barmanObjectStore:
       destinationPath: s3://cnpg/
       endpointURL: https://${S3_EXTERNAL}
-      serverName: postgres-v1
+      serverName: postgres-v2
       wal:
         compression: bzip2
         maxParallel: 8
