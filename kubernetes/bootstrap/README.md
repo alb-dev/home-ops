@@ -18,6 +18,10 @@ sops --decrypt kubernetes/flux/vars/cluster-secrets.sops.yaml | kubectl apply -f
 ```
 
 ```bash
+kubectl apply -f kubernetes/flux/vars/cluster-settings.yaml
+```
+
+```bash
 kubectl apply --server-side --kustomize ./kubernetes/flux/config
 ```
 

@@ -15,7 +15,7 @@
     "helpers:pinGitHubActionDigests"
   ],
   "dependencyDashboard": true,
-  "dependencyDashboardTitle": "Renovate Dashboard 🤖",
+  "dependencyDashboardTitle": "alb-bot 🤖",
   "suppressNotifications": ["prIgnoreNotification"],
   "rebaseWhen": "conflicted",
   "pre-commit": {
