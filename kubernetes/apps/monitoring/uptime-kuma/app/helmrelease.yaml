@@ -46,7 +46,7 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
         hosts:
-          - host: &host "uptime.${DOMAIN}"
+          - host: &host "status.${DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
