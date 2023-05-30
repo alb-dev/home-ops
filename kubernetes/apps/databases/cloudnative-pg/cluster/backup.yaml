@@ -7,4 +7,4 @@ metadata:
 spec:
   schedule: "@daily"
   cluster:
-    name: alb-v15
+    name: postgres-v2
