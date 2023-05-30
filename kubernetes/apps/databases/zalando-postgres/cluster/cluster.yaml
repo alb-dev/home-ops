@@ -5,7 +5,7 @@ metadata:
   name: postgres
   namespace: database
 spec:
-  teamId: "bjw-s"
+  teamId: "alb"
 
   volume:
     size: 30Gi
