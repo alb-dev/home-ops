@@ -48,11 +48,11 @@ spec:
     postgresql:
       enabled: true
       auth:
-        database: bitnami_keycloak
         existingSecret:
           name: keycloak-db-credentials
           keyMapping:
             postgresPassword: postgresPassword
+            database: database
             username: admin-password
             password: management-password
       architecture: standalone
