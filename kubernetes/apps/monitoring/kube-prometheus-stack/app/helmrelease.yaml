@@ -83,21 +83,21 @@ spec:
     kubeControllerManager:
       enabled: true
       endpoints:
-        - 192.168.178.210
-        - 192.168.178.211
-        - 192.168.178.212
+        - 192.168.178.213
+        - 192.168.178.214
+        - 192.168.178.215
     kubeScheduler:
       enabled: true
       endpoints:
-        - 192.168.178.210
-        - 192.168.178.211
-        - 192.168.178.212
+        - 192.168.178.213
+        - 192.168.178.214
+        - 192.168.178.215
     kubeProxy:
       enabled: true
       endpoints:
-        - 192.168.178.210
-        - 192.168.178.211
-        - 192.168.178.212
+        - 192.168.178.213
+        - 192.168.178.214
+        - 192.168.178.215
     kubeEtcd:
       enabled: true
       endpoints:
@@ -124,10 +124,10 @@ spec:
         resources:
           requests:
             cpu: 1000m
-            memory: 4000Mi
+            memory: 2000Mi
           limits:
             cpu: 3000m
-            memory: 8000Mi
+            memory: 6000Mi
         externalLabels:
           cluster: home-ops
         podAntiAffinity: hard
