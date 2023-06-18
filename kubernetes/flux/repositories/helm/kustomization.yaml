@@ -39,3 +39,4 @@ resources:
   - kyverno.yaml
   - netcup-webhook.yaml
   - zalando-postgres-operator.yaml
+  - ext-postgres-operator.yaml
