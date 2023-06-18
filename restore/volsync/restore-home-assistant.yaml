@@ -1,22 +1,21 @@
-
 ---
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: config-home-assistant-0
+  name: config-home-assistant-12
   namespace: default
 spec:
   trigger:
     manual: restore-once
   restic:
-    repository: hass-restic-secret
+    repository: home-assistant-restic-secret
     destinationPVC: config-home-assistant-0
     cacheCapacity: 10Gi
     copyMethod: Direct
     storageClassName: ceph-block
     # IMPORTANT NOTE:
     #   Set to the last X number of snapshots to restore from
-    previous: 2
+    previous: 4
     moverSecurityContext:
       runAsUser: 0
       runAsGroup: 0
