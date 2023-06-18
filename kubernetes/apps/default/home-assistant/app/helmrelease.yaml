@@ -35,8 +35,13 @@ spec:
       tag: 2023.6.2
     env:
       TZ: "Europe/Berlin"
+      SECRET_RECORDER_DB_URL:
+        valueFrom:
+          secretKeyRef:
+            name: database-home-assistant-user
+            key: POSTGRES_URL
     hostNetwork: true
-    dnsPolicy: ClusterFirstWithHostNet    
+    dnsPolicy: ClusterFirstWithHostNet
     service:
       main:
         type: LoadBalancer
@@ -58,8 +63,8 @@ spec:
               - path: /
                 pathType: Prefix
         tls:
-        - hosts:
-            - "hass.${DOMAIN}"
+          - hosts:
+              - "hass.${DOMAIN}"
     probes:
       liveness:
         enabled: false
@@ -76,6 +81,6 @@ spec:
     resources:
       requests:
         cpu: 10m
-        memory: 100Mi
+        memory: 1250Mi
       limits:
-        memory: 750Mi
+        memory: 1250Mi
