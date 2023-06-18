@@ -60,8 +60,7 @@ spec:
       hosts:
         - "adblock.${DOMAIN}"
       tls:
-        - secretName: "adblock.${DOMAIN}"
-          hosts:
+        - hosts:
             - "adblock.${DOMAIN}"
     persistentVolumeClaim:
       enabled: true
