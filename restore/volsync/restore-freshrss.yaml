@@ -1,4 +1,3 @@
-
 ---
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
@@ -16,7 +15,3 @@ spec:
     # IMPORTANT NOTE:
     #   Set to the last X number of snapshots to restore from
     previous: 2
-    moverSecurityContext:
-      runAsUser: 0
-      runAsGroup: 0
-      fsGroup: 0
