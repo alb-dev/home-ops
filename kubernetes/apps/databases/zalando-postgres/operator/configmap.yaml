@@ -10,7 +10,7 @@ data:
   # Configure S3 backups
   USE_WALG_BACKUP: "true"
   USE_WALG_RESTORE: "true"
-  BACKUP_SCHEDULE: '0 5 * * * *'
+  BACKUP_SCHEDULE: '*/5 * * * *'
   WAL_BUCKET_SCOPE_PREFIX: ""
   WAL_BUCKET_SCOPE_SUFFIX: ""
   WALG_DISABLE_S3_SSE: "true"
