@@ -5,7 +5,7 @@ metadata:
   name: zalando-postgres-pod-configmap
   namespace: databases
 data:
-  ALLOW_NOSSL: "true"
+  #ALLOW_NOSSL: "true"
 
   # Configure S3 backups
   USE_WALG_BACKUP: "true"
