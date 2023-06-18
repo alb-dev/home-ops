@@ -12,3 +12,4 @@ resources:
   - ./kube-vip/ks.yaml
 #  - kube-vip
   - ./intel-device-plugin/ks.yaml
+  - ./cilium/ks.yaml

@@ -10,7 +10,7 @@ resources:
   - monitoring
   - networking
   - kube-system
-  - tigera-operator
+#  - tigera-operator
   - storage
   - volsync
   - rook-ceph

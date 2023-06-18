@@ -14,19 +14,14 @@ k3s_server:
   docker: false
   flannel-backend: "none" # This needs to be in quotes
   disable:
-    # Disable flannel - replaced with Calico
-    - flannel
-    # Disable traefik - replaced with ingress-nginx
-    - traefik
-    # Disable servicelb - replaced with metallb and install with Flux
-    - servicelb
-    # Disable metrics-server - installed with Flux
-    - metrics-server
-    # Disable localpath
-    - local-storage
+    - flannel                         # Disable flannel                 - replaced with Cilium
+    - local-storage                   # Disable local-path-provisioner  - installed with Flux
+    - metrics-server                  # Disable metrics-server          - installed with Flux
+    - servicelb                       # Disable servicelb               - replaced with metallb and installed with Flux
+    - traefik                         # Disable traefik                 - replaced with ingress-nginx and installed with Flux
   disable-network-policy: true
   disable-cloud-controller: true
-  #disable-kube-proxy: true
+  disable-kube-proxy: true
   write-kubeconfig-mode: "644"
   # Network CIDR to use for pod IPs
   cluster-cidr: "10.56.0.0/16"
