@@ -32,13 +32,6 @@ spec:
     nginx:
       enabled: true
     nextcloud:
-      extraInitContainers:
-        - name: init-db
-          image: ghcr.io/haraldkoch/postgres-initdb:15.3
-          imagePullPolicy: IfNotPresent
-          envFrom:
-            - secretRef:
-                name: nextcloud-secret
       datadir: /var/www/data
       extraEnv:
         - name: REDIS_HOST
