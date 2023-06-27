@@ -119,7 +119,7 @@ spec:
           - hosts:
               - prometheus.${DOMAIN}
       prometheusSpec:
-        replicas: 1
+        replicas: 2
         replicaExternalLabelName: __replica__
         resources:
           requests:

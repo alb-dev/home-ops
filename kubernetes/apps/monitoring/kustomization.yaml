@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - namespace.yaml
 #  - dashboards
-#  - ./kube-prometheus-stack/ks.yaml
+  - ./kube-prometheus-stack/ks.yaml
 #  - node-problem-detector
   - ./uptime-kuma/ks.yaml
   - ./grafana/ks.yaml
