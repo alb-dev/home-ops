@@ -18,13 +18,11 @@ _... managed with Flux, Renovate and GitHub Actions_ 🤖
 
 
 ---
-
 ## 📖 Overview
 
 This is a mono repository for my home infrastructure and Kubernetes cluster. I try to adhere to Infrastructure as Code (IaC) and GitOps practices using the tools like [Ansible](https://www.ansible.com/), [Terraform](https://www.terraform.io/), [Kubernetes](https://kubernetes.io/), [Flux](https://github.com/fluxcd/flux2), [Renovate](https://github.com/renovatebot/renovate) and [GitHub Actions](https://github.com/features/actions).
 
 ---
-
 ## ⛵ Kubernetes
 
 There is a template over at [onedr0p/flux-cluster-template](https://github.com/onedr0p/flux-cluster-template) if you wanted to try and follow along with some of the practices I use here. Even though cluster template from onedr0p is really good. I created a lot of parts in my cluster manually. This helped my understanding of kubernetes, iac etc..
@@ -55,7 +53,6 @@ This Git repository contains the following directories under [kubernetes](./kube
 - Since my home-network is just one subnet everything is managed by calico's overlay-network in cluster.
 
 ---
-
 ## ☁️ Cloud Dependencies
 
 | Service                                         | Use                                                               | Cost           |
@@ -65,7 +62,6 @@ This Git repository contains the following directories under [kubernetes](./kube
 | [GitHub](https://github.com/)                   | Hosting this repository and continuous integration/deployments    | Free           |
 
 ---
-
 ## 🔧 Hardware
 
 <details>
@@ -84,7 +80,6 @@ This Git repository contains the following directories under [kubernetes](./kube
 | Raspberry Pi4                    | 1     | 32GB SD-Card | -                           | 8GB  | Raspbian         | PiHole & Backupsvc  |
 
 ---
-
 ## Special thanks
 A lot of inspiration is taken form the k8s at home community. If you are intrested in learning kubernetes i highly recommand to visit them over at discord
 [![Discord](https://img.shields.io/discord/673534664354430999?style=for-the-badge&label&logo=discord&logoColor=white&color=blue)](https://discord.gg/k8s-at-home)
