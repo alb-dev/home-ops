@@ -9,7 +9,7 @@ resources:
   - csi-driver-nfs
   - metrics-server
   - ./reloader/ks.yaml
-#  - ./kube-vip/ks.yaml
+  - ./kube-vip/ks.yaml
 #  - kube-vip
   - ./intel-device-plugin/ks.yaml
   - ./cilium/ks.yaml
