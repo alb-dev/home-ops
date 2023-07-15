@@ -54,6 +54,10 @@ spec:
           serviceMonitor:
             enabled: true
       ui:
+        frontend:
+          server:
+            ipv6:
+              enabled: false
         enabled: true
         rollOutPods: true
         ingress:
