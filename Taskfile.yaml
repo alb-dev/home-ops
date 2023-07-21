@@ -41,6 +41,7 @@ tasks:
         minio
         kubernetes-cli
         kustomize
+        openlens
         pre-commit
         prettier
         sops

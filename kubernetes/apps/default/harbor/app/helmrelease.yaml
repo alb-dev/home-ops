@@ -1,0 +1,67 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: harbor
+  namespace: harbor
+spec:
+  interval: ${HELM_RELEASE_INTERVAL:=24h}
+  chart:
+    spec:
+      # renovate: registryUrl=https://helm.goharbor.io
+      chart: harbor
+      version: 1.11.0
+      sourceRef:
+        kind: HelmRepository
+        name: goharbor
+        namespace: flux-system
+  values:
+    expose:
+      type: ingress
+      tls:
+        # The ingress controller has a default certificate so we don't need to configure it
+        certSource: none
+      ingress:
+        hosts:
+          core: registry.${DOMAIN}
+          notary: registry-notary.${DOMAIN}
+        annotations:
+          nginx.ingress.kubernetes.io/proxy-body-size: "0"
+          nginx.ingress.kubernetes.io/proxy-connect-timeout: "480"
+          nginx.ingress.kubernetes.io/custom-http-errors: "418"
+    externalURL: https://registry.${DOMAIN}
+    secretKey: "${HARBOR_SECRET_KEY:=e5EYeDDsQR3HdUB8}"
+    harborAdminPassword: "${HARBOR_ADMIN_PASSWORD:=Harbor12345}"
+    notary:
+      enabled: false
+    persistence:
+      enabled: true
+      resourcePolicy: "keep"
+      persistentVolumeClaim:
+        registry:
+          storageClass: ceph-block
+          size: 50Gi
+        chartmuseum:
+          storageClass: ceph-block
+          size: 5Gi
+        jobservice:
+          jobLog:
+            storageClass: ceph-block
+            size: 5Gi
+          scanDataExports:
+            storageClass: ceph-block
+            size: 5Gi
+        redis:
+          storageClass: ceph-block
+          size: 5Gi
+        trivy:
+          storageClass: ceph-block
+          size: 5Gi
+    database:
+      type: external
+      external:
+        host: "postgres-rw.harbor.svc"
+        port: "5432"
+        username: "harbor"
+        existingSecret: "postgres-app"
+        coreDatabase: "registry"
