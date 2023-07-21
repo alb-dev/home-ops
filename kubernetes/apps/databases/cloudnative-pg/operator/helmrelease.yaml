@@ -27,14 +27,7 @@ spec:
     keepHistory: false
   values:
     crds:
-      create: false
+      create: true
     config:
       data:
         INHERITED_ANNOTATIONS: kyverno.io/ignore
-    resources:
-      requests:
-        cpu: 15m
-        memory: 128Mi
-      limits:
-        cpu: 15m
-        memory: 192Mi
