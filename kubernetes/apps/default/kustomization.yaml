@@ -16,3 +16,4 @@ resources:
   - ./zigbee2mqtt/ks.yaml
   - ./paperless/ks.yaml
   - ./excalidraw/ks.yaml
+  - ./harbor/ks.yaml
