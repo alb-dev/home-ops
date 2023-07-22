@@ -3,9 +3,9 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: harbor
-  namespace: harbor
+  namespace: default
 spec:
-  interval: ${HELM_RELEASE_INTERVAL:=24h}
+  interval: 5m
   chart:
     spec:
       # renovate: registryUrl=https://helm.goharbor.io
@@ -21,17 +21,22 @@ spec:
       tls:
         # The ingress controller has a default certificate so we don't need to configure it
         certSource: none
+      # Default Values
+      ClusterIP:
+        name: harbor
+        ports:
+          httpPort: 80
+          httpsPort: 443
       ingress:
         hosts:
           core: registry.${DOMAIN}
-          notary: registry-notary.${DOMAIN}
         annotations:
           nginx.ingress.kubernetes.io/proxy-body-size: "0"
           nginx.ingress.kubernetes.io/proxy-connect-timeout: "480"
           nginx.ingress.kubernetes.io/custom-http-errors: "418"
     externalURL: https://registry.${DOMAIN}
-    secretKey: "${HARBOR_SECRET_KEY:=e5EYeDDsQR3HdUB8}"
-    harborAdminPassword: "${HARBOR_ADMIN_PASSWORD:=Harbor12345}"
+    secretKey: "${HARBOR_SECRET_KEY}"
+    harborAdminPassword: "${HARBOR_ADMIN_PASSWORD}"
     notary:
       enabled: false
     persistence:
@@ -57,11 +62,17 @@ spec:
         trivy:
           storageClass: ceph-block
           size: 5Gi
+    redis:
+      type: internal
+#    database:
+#      type: internal
+#      internal:
+#        password: "${HARBOR_POSTGRES_PASSWORD}"
     database:
       type: external
       external:
-        host: "postgres-rw.harbor.svc"
+        host: "postgres-harbor-rw.harbor.svc"
         port: "5432"
         username: "harbor"
-        existingSecret: "postgres-app"
+        existingSecret: "cnpg-harbor-secret"
         coreDatabase: "registry"

@@ -1,0 +1,38 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres-harbor
+  namespace: default
+spec:
+  description: Postgresql cluster for harbor
+  imageName: ghcr.io/cloudnative-pg/postgresql:15.3
+  instances: 3
+  storage:
+    size: 10Gi
+    storageClass: ceph-block
+  bootstrap:
+    initdb:
+      database: registry
+      owner: registry
+      secret:
+        name: cnpg-harbor-secret
+  primaryUpdateStrategy: unsupervised
+  monitoring:
+    enablePodMonitor: true
+  backup:
+    retentionPolicy: 14d
+    barmanObjectStore:
+      destinationPath: s3://cnpg-harbor/
+      endpointURL: https://${S3_EXTERNAL}
+      serverName: postgres-harbor
+      wal:
+        compression: bzip2
+        maxParallel: 8
+      s3Credentials:
+        accessKeyId:
+          name: cnpg-harbor-backup
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: cnpg-harbor-backup
+          key: ACCESS_SECRET_KEY

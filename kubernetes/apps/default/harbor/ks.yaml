@@ -1,0 +1,41 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-harbor
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: cluster-apps-rook-ceph-cluster
+    - name: cluster-apps-volsync
+    - name: cluster-apps-harbor-database
+  path: ./kubernetes/apps/default/harbor/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-ops-kubernetes
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: harbor
+      namespace: default
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-harbor-database
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: cluster-apps-rook-ceph-cluster
+  path: ./kubernetes/apps/default/harbor/database
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-ops-kubernetes
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
