@@ -40,3 +40,4 @@ resources:
   - netcup-webhook.yaml
   - zalando-postgres-operator.yaml
   - ext-postgres-operator.yaml
+  - harbor.yaml
