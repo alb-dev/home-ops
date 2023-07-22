@@ -29,12 +29,12 @@ spec:
           httpsPort: 443
       ingress:
         hosts:
-          core: registry.${DOMAIN}
+          core: harbor.${DOMAIN}
         annotations:
           nginx.ingress.kubernetes.io/proxy-body-size: "0"
           nginx.ingress.kubernetes.io/proxy-connect-timeout: "480"
           nginx.ingress.kubernetes.io/custom-http-errors: "418"
-    externalURL: https://registry.${DOMAIN}
+    externalURL: https://harbor.${DOMAIN}
     secretKey: "${HARBOR_SECRET_KEY}"
     harborAdminPassword: "${HARBOR_ADMIN_PASSWORD}"
     notary:
