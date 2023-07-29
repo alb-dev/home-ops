@@ -163,10 +163,24 @@ spec:
       enabled: true
       existingClaim: nextcloud-v1
     # this seems to be required for nextcloud initialization which takes a long time
+    livenessProbe:
+      enabled: true
+      initialDelaySeconds: 10
+      periodSeconds: 30
+      timeoutSeconds: 10
+      failureThreshold: 3
+      successThreshold: 1
+    readinessProbe:
+      enabled: true
+      initialDelaySeconds: 60
+      periodSeconds: 60
+      timeoutSeconds: 5
+      failureThreshold: 10
+      successThreshold: 1
     startupProbe:
       enabled: true
-      initialDelaySeconds: 30
-      periodSeconds: 10
+      initialDelaySeconds: 20
+      periodSeconds: 60
       timeoutSeconds: 5
-      failureThreshold: 30
+      failureThreshold: 10
       successThreshold: 1
