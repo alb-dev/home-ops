@@ -80,8 +80,8 @@ spec:
       leaseRenewDeadline: 60s
       leaseRetryPeriod: 1s
     localRedirectPolicy: true
-    loadBalancer:
-      algorithm: maglev
+#    loadBalancer:
+#      algorithm: maglev
 #      mode: dsr
     operator:
       rollOutPods: true
