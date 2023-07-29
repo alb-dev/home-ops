@@ -5,12 +5,9 @@ resources:
   - namespace.yaml
   - cert-manager
   - databases
-  #- home
-  #- home-automation
   - monitoring
   - networking
   - kube-system
-#  - tigera-operator
   - storage
   - volsync
   - rook-ceph
@@ -18,4 +15,3 @@ resources:
   - system-upgrade
   - flux-system
   - kyverno
-#  - security
