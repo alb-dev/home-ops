@@ -82,7 +82,7 @@ spec:
     localRedirectPolicy: true
     loadBalancer:
       algorithm: maglev
-      mode: dsr
+#      mode: dsr
     operator:
       rollOutPods: true
       prometheus:
