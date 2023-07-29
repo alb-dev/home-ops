@@ -1,0 +1,38 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres-nextcloud
+  namespace: default
+spec:
+  description: Postgresql cluster for nextcloud
+  imageName: ghcr.io/cloudnative-pg/postgresql:15.3
+  instances: 3
+  storage:
+    size: 10Gi
+    storageClass: ceph-block
+  bootstrap:
+    initdb:
+      database: nextcloud
+      owner: nextcloud
+      secret:
+        name: cnpg-nextcloud-secret
+  primaryUpdateStrategy: unsupervised
+  monitoring:
+    enablePodMonitor: true
+  backup:
+    retentionPolicy: 14d
+    barmanObjectStore:
+      destinationPath: s3://cnpg-nextcloud/
+      endpointURL: https://${S3_EXTERNAL}
+      serverName: postgres-nextcloud
+      wal:
+        compression: bzip2
+        maxParallel: 8
+      s3Credentials:
+        accessKeyId:
+          name: cnpg-nextcloud-backup
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: cnpg-nextcloud-backup
+          key: ACCESS_SECRET_KEY

@@ -8,9 +8,6 @@ values:
     enabled: true
     className: nginx
     annotations:
-      external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
-      external-dns.home.arpa/enabled: "true"
-      hajimari.io/icon: simple-icons:nextcloud
       nginx.ingress.kubernetes.io/proxy-body-size: "10G"
       nginx.ingress.kubernetes.io/proxy-buffering: "off"
       nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
@@ -47,9 +44,9 @@ values:
     pathType: Prefix
     tls:
       - hosts:
-          - nc.${SECRET_DOMAIN}
+          - nextcloud.${SECRET_DOMAIN}
   nextcloud:
-    host: nc.${SECRET_DOMAIN}
+    host: nextcloud.${SECRET_DOMAIN}
     existingSecret:
       enabled: true
       secretName: nextcloud-secret

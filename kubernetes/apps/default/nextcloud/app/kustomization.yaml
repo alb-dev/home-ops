@@ -5,9 +5,9 @@ namespace: default
 resources:
   - ./helmrelease.yaml
   - ./volsync.yaml
-  - ./database.yaml
-patchesStrategicMerge:
-  - ./patches/addons.yaml
+  - ./database/cluster.yaml
+  - ./secret.sops.yaml
+  - ./pvc.yaml
 labels:
   - pairs:
       app.kubernetes.io/name: nextcloud

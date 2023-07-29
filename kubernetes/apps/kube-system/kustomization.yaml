@@ -6,7 +6,7 @@ resources:
   - snapshot-validation-webhook
   - kured/ks.yaml
   - descheduler
-  - csi-driver-nfs
+#  - csi-driver-nfs
   - metrics-server
   - ./reloader/ks.yaml
 #  - ./kube-vip/ks.yaml
