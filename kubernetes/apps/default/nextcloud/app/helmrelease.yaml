@@ -72,7 +72,7 @@ spec:
           pm.max_requests = 500
           pm.process_idle_timeout = 10s
       mail:
-        enabled: true
+        enabled: false
         fromAddress: nextcloud-noreply
         domain: ${DOMAIN}
         smtp:
@@ -87,6 +87,8 @@ spec:
         runAsNonRoot: true
     internalDatabase:
       enabled: false
+    cronjob:
+      enabled: true
     redis:
       enabled: true
       architecture: standalone
