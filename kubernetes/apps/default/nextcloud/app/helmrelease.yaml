@@ -1,185 +1,170 @@
-values:
-  image:
-    repository: nextcloud
-    tag: 27.0.1
-    pullPolicy: IfNotPresent
-  replicaCount: 1
-  ingress:
-    enabled: true
-    className: nginx
-    annotations:
-      nginx.ingress.kubernetes.io/proxy-body-size: "10G"
-      nginx.ingress.kubernetes.io/proxy-buffering: "off"
-      nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
-      nginx.ingress.kubernetes.io/server-snippet: |-
-        server_tokens off;
-        proxy_hide_header X-Powered-By;
-        rewrite ^/.well-known/webfinger /public.php?service=webfinger last;
-        rewrite ^/.well-known/host-meta /public.php?service=host-meta last;
-        rewrite ^/.well-known/host-meta.json /public.php?service=host-meta-json;
-        location = /.well-known/carddav {
-          return 301 $scheme://$host/remote.php/dav;
-        }
-        location = /.well-known/caldav {
-          return 301 $scheme://$host/remote.php/dav;
-        }
-        location = /robots.txt {
-          allow all;
-          log_not_found off;
-          access_log off;
-        }
-        location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/ {
-          deny all;
-        }
-        location ~ ^/(?:autotest|occ|issue|indie|db_|console) {
-          deny all;
-        }
-        location ^~ /.well-known {
-        return 301 /index.php$uri;
-        }
-        location = /.well-known/webfinger {
-        return 301 /index.php$uri;
-        }
-    path: /
-    pathType: Prefix
-    tls:
-      - hosts:
-          - nextcloud.${SECRET_DOMAIN}
-  nextcloud:
-    host: nextcloud.${SECRET_DOMAIN}
-    existingSecret:
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.haraldkoch.ca/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nextcloud
+  namespace: default
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: nextcloud
+      version: 3.5.20
+      sourceRef:
+        kind: HelmRepository
+        name: nextcloud
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    deploymentAnnotations:
+      secret.reloader.stakater.com/reload: &secret nextcloud-secret
+    image:
+      repository: public.ecr.aws/docker/library/nextcloud
+      tag: 27.0.1-fpm-alpine
+    nextcloud:
+      datadir: /var/www/data
+      existingSecret:
+        enabled: true
+        secretName: nextcloud-secret
+      host: &host nextcloud.${DOMAIN}
+      configs:
+        local.config.php: |-
+          <?php
+          $CONFIG = array (
+            'trusted_proxies' =>
+            array (
+              0 => '10.0.0.0/8',
+            ),
+            'forwarded_for_headers' =>
+            array (
+              0 => 'HTTP_X_FORWARDED_FOR',
+            ),
+            'default_phone_region' => 'DE',
+            'trashbin_retention_obligation' => 'auto, 30',
+            'auth.bruteforce.protection.enabled' => true,
+          );
+      phpConfigs:
+        uploadLimit.ini: |
+          upload_max_filesize = 16G
+          post_max_size = 16G
+          max_input_time = 3600
+          max_execution_time = 3600
+        www.conf: |
+          [www]
+          user = www-data
+          group = www-data
+          listen = 127.0.0.1:9000
+          pm = dynamic
+          pm.max_children = 57
+          pm.start_servers = 14
+          pm.min_spare_servers = 14
+          pm.max_spare_servers = 42
+          pm.max_requests = 500
+          pm.process_idle_timeout = 10s
+      mail:
+        enabled: true
+        fromAddress: nextcloud-noreply
+        domain: ${DOMAIN}
+        smtp:
+          host: 192.168.178.241
+          port: 587
+          authtype: NONE
+          name: ""
+          password: ""
+      securityContext:
+        runAsUser: 3000
+        runAsGroup: 3000
+        runAsNonRoot: true
+    internalDatabase:
+      enabled: false
+    redis:
       enabled: true
-      secretName: nextcloud-secret
-    defaultConfigs:
-      .htaccess: true
-      redis.config.php: false
-      apache-pretty-urls.config.php: true
-      apcu.config.php: true
-      apps.config.php: true
-      autoconfig.php: false
-      # SMTP default configuration
-      smtp.config.php: true
-    mail:
+      architecture: standalone
+      auth:
+        enabled: true
+        existingSecret: nextcloud-secret
+        existingSecretPasswordKey: REDIS_PASSWORD
+      master:
+        persistence:
+          enabled: false
+        resources:
+          requests:
+            cpu: 50m
+            memory: 50Mi
+          limits:
+            memory: 100Mi
+      commonConfiguration: |-
+        # Enable AOF https://redis.io/topics/persistence#append-only-file
+        appendonly yes
+        # Disable RDB persistence, AOF persistence already enabled.
+        save ""
+        maxmemory 94371840
+        maxmemory-policy allkeys-lru
+    externalDatabase:
       enabled: true
-    configs:
-      custom.config.php: |-
-        <?php
-        $CONFIG = array (
-          'overwriteprotocol' => 'https',
-          'overwrite.cli.url' => 'https://nextcloud.${DOMAIN}',
-          'filelocking.enabled' => 'true',
-          'loglevel' => '2',
-          'enable_previews' => true,
-          'trusted_domains' =>
-            [
-              'nextcloud',
-              'nextcloud.${DOMAIN}'
-            ],
-          'trusted_proxies' =>
-            [
-              'nginx'
-            ],
-          'forwarded_for_headers' =>
-            [
-              0 => 'X-Forwarded-For',
-              1 => 'HTTP_X_FORWARDED_FOR',
-            ],
-          'default_phone_region' => 'DE',
-        );
-      redis.config.php: |-
-        <?php
-        $CONFIG = array (
-          'memcache.local' => '\\OC\\Memcache\\Redis',
-          'memcache.distributed' => '\OC\Memcache\Redis',
-          'memcache.locking' => '\OC\Memcache\Redis',
-          'redis' => array(
-            'host' => 'redis-lb.databases.svc.cluster.local',
-            'port' => 6379,
-          )
-        );
-    strategy:
-      type: Recreate
-  internalDatabase:
-    enabled: false
-  externalDatabase:
-    enabled: true
-    type: postgresql
-    host: postgres-v15-rw.databases.svc.cluster.local
-  cronjob:
-    enabled: true
-  persistence:
-    enabled: true
-    existingClaim: nextcloud-v1
-  resources:
-    requests:
-      cpu: 150m
-      memory: 512Mi
-    limits:
-      memory: 5120Mi
-  livenessProbe:
-    enabled: true
-    initialDelaySeconds: 10
-    periodSeconds: 30
-    timeoutSeconds: 10
-    failureThreshold: 3
-    successThreshold: 1
-  readinessProbe:
-    enabled: true
-    initialDelaySeconds: 60
-    periodSeconds: 60
-    timeoutSeconds: 5
-    failureThreshold: 10
-    successThreshold: 1
-  startupProbe:
-    enabled: true
-    initialDelaySeconds: 60
-    periodSeconds: 120
-    timeoutSeconds: 20
-    failureThreshold: 60
-    successThreshold: 1
-  rbac:
-    enabled: false
-    serviceaccount:
-      create: true
-      name: nextcloud-serviceaccount
-valuesFrom:
-  - targetPath: externalDatabase.user
-    kind: Secret
-    name: nextcloud-secret
-    valuesKey: POSTGRES_USER
-  - targetPath: externalDatabase.password
-    kind: Secret
-    name: nextcloud-secret
-    valuesKey: POSTGRES_PASS
-  - targetPath: externalDatabase.database
-    kind: Secret
-    name: nextcloud-secret
-    valuesKey: POSTGRES_DB
-  - targetPath: metrics.token
-    kind: Secret
-    name: nextcloud-secret
-    valuesKey: nextcloud-token
-  - targetPath: nextcloud.mail.smtp.host
-    kind: Secret
-    name: nextcloud-secret
-    valuesKey: MAIL_HOST
-  - targetPath: nextcloud.mail.smtp.port
-    kind: Secret
-    name: nextcloud-secret
-    valuesKey: MAIL_PORT
-  - targetPath: nextcloud.mail.smtp.name
-    kind: Secret
-    name: nextcloud-secret
-    valuesKey: smtp-username
-  - targetPath: nextcloud.mail.smtp.password
-    kind: Secret
-    name: nextcloud-secret
-    valuesKey: smtp-password
-  - targetPath: nextcloud.mail.fromAddress
-    kind: Secret
-    name: nextcloud-secret
-    valuesKey: MAIL_FROM
-  - targetPath: nextcloud.mail.domain
-    kind: Secret
-    name: nextcloud-secret
-    valuesKey: MAIL_DOMAIN
+      type: postgresql
+      host: postgres-nextcloud-rw.default.svc.cluster.local.
+      database: nextcloud
+      existingSecret:
+        enabled: true
+        secretName: cnpg-nextcloud-secret
+        usernameKey: username
+        passwordKey: password
+    ingress:
+      enabled: true
+      className: nginx
+      annotations:
+        external-dns.home.arpa/enabled: "true"
+        nginx.ingress.kubernetes.io/proxy-body-size: "10G"
+        nginx.ingress.kubernetes.io/proxy-buffering: "off"
+        nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
+        nginx.ingress.kubernetes.io/server-snippet: |-
+          server_tokens off;
+          proxy_hide_header X-Powered-By;
+
+          rewrite ^/.well-known/webfinger /public.php?service=webfinger last;
+          rewrite ^/.well-known/host-meta /public.php?service=host-meta last;
+          rewrite ^/.well-known/host-meta.json /public.php?service=host-meta-json;
+          location = /.well-known/carddav {
+            return 301 $scheme://$host/remote.php/dav;
+          }
+          location = /.well-known/caldav {
+            return 301 $scheme://$host/remote.php/dav;
+          }
+          location = /robots.txt {
+            allow all;
+            log_not_found off;
+            access_log off;
+          }
+          location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/ {
+            deny all;
+          }
+          location ~ ^/(?:autotest|occ|issue|indie|db_|console) {
+            deny all;
+          }
+      path: /
+      pathType: Prefix
+      tls:
+        - hosts:
+            - *host
+    persistence:
+      enabled: true
+      existingClaim: nextcloud-v1
+    # this seems to be required for nextcloud initialization which takes a long time
+    startupProbe:
+      enabled: true
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 30
+      successThreshold: 1

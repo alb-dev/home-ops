@@ -32,9 +32,9 @@ spec:
 
     env:
       DEBUG: "true"
-      SMTP_DOMAIN: "${SECRET_PUBLIC_DOMAIN}"
-      SMTP_SERVER: "smtp.${SECRET_PUBLIC_DOMAIN}"
-      SMTP_USERNAME: "monitoring@${SECRET_PUBLIC_DOMAIN}"
+      SMTP_DOMAIN: "${DOMAIN}"
+      SMTP_SERVER: "smtp.${DOMAIN}"
+      SMTP_USERNAME: "monitoring@${DOMAIN}"
       SMTP_PORT: "587"
     envFrom:
       - secretRef:
@@ -44,14 +44,11 @@ spec:
       main:
         type: LoadBalancer
         annotations:
-          metallb.universe.tf/loadBalancerIPs: "${SVC_SMTP_RELAY_ADDRESS}"
-        externalTrafficPolicy: Local    
+          io.cilium/lb-ipam-ips: 192.168.178.241
+        externalTrafficPolicy: Local
         ports:
           http:
-            port: 2525
-          metrics:
-            enabled: true
-            port: 9749
+            port: 587
 
     persistence:
       config:

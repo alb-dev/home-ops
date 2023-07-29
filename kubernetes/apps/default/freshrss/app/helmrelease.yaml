@@ -52,7 +52,7 @@ spec:
         enabled: true
         ingressClassName: "nginx"
         hosts:
-          - host: &host "{{ .Release.Name }}.${DOMAIN}"
+          - host: &host "freshrss.${DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
