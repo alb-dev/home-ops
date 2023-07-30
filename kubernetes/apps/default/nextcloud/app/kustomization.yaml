@@ -6,7 +6,8 @@ resources:
   - ./helmrelease.yaml
   - ./volsync.yaml
   - ./secret.sops.yaml
-  - ./pvc.yaml
+  - ./config-pvc.yaml
+  - ./data-pvc.yaml
 labels:
   - pairs:
       app.kubernetes.io/name: nextcloud
