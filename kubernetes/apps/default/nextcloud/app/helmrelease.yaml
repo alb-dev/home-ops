@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: nextcloud
-      version: 3.5.20
+      version: 3.5.19
       sourceRef:
         kind: HelmRepository
         name: nextcloud
@@ -177,7 +177,7 @@ spec:
       existingClaim: nextcloud-config-v1
       nextcloudData:
         enabled: true
-        existingClaim: nextcloud-nfs
+        existingClaim: nextcloud-data-v1
         accessMode: ReadWriteMany
     # this seems to be required for nextcloud initialization which takes a long time
     livenessProbe:
