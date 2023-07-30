@@ -28,9 +28,6 @@ spec:
   values:
     deploymentAnnotations:
       secret.reloader.stakater.com/reload: &secret nextcloud-secret
-    image:
-      repository: public.ecr.aws/docker/library/nextcloud
-      tag: 27.0.1-fpm-alpine
     nextcloud:
       datadir: /var/www/data
       existingSecret:
@@ -122,19 +119,6 @@ spec:
         secretName: cnpg-nextcloud-secret
         usernameKey: username
         passwordKey: password
-    nginx:
-      enabled: true
-      image:
-        repository: public.ecr.aws/nginx/nginx
-        tag: "1.25.1"
-      config:
-        default: true
-      resources:
-        requests:
-          cpu: 50m
-          memory: 20Mi
-        limits:
-          memory: 100Mi
     ingress:
       enabled: true
       className: nginx
