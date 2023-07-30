@@ -10,7 +10,7 @@ resources:
   - ./freshrss/ks.yaml
   - ./jellyfin/ks.yaml
   - ./home-assistant/ks.yaml
-  - ./mosquitto/ks.yaml
+#  - ./mosquitto/ks.yaml
   - ./mealie/ks.yaml
   - ./smtp-relay/ks.yaml
   - ./zigbee2mqtt/ks.yaml
