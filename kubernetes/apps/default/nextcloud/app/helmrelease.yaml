@@ -63,7 +63,7 @@ spec:
           [www]
           user = www-data
           group = www-data
-          listen = 0.0.0.0:9000
+          listen = 127.0.0.1:9000
           pm = dynamic
           pm.max_children = 57
           pm.start_servers = 14
@@ -122,6 +122,19 @@ spec:
         secretName: cnpg-nextcloud-secret
         usernameKey: username
         passwordKey: password
+    nginx:
+      enabled: true
+      image:
+        repository: public.ecr.aws/nginx/nginx
+        tag: "1.25.1"
+      config:
+        default: true
+      resources:
+        requests:
+          cpu: 50m
+          memory: 20Mi
+        limits:
+          memory: 100Mi
     ingress:
       enabled: true
       className: nginx
