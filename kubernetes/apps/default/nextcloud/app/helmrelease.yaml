@@ -174,7 +174,11 @@ spec:
             - *host
     persistence:
       enabled: true
-      existingClaim: nextcloud-v1
+      existingClaim: nextcloud-config-v1
+      nextcloudData:
+        enabled: true
+        existingClaim: nextcloud-data-v1
+        accessMode: ReadWriteMany
     # this seems to be required for nextcloud initialization which takes a long time
     livenessProbe:
       enabled: true
