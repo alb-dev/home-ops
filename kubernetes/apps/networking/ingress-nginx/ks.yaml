@@ -20,7 +20,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-ingress-nginx-internal
+  name: cluster-apps-ingress-internal
   namespace: flux-system
 spec:
   path: ./kubernetes/apps/networking/ingress-nginx/internal
@@ -40,7 +40,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-ingress-nginx-external
+  name: cluster-apps-ingress-external
   namespace: flux-system
 spec:
   path: ./kubernetes/apps/networking/ingress-nginx/external

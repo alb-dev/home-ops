@@ -21,7 +21,7 @@ spec:
       edition: ee
       time_zone: ${TIMEZONE}
       ingress:
-        class: nginx-internal
+        class: internal
         annotations:
         nginx.ingress.kubernetes.io/enable-global-auth: "false"
         configureCertmanager: false

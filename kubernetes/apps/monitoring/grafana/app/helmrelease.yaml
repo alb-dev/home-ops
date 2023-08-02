@@ -213,7 +213,7 @@ spec:
       enabled: true
     ingress:
       enabled: true
-      ingressClassName: "nginx-internal"
+      ingressClassName: "internal"
       annotations:
         nginx.ingress.kubernetes.io/affinity: "cookie"
         nginx.ingress.kubernetes.io/session-cookie-name: "grafana"

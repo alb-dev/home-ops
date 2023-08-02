@@ -56,7 +56,7 @@ spec:
     virtualHost: "adblock.${DOMAIN}"
     ingress:
       enabled: true
-      ingressClassName: nginx-internal
+      ingressClassName: internal
       hosts:
         - "adblock.${DOMAIN}"
       tls:

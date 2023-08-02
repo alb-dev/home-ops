@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: nginx-external
+  name: external
   namespace: networking
 spec:
   interval: 15m
@@ -42,16 +42,16 @@ spec:
       publishService:
         enabled: true
       ingressClassResource:
-        name: external-nginx
+        name: external
         default: false
-        controllerValue: k8s.io/ingress-nginx-external
+        controllerValue: k8s.io/external
       admissionWebhooks:
         objectSelector:
           matchExpressions:
             - key: ingress-class
               operator: In
               values:
-                - external-nginx
+                - external
       config:
         client-body-buffer-size: "100M"
         client-body-timeout: 120
@@ -90,7 +90,7 @@ spec:
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
-              app.kubernetes.io/name: nginx-external
+              app.kubernetes.io/name: external
               app.kubernetes.io/component: controller
       resources:
         requests:
