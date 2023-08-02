@@ -10,7 +10,7 @@ metadata:
 #  annotations:
 #    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
-  ingressClassName: nginx
+  ingressClassName: internal
   rules:
     - host: &host "athena.${DOMAIN}"
       http:
