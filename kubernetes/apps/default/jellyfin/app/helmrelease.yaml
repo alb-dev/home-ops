@@ -45,7 +45,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: "nginx"
+        ingressClassName: "nginx-internal"
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           nginx.ingress.kubernetes.io/whitelist-source-range: |
@@ -56,8 +56,8 @@ spec:
               - path: /
                 pathType: Prefix
         tls:
-        - hosts:
-            - "jelly.${DOMAIN}"
+          - hosts:
+              - "jelly.${DOMAIN}"
     persistence:
       transcode:
         enabled: true
@@ -76,7 +76,7 @@ spec:
             path: /volume1/media/Video
         mountPath: /media
         readOnly: false
-    podSecurityContext: 
+    podSecurityContext:
       supplementalGroups: [44, 109, 10000]
     nodeSelector:
       intel.feature.node.kubernetes.io/gpu: "true"

@@ -73,20 +73,20 @@ spec:
       # @default -- See values.yaml
       main:
         enabled: true
-        ingressClassName: "nginx"
+        ingressClassName: "nginx-internal"
         annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"  
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
           - host: "vault.${DOMAIN}"
             paths:
-            - path: /
-              pathType: Prefix
-            - path: /notifications/hub
-              pathType: Prefix
-              service:
-                port: 3012
-            - path: /notifications/hub/negotiate
-              pathType: Prefix
+              - path: /
+                pathType: Prefix
+              - path: /notifications/hub
+                pathType: Prefix
+                service:
+                  port: 3012
+              - path: /notifications/hub/negotiate
+                pathType: Prefix
         tls:
           - hosts:
               - "vault.${DOMAIN}"
@@ -104,9 +104,9 @@ spec:
           - hosts:
               - "vault.${DOMAIN}"
     persistence:
-        config:
-          enabled: true
-          existingClaim: vaultwarden-v1
+      config:
+        enabled: true
+        existingClaim: vaultwarden-v1
     resources:
       requests:
         cpu: 100m
