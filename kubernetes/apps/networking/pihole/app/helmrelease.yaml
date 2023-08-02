@@ -48,11 +48,6 @@ spec:
       https:
         enabled: true
         port: 443
-      type: LoadBalancer
-      externalTrafficPolicy: Local
-      annotations:
-        metallb.universe.tf/allow-shared-ip: pihole-svc
-        metallb.universe.tf/loadBalancerIPs: "${PIHOLE_LB_IP}"
     virtualHost: "adblock.${DOMAIN}"
     ingress:
       enabled: true
