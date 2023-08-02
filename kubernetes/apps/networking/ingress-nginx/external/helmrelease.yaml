@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: ingress-nginx
+  name: nginx-external
   namespace: networking
 spec:
   interval: 15m
@@ -37,12 +37,21 @@ spec:
 #          jellyfin: jellyfin
         type: LoadBalancer
         annotations:
-          io.cilium/lb-ipam-ips: 192.168.178.250
-        externalTrafficPolicy: Local
+          io.cilium/lb-ipam-ips: 192.168.178.251
+        externalTrafficPolicy: Cluster
       publishService:
         enabled: true
       ingressClassResource:
-        default: true
+        name: external-nginx
+        default: false
+        controllerValue: k8s.io/ingress-nginx-external
+      admissionWebhooks:
+        objectSelector:
+          matchExpressions:
+            - key: ingress-class
+              operator: In
+              values:
+                - external-nginx
       config:
         client-body-buffer-size: "100M"
         client-body-timeout: 120
@@ -76,12 +85,12 @@ spec:
         default-ssl-certificate: |-
           networking/alb-home-tls
       topologySpreadConstraints:
-        - maxSkew: 3
+        - maxSkew: 2
           topologyKey: kubernetes.io/hostname
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
-              app.kubernetes.io/name: ingress-nginx
+              app.kubernetes.io/name: nginx-external
               app.kubernetes.io/component: controller
       resources:
         requests:

@@ -50,7 +50,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: "nginx"
+        ingressClassName: "nginx-external"
         hosts:
           - host: &host "freshrss.${DOMAIN}"
             paths:
