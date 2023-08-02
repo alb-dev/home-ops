@@ -34,7 +34,7 @@ spec:
     dualStack:
       enabled: false
     serviceDns:
-      mixedService: false
+      mixedService: true
       type: LoadBalancer
       port: 53
       externalTrafficPolicy: Local
