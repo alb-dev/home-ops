@@ -48,7 +48,10 @@ spec:
         externalTrafficPolicy: Local
         ports:
           http:
-            port: 587
+            port: 2525
+          metrics:
+            enabled: true
+            port: 9749
 
     persistence:
       config:
