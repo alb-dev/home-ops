@@ -17,7 +17,6 @@ resources:
   - longhorn-charts.yaml
   - grafana-charts.yaml
   - csi-driver-nfs-charts.yaml
-  - hajimari-charts.yaml
   - bjw-s-charts.yaml
   - stakater-charts.yaml
   - backube.yaml
