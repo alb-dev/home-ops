@@ -47,8 +47,8 @@ This Git repository contains the following directories under [kubernetes](./kube
 | Name                                          | CIDR              |
 |-----------------------------------------------|-------------------|
 | Kubernetes Nodes VLAN                         | `192.168.178.0/24`|
-| Kubernetes pods (Calico)                      | `10.56.0.0/16`    |
-| Kubernetes services (Calico)                  | `10.57.0.0/16`    |
+| Kubernetes pods (Cilium)                      | `10.56.0.0/16`    |
+| Kubernetes services (Cilium)                  | `10.57.0.0/16`    |
 
 - Since my home-network is just one subnet everything is managed by calico's overlay-network in cluster.
 
@@ -72,8 +72,7 @@ This Git repository contains the following directories under [kubernetes](./kube
 
 | Device                           | Count | OS Disk Size | Data Disk Size              | Ram  | Operating System | Purpose             |
 |----------------------------------|-------|--------------|-----------------------------|------|------------------|---------------------|
-| Lenovo ThinkCentre M900 i5 6500t | 3     | 1TB SSD      | -                           | 16GB | Ubuntu 22.04     | Kubernetes Masters  |
-| IdeaCentre Mini 5i 10400t        | 3     | 256GB SSD    | 1TB NVMe (rook-ceph)        | 16GB | Ubuntu 22.04     | Kubernetes Worker   |
+| IdeaCentre Mini 5i 10400t        | 3     | 256GB SSD    | 1TB NVMe (rook-ceph)        | 32GB | Ubuntu 22.04     | Kubernetes Worker   |
 | Synology RS1221+                 | 1     | 60TB HDD     | -                           | 4GB  | DSM 7.1          | NFS Storage         |
 | MinisForum HM80                  | 1     | 512GB NVMe   | -                           | 32GB | Proxmox 7.1      | Hypervisor DNS etc. |
 | TP-Link TL-SG1016DE 16-Port      | 1     | -            | -                           | -    | -                | Rack-Switch         |
