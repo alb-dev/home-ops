@@ -34,10 +34,10 @@ spec:
     dualStack:
       enabled: false
     serviceDns:
-      mixedService: false
+      mixedService: true
       type: LoadBalancer
       port: 53
-      externalTrafficPolicy: Local
+      externalTrafficPolicy: Cluster
       annotations:
         io.cilium/lb-ipam-ips: 192.168.178.247
     serviceWeb:
