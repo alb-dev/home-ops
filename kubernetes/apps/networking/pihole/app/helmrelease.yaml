@@ -34,7 +34,7 @@ spec:
     dualStack:
       enabled: false
     serviceDns:
-      mixedService: true
+      mixedService: false
       type: LoadBalancer
       port: 53
       externalTrafficPolicy: Cluster
@@ -42,6 +42,7 @@ spec:
       #  io.cilium/lb-ipam-ips: 192.168.178.247
       annotations:
         metallb.universe.tf/allow-shared-ip: pihole-svc
+        metallb.universe.tf/loadBalancerIP: 192.168.178.247
     serviceWeb:
       http:
         enabled: true
