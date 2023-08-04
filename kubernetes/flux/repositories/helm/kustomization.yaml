@@ -28,7 +28,6 @@ resources:
   - cilium.yaml
   - cloudnative-pg.yaml
   - rook-ceph.yaml
-  - forgejo.yaml
   - weave-gitops.yaml
   - k8s-gateway.yaml
   - kyverno.yaml
