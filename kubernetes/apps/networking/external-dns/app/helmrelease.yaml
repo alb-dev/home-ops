@@ -21,7 +21,7 @@ spec:
     interval: 3m
     logLevel: debug
     provider: rfc2136
-    policy: upset-only
+    policy: upsert-only
     sources:
       - ingress
     txtPrefix: "k8s."
