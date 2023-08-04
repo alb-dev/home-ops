@@ -24,7 +24,7 @@ spec:
     policy: upsert-only
     sources:
       - ingress
-    txtPrefix: "k8s."
+    txtPrefix: "kubernetes."
     txtOwnerId: "default"
     resources:
       requests:
