@@ -2,63 +2,67 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: keycloak
+  name: authentik
   namespace: security
 spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://charts.bitnami.com/bitnami
-      chart: keycloak
-      version: 16.0.2
+      # renovate: registryUrl=https://charts.goauthentik.io
+      chart: authentik
+      version: 2023.6.3
       sourceRef:
         kind: HelmRepository
-        name: bitnami
+        name: authentik-charts
         namespace: flux-system
       interval: 5m
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+      remediateLastFailure: true
+    cleanupOnFail: true
+  rollback:
+    timeout: 10m
+    recreate: true
+    cleanupOnFail: true
+  valuesFrom:
+    - kind: Secret
+      name: authentik-secrets
   values:
-    auth:
-      existingSecret:
-        name: keycloak-credentials
-        keyMapping:
-          admin-password: admin-password
-          management-password: management-password
-    proxy: reencrypt
-    service:
-      type: ClusterIP
-      externalTrafficPolicy: null
+    authentik:
+      error_reporting:
+        enabled: true
+      email:
+        from: "auth-noreploy@${DOMAIN}"
+        host: "smtp-relay.default.svc.cluster.local"
+        port: 587
+        use_tls: true
+        use_ssl: false
     ingress:
       enabled: true
-      ingressClassName: "nginx"
-      annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt-production"
-      hostname: keycloak.${DOMAIN}
-      tls: false
-      extraTls:
-        - secretName: keycloak-${DOMAIN}
+      ingressClassName: external
+      hosts:
+        - host: "auth.${DOMAIN}"
+          paths:
+            - path: "/"
+              pathType: Prefix
+      tls:
+        - secretName: alb-home-tls
           hosts:
-            - keycloak.${DOMAIN}
-    podSecurityContext:
-      enabled: true
-      fsGroup: 1001
-    containerSecurityContext:
-      enabled: true
-      runAsUser: 1001
-      runAsNonRoot: true
+            - "auth.${DOMAIN}"
     postgresql:
       enabled: true
-      auth:
-        existingSecret:
-          name: keycloak-db-credentials
-          keyMapping:
-            postgresPassword: postgresPassword
-            database: database
-            username: admin-password
-            password: management-password
-      architecture: standalone
-    metrics:
+    redis:
       enabled: true
+    prometheus:
       serviceMonitor:
-        enabled: true
-    cache:
-      enabled: true
+        create: true
+    resources:
+      server:
+        requests:
+          cpu: 200m
+        limits:
+          cpu: "2"
