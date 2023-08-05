@@ -1,0 +1,73 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: lldap
+  namespace: identity
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+
+  values:
+    controller:
+      replicas: 1
+      strategy: Recreate
+      annotations:
+        reloader.stakater.com/auto: "true"
+
+    image:
+      repository: ghcr.io/lldap/lldap
+      # TODO: Switch to release tag on next release
+      tag: latest-alpine@sha256:8397179843b2722aed2c76f8a24e63fccaa2f4be69f93d7a01f4cd233479b88a
+
+    env:
+      LLDAP_HTTP_PORT: &port 80
+      LLDAP_HTTP_URL: https://lldap.${DOMAIN}
+      LLDAP_LDAP_PORT: &ldapPort 389
+
+    envFrom:
+      - secretRef:
+          name: lldap-secret
+
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+          ldap:
+            enabled: true
+            port: *ldapPort
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: external
+        hosts:
+          - host: &host "lldap.${DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+
+    persistence:
+      data:
+        enabled: true
+        type: pvc
+        existingClaim: data-lldap
+
+    resources:
+      requests:
+        cpu: 5m
+        memory: 128Mi
+      limits:
+        memory: 512Mi
