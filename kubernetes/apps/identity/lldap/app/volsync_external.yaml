@@ -2,28 +2,28 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: authelia-backup-ck
+  name: lldap-backup-ck
   namespace: identity
 spec:
-  sourcePVC: authelia-data
+  sourcePVC: lldap-data
   trigger:
     schedule: "0 22 * * *"
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 14
-    repository: authelia-restic-secret-ck
+    repository: lldap-restic-secret-ck
     retain:
       daily: 14
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: authelia-restic-secret-ck
+  name: lldap-restic-secret-ck
   namespace: identity
 type: Opaque
 stringData:
   # The repository url
-  RESTIC_REPOSITORY: s3:https://${S3_EXTERNAL}/authelia
+  RESTIC_REPOSITORY: s3:https://${S3_EXTERNAL}/lldap
   # The repository encryption key
   RESTIC_PASSWORD: "${RESTIC_PW}"
   # ENV vars specific to the back end
