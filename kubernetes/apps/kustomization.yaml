@@ -5,6 +5,7 @@ resources:
   - namespace.yaml
   - cert-manager
   - databases
+  - identity
   - monitoring
   - networking
   - kube-system
