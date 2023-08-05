@@ -63,7 +63,7 @@ spec:
       data:
         enabled: true
         type: pvc
-        existingClaim: data-lldap
+        existingClaim: lldap-data
 
     resources:
       requests:
