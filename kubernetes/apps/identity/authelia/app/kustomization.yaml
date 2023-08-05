@@ -1,15 +1,20 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: identity
 resources:
   - ./secret.sops.yaml
-  - ./helmrelease.yaml
   - ./pvc.yaml
+  - ./helmrelease.yaml
   - ./volsync.yaml
   - ./volsync_external.yaml
 commonLabels:
-  app.kubernetes.io/name: lldap
-  app.kubernetes.io/instance: lldap
+  app.kubernetes.io/name: authelia
+  app.kubernetes.io/instance: authelia
+configMapGenerator:
+  - name: authelia-configmap
+    files:
+      - configuration.yaml=./config/configuration.yaml
 generatorOptions:
   disableNameSuffixHash: true
   annotations:

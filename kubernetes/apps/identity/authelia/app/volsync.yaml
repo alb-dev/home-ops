@@ -2,7 +2,7 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: authelia-backup-ck
+  name: authelia-backup
   namespace: identity
 spec:
   sourcePVC: authelia-data
@@ -11,22 +11,22 @@ spec:
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 14
-    repository: authelia-restic-secret-ck
+    repository: authelia-restic-secret
     retain:
       daily: 14
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: authelia-restic-secret-ck
+  name: authelia-restic-secret
   namespace: identity
 type: Opaque
 stringData:
   # The repository url
-  RESTIC_REPOSITORY: s3:https://${S3_EXTERNAL}/authelia
+  RESTIC_REPOSITORY: s3:http://minio.storage.svc.cluster.local:9000/authelia
   # The repository encryption key
   RESTIC_PASSWORD: "${RESTIC_PW}"
   # ENV vars specific to the back end
   # https://restic.readthedocs.io/en/stable/030_preparing_a_new_repo.html
-  AWS_ACCESS_KEY_ID: "${CK_ACCESS_KEY}"
-  AWS_SECRET_ACCESS_KEY: "${CK_SECRET_KEY}"
+  AWS_ACCESS_KEY_ID: "${MINIO_USER}"
+  AWS_SECRET_ACCESS_KEY: "${MINIO_PASSWORD}"
