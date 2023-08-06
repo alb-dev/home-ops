@@ -24,35 +24,41 @@ spec:
     remediation:
       retries: 5
   values:
-    replicas: 2
+    replicas: 3
     env:
-      GF_AUTH_GENERIC_OAUTH_TOKEN_URL: https://auth.${DOMAIN}/api/oidc/token
-      GF_AUTH_GENERIC_OAUTH_API_URL: https://auth.${DOMAIN}/api/oidc/userinfo
-      GF_AUTH_GENERIC_OAUTH_CLIENT_ID: grafana
-      GF_AUTH_GENERIC_OAUTH_AUTH_URL: https://auth.${DOMAIN}/api/oidc/authorization
-      GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET: ${GRAFANA_OAUTH_CLIENT_SECRET}
       GF_DATE_FORMATS_USE_BROWSER_LOCALE: true
       GF_EXPLORE_ENABLED: true
       GF_FEATURE_TOGGLES_ENABLE: publicDashboards
-      GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: natel-discrete-panel,pr0ps-trackmap-panel,panodata-map-panel
       GF_SECURITY_COOKIE_SAMESITE: grafana
-      GF_SERVER_ROOT_URL: https://grafana.${DOMAIN}
     envFromSecret: grafana-secret
     grafana.ini:
+      server:
+        root_url: "https://grafana.${DOMAIN}"
+      paths:
+        data: /var/lib/grafana/data
+        logs: /var/log/grafana
+        plugins: /var/lib/grafana/plugins
+        provisioning: /etc/grafana/provisioning
       analytics:
         check_for_updates: false
         check_for_plugin_updates: false
         reporting_enabled: false
       auth:
-        signout_redirect_url: https://auth.${DOMAIN}/logout
+        signout_redirect_url: "https://auth.${DOMAIN}/logout"
         oauth_auto_login: true
-        oauth_allow_insecure_email_lookup: true # https://github.com/grafana/grafana/issues/70203
+      auth.basic:
+        disable_login_form: false
+        enabled: false
       auth.generic_oauth:
         enabled: true
-        name: Authelia
-        icon: signin
-        scopes: openid profile email groups
+        name: 56k
+        client_id: grafana
+        client_secret: "${GRAFANA_OAUTH_CLIENT_SECRET}"
+        scopes: "openid profile email groups"
         empty_scopes: false
+        auth_url: https://auth.${DOMAIN}/api/oidc/authorization
+        token_url: https://auth.${DOMAIN}/api/oidc/token
+        api_url: https://auth.${DOMAIN}/api/oidc/userinfo
         login_attribute_path: preferred_username
         groups_attribute_path: groups
         name_attribute_path: name
@@ -65,8 +71,6 @@ spec:
         default_home_dashboard_path: /tmp/dashboards/home.json
       date_formats:
         use_browser_locale: true
-      auth.basic:
-        enabled: false
       auth.anonymous:
         enabled: false
         # org_id: 1
