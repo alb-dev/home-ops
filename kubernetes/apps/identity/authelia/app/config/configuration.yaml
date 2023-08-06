@@ -44,6 +44,11 @@ access_control:
       policy: two_factor
       subject:
         - ["group:admins"]
+    - domain:
+        - "freshrss.${DOMAIN}"
+      policy: two_factor
+      subject:
+        - ["group:admins"]
 identity_providers:
   oidc:
     cors:
