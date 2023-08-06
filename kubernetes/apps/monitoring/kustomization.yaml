@@ -6,4 +6,3 @@ resources:
   - ./uptime-kuma/ks.yaml
   - ./grafana/ks.yaml
 #  - kubernetes-dashboard
-#  - snmp-exporter-synology

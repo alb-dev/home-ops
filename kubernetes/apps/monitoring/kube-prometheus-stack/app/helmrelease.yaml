@@ -17,41 +17,29 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    crds:
+      enabled: true
     alertmanager:
-      config:
-        global:
-          resolve_timeout: 5m
-        receivers:
-          - name: "null"
-        inhibit_rules:
-          - source_matchers:
-              - severity = "critical"
-            target_matchers:
-              - severity = "warning"
-            equal: ["alertname", "namespace"]
-        ingress:
-          enabled: true
-          pathType: Prefix
-          annotations:
-            nginx.ingress.kubernetes.io/auth-url: http://authelia.identity.svc.cluster.local/api/verify
-            nginx.ingress.kubernetes.io/auth-signin: https://auth.${DOMAIN}
-          ingressClassName: internal
-          hosts:
-            - "alert-manager.${DOMAIN}"
-          tls:
-            - hosts:
-                - alert-manager.${DOMAIN}
-        alertmanagerSpec:
-          replicas: 3
-          podAntiAffinity: hard
-          storage:
-            volumeClaimTemplate:
-              spec:
-                storageClassName: "ceph-block"
-                resources:
-                  requests:
-                    # TODO(kube-prometheus-stack): change alertmanager volume to 250Mi
-                    storage: 250Mi
+      ingress:
+        enabled: true
+        pathType: Prefix
+        ingressClassName: internal
+        hosts:
+          - &host alertmanager.${DOMAIN}
+        tls:
+          - hosts:
+              - *host
+      alertmanagerSpec:
+        replicas: 2
+        useExistingSecret: true
+        configSecret: alertmanager-secret
+        storage:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: ceph-block
+              resources:
+                requests:
+                  storage: 1Gi
     kube-state-metrics:
       metricLabelsAllowlist:
         - "persistentvolumeclaims=[*]"
@@ -77,10 +65,21 @@ spec:
       enabled: true
       serviceMonitor:
         metricRelabelings:
+          # Remove duplicate labels provided by k3s
+          - action: keep
+            sourceLabels: ["__name__"]
+            regex: (apiserver_audit|apiserver_client|apiserver_delegated|apiserver_envelope|apiserver_storage|apiserver_webhooks|authentication_token|cadvisor_version|container_blkio|container_cpu|container_fs|container_last|container_memory|container_network|container_oom|container_processes|container|csi_operations|disabled_metric|get_token|go|hidden_metric|kubelet_certificate|kubelet_cgroup|kubelet_container|kubelet_containers|kubelet_cpu|kubelet_device|kubelet_graceful|kubelet_http|kubelet_lifecycle|kubelet_managed|kubelet_node|kubelet_pleg|kubelet_pod|kubelet_run|kubelet_running|kubelet_runtime|kubelet_server|kubelet_started|kubelet_volume|kubernetes_build|kubernetes_feature|machine_cpu|machine_memory|machine_nvm|machine_scrape|node_namespace|plugin_manager|prober_probe|process_cpu|process_max|process_open|process_resident|process_start|process_virtual|registered_metric|rest_client|scrape_duration|scrape_samples|scrape_series|storage_operation|volume_manager|volume_operation|workqueue)_(.+)
           - action: replace
-            sourceLabels:
-              - node
+            sourceLabels: ["node"]
             targetLabel: instance
+          # Drop high cardinality labels
+          - action: labeldrop
+            regex: (uid)
+          - action: labeldrop
+            regex: (id|name)
+          - action: drop
+            sourceLabels: ["__name__"]
+            regex: (rest_client_request_duration_seconds_bucket|rest_client_request_duration_seconds_sum|rest_client_request_duration_seconds_count)
     kubeApiServer:
       enabled: true
     kubeControllerManager:
@@ -96,11 +95,7 @@ spec:
         - 192.168.178.214
         - 192.168.178.215
     kubeProxy:
-      enabled: true
-      endpoints:
-        - 192.168.178.213
-        - 192.168.178.214
-        - 192.168.178.215
+      enabled: false
     kubeEtcd:
       enabled: true
       endpoints:
@@ -114,17 +109,22 @@ spec:
     prometheus:
       ingress:
         enabled: true
-        pathType: Prefix
-        annotations:
-          nginx.ingress.kubernetes.io/auth-url: http://authelia.identity.svc.cluster.local/api/verify
-          nginx.ingress.kubernetes.io/auth-signin: https://auth.${DOMAIN}
         ingressClassName: internal
+        pathType: Prefix
         hosts:
-          - "prometheus.${DOMAIN}"
+          - &host "prometheus.${DOMAIN}"
         tls:
           - hosts:
-              - prometheus.${DOMAIN}
+              - *host
       prometheusSpec:
+        additionalScrapeConfigs:
+          - job_name: node-exporter
+            scrape_interval: 1m
+            scrape_timeout: 10s
+            honor_timestamps: true
+            static_configs:
+              - targets:
+                  - nas.${SECRET_FAM_DOMAIN}:9100
         replicas: 2
         replicaExternalLabelName: __replica__
         resources:
@@ -137,11 +137,7 @@ spec:
         externalLabels:
           cluster: home-ops
         podAntiAffinity: hard
-        retentionSize: "6GB"
-        ruleSelectorNilUsesHelmValues: false
-        serviceMonitorSelectorNilUsesHelmValues: false
-        podMonitorSelectorNilUsesHelmValues: false
-        probeSelectorNilUsesHelmValues: false
+        retentionSize: 15GB
         retention: 2d
         enableAdminAPI: true
         walCompression: true
