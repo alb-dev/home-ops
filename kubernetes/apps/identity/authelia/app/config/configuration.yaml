@@ -29,7 +29,21 @@ access_control:
       policy: two_factor
       subject:
         - ["group:admins"]
-
+    - domain:
+        - "draw.${DOMAIN}"
+      policy: two_factor
+      subject:
+        - ["group:admins"]
+    - domain:
+        - "prometheus.${DOMAIN}"
+      policy: two_factor
+      subject:
+        - ["group:admins"]
+    - domain:
+        - "alertmanager.${DOMAIN}"
+      policy: two_factor
+      subject:
+        - ["group:admins"]
 identity_providers:
   oidc:
     cors:
