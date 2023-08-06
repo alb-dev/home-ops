@@ -31,7 +31,7 @@ access_control:
         - ["group:admins"]
     - domain:
         - "draw.${DOMAIN}"
-      policy: two_factor
+      policy: one_factor
       subject:
         - ["group:admins"]
     - domain:
