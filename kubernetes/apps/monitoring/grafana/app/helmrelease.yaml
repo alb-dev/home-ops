@@ -26,7 +26,17 @@ spec:
   values:
     replicas: 2
     env:
+      GF_AUTH_GENERIC_OAUTH_TOKEN_URL: https://auth.${DOMAIN}/api/oidc/token
+      GF_AUTH_GENERIC_OAUTH_API_URL: https://auth.${DOMAIN}/api/oidc/userinfo
+      GF_AUTH_GENERIC_OAUTH_CLIENT_ID: grafana
+      GF_AUTH_GENERIC_OAUTH_AUTH_URL: https://auth.${DOMAIN}/api/oidc/authorization
       GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET: ${GRAFANA_OAUTH_CLIENT_SECRET}
+      GF_DATE_FORMATS_USE_BROWSER_LOCALE: true
+      GF_EXPLORE_ENABLED: true
+      GF_FEATURE_TOGGLES_ENABLE: publicDashboards
+      GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: natel-discrete-panel,pr0ps-trackmap-panel,panodata-map-panel
+      GF_SECURITY_COOKIE_SAMESITE: grafana
+      GF_SERVER_ROOT_URL: https://grafana.${DOMAIN}
     envFromSecret: grafana-secret
     grafana.ini:
       analytics:
@@ -34,8 +44,9 @@ spec:
         check_for_plugin_updates: false
         reporting_enabled: false
       auth:
+        signout_redirect_url: https://auth.${DOMAIN}/logout
         oauth_auto_login: true
-        oauth_allow_insecure_email_lookup: true
+        oauth_allow_insecure_email_lookup: true # https://github.com/grafana/grafana/issues/70203
       auth.generic_oauth:
         enabled: true
         name: Authelia
@@ -46,11 +57,6 @@ spec:
         groups_attribute_path: groups
         name_attribute_path: name
         use_pkce: true
-        client_id: grafana
-        client_secret: # Set by env vars
-        auth_url: https://auth.${DOMAIN}/api/oidc/authorization
-        token_url: https://auth.${DOMAIN}/api/oidc/token
-        api_url: https://auth.${DOMAIN}/api/oidc/userinfo
       auth.generic_oauth.group_mapping:
         org_id: 1
         role_attribute_path: |
@@ -265,11 +271,6 @@ spec:
     ingress:
       enabled: true
       ingressClassName: "internal"
- #     annotations:
- #       nginx.ingress.kubernetes.io/affinity: "cookie"
- #       nginx.ingress.kubernetes.io/session-cookie-name: "grafana"
- #       nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
- #       nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
       hosts:
         - &host "grafana.${DOMAIN}"
       tls:
