@@ -36,8 +36,7 @@ spec:
       GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: natel-discrete-panel,pr0ps-trackmap-panel,panodata-map-panel
       GF_SECURITY_COOKIE_SAMESITE: grafana
       GF_SERVER_ROOT_URL: https://grafana.${DOMAIN}
-    envFromSecrets:
-      - name: grafana-secret
+    envFromSecret: grafana-secret
     grafana.ini:
       analytics:
         check_for_updates: false
@@ -60,6 +59,10 @@ spec:
         org_id: 1
         role_attribute_path: |
           contains(groups[*], 'admins') && 'Admin' || contains(groups[*], 'people') && 'Viewer'
+      dashboards:
+        default_home_dashboard_path: /tmp/dashboards/home.json
+      date_formats:
+        use_browser_locale: true
       auth.basic:
         enabled: false
       auth.anonymous:
@@ -258,6 +261,9 @@ spec:
       - natel-discrete-panel
       - pr0ps-trackmap-panel
       - vonage-status-panel
+    podAnnotations:
+      configmap.reloader.stakater.com/reload: grafana
+      secret.reloader.stakater.com/reload: grafana-secrets
     serviceMonitor:
       enabled: true
     ingress:
