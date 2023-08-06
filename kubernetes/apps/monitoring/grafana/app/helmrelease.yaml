@@ -26,19 +26,21 @@ spec:
   values:
     replicas: 3
     env:
-      GF_DATE_FORMATS_USE_BROWSER_LOCALE: true
+      GF_DATE_FORMATS_FULL_DATE: "MMM Do, YYYY hh:mm:ss a"
       GF_EXPLORE_ENABLED: true
-      GF_FEATURE_TOGGLES_ENABLE: publicDashboards
+      GF_GRAFANA_NET_URL: https://grafana.net
+      GF_LOG_FILTERS: rendering:debug
+      GF_LOG_MODE: console
+      GF_PANELS_DISABLE_SANITIZE_HTML: true
+      GF_PATHS_DATA: /var/lib/grafana/data
+      GF_PATHS_LOGS: /var/log/grafana
+      GF_PATHS_PLUGINS: /var/lib/grafana/plugins
+      GF_PATHS_PROVISIONING: /etc/grafana/provisioning
+      GF_SECURITY_ALLOW_EMBEDDING: true
       GF_SECURITY_COOKIE_SAMESITE: grafana
+      GF_SERVER_ROOT_URL: "https://grafana.${DOMAIN}"
     envFromSecret: grafana-secret
     grafana.ini:
-      server:
-        root_url: "https://grafana.${DOMAIN}"
-      paths:
-        data: /var/lib/grafana/data
-        logs: /var/log/grafana
-        plugins: /var/lib/grafana/plugins
-        provisioning: /etc/grafana/provisioning
       analytics:
         check_for_updates: false
         check_for_plugin_updates: false
@@ -51,7 +53,7 @@ spec:
         enabled: false
       auth.generic_oauth:
         enabled: true
-        name: 56k
+        name: Authelia
         client_id: grafana
         client_secret: "${GRAFANA_OAUTH_CLIENT_SECRET}"
         scopes: "openid profile email groups"
