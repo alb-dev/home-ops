@@ -26,17 +26,7 @@ spec:
   values:
     replicas: 2
     env:
-      GF_AUTH_GENERIC_OAUTH_API_URL: https://auth.${DOMAIN}/api/oidc/userinfo
-      GF_AUTH_GENERIC_OAUTH_AUTH_URL: https://auth.${DOMAIN}/api/oidc/authorization
-      GF_AUTH_GENERIC_OAUTH_CLIENT_ID: grafana
-      GF_AUTH_GENERIC_OAUTH_TOKEN_URL: https://auth.${DOMAIN}/api/oidc/token
-      GF_DATE_FORMATS_USE_BROWSER_LOCALE: true
-      GF_EXPLORE_ENABLED: true
       GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET: ${GRAFANA_OAUTH_CLIENT_SECRET}
-      GF_FEATURE_TOGGLES_ENABLE: publicDashboards
-      GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: natel-discrete-panel,pr0ps-trackmap-panel,panodata-map-panel
-      GF_SECURITY_COOKIE_SAMESITE: grafana
-      GF_SERVER_ROOT_URL: https://grafana.${DOMAIN}
     envFromSecret: grafana-secret
     grafana.ini:
       analytics:
@@ -56,6 +46,11 @@ spec:
         groups_attribute_path: groups
         name_attribute_path: name
         use_pkce: true
+        client_id: grafana
+        client_secret: # Set by env vars
+        auth_url: https://auth.${DOMAIN}/api/oidc/authorization
+        token_url: https://auth.${DOMAIN}/api/oidc/token
+        api_url: https://auth.${DOMAIN}/api/oidc/userinfo
       auth.generic_oauth.group_mapping:
         org_id: 1
         role_attribute_path: |
