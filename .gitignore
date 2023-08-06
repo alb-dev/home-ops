@@ -31,3 +31,4 @@ kubernetes_new
 ansible
 .DS_Store
 .config.env
+archive
