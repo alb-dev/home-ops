@@ -12,6 +12,10 @@ spec:
     copyMethod: Snapshot
     pruneIntervalDays: 14
     repository: freshrss-restic-secret-ck
+    moverSecurityContext:
+      runAsUser: 0
+      runAsGroup: 33
+      fsGroup: 33
     retain:
       daily: 14
 ---
