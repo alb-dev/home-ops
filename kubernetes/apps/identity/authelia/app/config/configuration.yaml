@@ -49,6 +49,11 @@ access_control:
       policy: one_factor
       subject:
         - ["group:admins"]
+    - domain:
+        - "freshrss.${DOMAIN}"
+      resources:
+        - "^/api/.*$"
+      policy: bypass
 identity_providers:
   oidc:
     cors:

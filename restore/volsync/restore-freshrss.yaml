@@ -15,3 +15,7 @@ spec:
     # IMPORTANT NOTE:
     #   Set to the last X number of snapshots to restore from
     previous: 2
+    moverSecurityContext:
+      runAsUser: 0
+      runAsGroup: 33
+      fsGroup: 33
