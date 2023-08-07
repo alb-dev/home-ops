@@ -46,7 +46,7 @@ access_control:
         - ["group:admins"]
     - domain:
         - "freshrss.${DOMAIN}"
-      policy: two_factor
+      policy: one_factor
       subject:
         - ["group:admins"]
 identity_providers:
