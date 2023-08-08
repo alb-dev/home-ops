@@ -17,4 +17,4 @@ resources:
 #  - ./paperless/ks.yaml
   - ./excalidraw/ks.yaml
 #  - ./harbor/ks.yaml
-  - ./nextcloud/ks.yaml
+#  - ./nextcloud/ks.yaml
