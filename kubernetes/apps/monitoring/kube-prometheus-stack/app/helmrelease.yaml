@@ -117,14 +117,6 @@ spec:
           - hosts:
               - *host
       prometheusSpec:
-        additionalScrapeConfigs:
-          - job_name: node-exporter
-            scrape_interval: 1m
-            scrape_timeout: 10s
-            honor_timestamps: true
-            static_configs:
-              - targets:
-                  - nas.${SECRET_FAM_DOMAIN}:9100
         replicas: 2
         replicaExternalLabelName: __replica__
         resources:
@@ -134,8 +126,8 @@ spec:
           limits:
             cpu: 3000m
             memory: 6000Mi
-        externalLabels:
-          cluster: home-ops
+        #externalLabels:
+        #  cluster: home-ops
         podAntiAffinity: hard
         retentionSize: 15GB
         retention: 2d
