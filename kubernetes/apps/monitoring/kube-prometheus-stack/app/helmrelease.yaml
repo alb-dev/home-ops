@@ -117,26 +117,28 @@ spec:
           - hosts:
               - *host
       prometheusSpec:
-        replicas: 2
+        replicas: 3
         replicaExternalLabelName: __replica__
-        resources:
-          requests:
-            cpu: 1000m
-            memory: 2000Mi
-          limits:
-            cpu: 3000m
-            memory: 6000Mi
+        #Breaks other metrics that has 'cluster'lable
         #externalLabels:
-        #  cluster: home-ops
+        #  cluster: home-kubernetes
         podAntiAffinity: hard
-        retentionSize: 15GB
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
         retention: 2d
+        retentionSize: 10GB
         enableAdminAPI: true
         walCompression: true
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: "ceph-block"
+              storageClassName: ceph-block
               resources:
                 requests:
                   storage: 60Gi
+        resources:
+          requests:
+            cpu: 10m
+            memory: 1000Mi
