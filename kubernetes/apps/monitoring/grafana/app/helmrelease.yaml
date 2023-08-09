@@ -69,8 +69,6 @@ spec:
         org_id: 1
         role_attribute_path: |
           contains(groups[*], 'admins') && 'Admin' || contains(groups[*], 'people') && 'Viewer'
-      dashboards:
-        default_home_dashboard_path: /tmp/dashboards/home.json
       date_formats:
         use_browser_locale: true
       auth.anonymous:
@@ -123,22 +121,6 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/nginx
-          - name: thanos
-            orgId: 1
-            folder: Thanos
-            type: file
-            disableDeletion: false
-            editable: true
-            options:
-              path: /var/lib/grafana/dashboards/thanos
-          - name: unifi
-            orgId: 1
-            folder: Unifi
-            type: file
-            disableDeletion: false
-            editable: true
-            options:
-              path: /var/lib/grafana/dashboards/unifi
     datasources:
       datasources.yaml:
         apiVersion: 1
@@ -165,11 +147,6 @@ spec:
           gnetId: 15038 # https://grafana.com/grafana/dashboards/15038?tab=revisions
           revision: 1
           datasource: Prometheus
-        minio:
-          gnetId: 13502 # https://grafana.com/grafana/dashboards/13502?tab=revisions
-          revision: 23
-          datasource:
-            - { name: DS_PROMETHEUS, value: Prometheus }
         node-exporter-full:
           gnetId: 1860 # https://grafana.com/grafana/dashboards/1860?tab=revisions
           revision: 31
@@ -177,15 +154,6 @@ spec:
         redis:
           gnetId: 763 # https://grafana.com/grafana/dashboards/763?tab=revisions
           revision: 5
-          datasource: Prometheus
-        unpackerr:
-          gnetId: 18817 # https://grafana.com/grafana/dashboards/18817?tab=revisions
-          revision: 1
-          datasource:
-            - { name: DS_PROMETHEUS, value: Prometheus }
-        zfs:
-          gnetId: 7845 # https://grafana.com/grafana/dashboards/7845?tab=revisions
-          revision: 4
           datasource: Prometheus
         cloudnative-pg:
           url: https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/main/docs/src/samples/monitoring/grafana-dashboard.json
@@ -247,51 +215,6 @@ spec:
           datasource: Prometheus
         nginx-request-handling-performance:
           url: https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/request-handling-performance.json
-          datasource: Prometheus
-      thanos:
-        thanos-bucket-replicate:
-          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/bucket-replicate.json
-          datasource: Prometheus
-        thanos-compact:
-          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/compact.json
-          datasource: Prometheus
-        thanos-overview:
-          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/overview.json
-          datasource: Prometheus
-        thanos-query:
-          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/query.json
-          datasource: Prometheus
-        thanos-query-frontend:
-          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/query-frontend.json
-          datasource: Prometheus
-        thanos-receieve:
-          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/receive.json
-          datasource: Prometheus
-        thanos-rule:
-          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/rule.json
-          datasource: Prometheus
-        thanos-sidecar:
-          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/sidecar.json
-          datasource: Prometheus
-        thanos-store:
-          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/thanos/dashboards/store.json
-          datasource: Prometheus
-      unifi:
-        unifi-insights:
-          gnetId: 11315 # https://grafana.com/grafana/dashboards/11315?tab=revisions
-          revision: 9
-          datasource: Prometheus
-        unifi-network-sites:
-          gnetId: 11311 # https://grafana.com/grafana/dashboards/11311?tab=revisions
-          revision: 5
-          datasource: Prometheus
-        unifi-uap:
-          gnetId: 11314 # https://grafana.com/grafana/dashboards/11314?tab=revisions
-          revision: 10
-          datasource: Prometheus
-        unifi-usw:
-          gnetId: 11312 # https://grafana.com/grafana/dashboards/11312?tab=revisions
-          revision: 9
           datasource: Prometheus
     sidecar:
       dashboards:
