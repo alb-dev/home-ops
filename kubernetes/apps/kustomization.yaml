@@ -9,7 +9,7 @@ resources:
   - monitoring
   - networking
   - kube-system
-  - storage
+#  - storage
   - volsync
   - rook-ceph
   - default
