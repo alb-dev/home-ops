@@ -174,11 +174,9 @@ spec:
             - *host
     persistence:
       enabled: true
-      existingClaim: nextcloud-config
-      nextcloudData:
-        enabled: true
-        existingClaim: nextcloud-data
-        accessMode: ReadWriteOnce
+      accessMode: ReadWriteMany
+      size: 1Mi
+      existingClaim: nextcloud-nfs-config
     # this seems to be required for nextcloud initialization which takes a long time
     startupProbe:
       enabled: true

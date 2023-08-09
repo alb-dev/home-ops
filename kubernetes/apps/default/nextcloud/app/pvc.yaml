@@ -1,32 +1,37 @@
 ---
 apiVersion: v1
-kind: PersistentVolumeClaim
+kind: PersistentVolume
 metadata:
-  name: nextcloud-data
-  namespace: default
-  labels:
-    app.kubernetes.io/name: &name nextcloud
-    app.kubernetes.io/instance: *name
+  name: nextcloud-nfs-config
 spec:
+  storageClassName: nextcloud-nfs-config
+  capacity:
+    storage: 1Mi
   accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 200Gi
-  storageClassName: ceph-block
+    - ReadWriteMany
+  nfs:
+    server: "${NFS_SERVER}"
+    path: /volume1/kubernetes/nextcloud
+  mountOptions:
+    - nfsvers=4.1
+    - nconnect=16
+    - tcp
+    - intr
+    - hard
+    - noatime
+    - nodiratime
+    - rsize=1048576
+    - wsize=1048576
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nextcloud-config
+  name: nextcloud-nfs-config
   namespace: default
-  labels:
-    app.kubernetes.io/name: &name nextcloud
-    app.kubernetes.io/instance: *name
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
+  storageClassName: nextcloud-nfs-config
   resources:
     requests:
-      storage: 5Gi
-  storageClassName: ceph-block
+      storage: 1Mi
