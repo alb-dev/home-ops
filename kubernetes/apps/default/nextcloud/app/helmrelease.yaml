@@ -112,16 +112,17 @@ spec:
         save ""
         maxmemory 94371840
         maxmemory-policy allkeys-lru
-    externalDatabase:
-      enabled: true
-      type: postgresql
-      host: postgres-nextcloud-rw.default.svc.cluster.local.
-      database: nextcloud
-      existingSecret:
+    postgresql:
+      enabled: false
+      persistence:
         enabled: true
-        secretName: cnpg-nextcloud-secret
-        usernameKey: username
-        passwordKey: password
+        existingClaim: pvc-nextcloud-db
+        size: 1Mi
+      global:
+        postgresql:
+          postgresqlUsername: ncuser
+          postgresqlPassword: ${SECRET_NEXTCLOUD_DB_PASSWORD}
+          postgresqlDatabase: nextcloud
     nginx:
       enabled: true
       image:
