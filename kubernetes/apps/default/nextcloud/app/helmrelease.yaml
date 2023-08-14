@@ -53,6 +53,24 @@ spec:
             'trashbin_retention_obligation' => 'auto, 30',
             'auth.bruteforce.protection.enabled' => true,
           );
+        s3.config.php: |-
+          <?php
+          $CONFIG = array (
+            'objectstore' => array(
+              'class' => '\\OC\\Files\\ObjectStore\\S3',
+              'arguments' => array(
+                'hostname'   => '192.168.178.35',
+                'port'       => 9000,
+                'bucket'     => 'nextcloud',
+                'autocreate' => true,
+                'key'        => '${NC_MINIO_KEY}',
+                'secret'     => '${NC_MINIO_SECRET}',
+                'region'     => 'optional',
+                'use_ssl'    => false,
+                'use_path_style'=> true
+              ),
+            ),
+          );
       phpConfigs:
         uploadLimit.ini: |
           upload_max_filesize = 16G
