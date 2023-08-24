@@ -50,6 +50,14 @@ spec:
       bdev_enable_discard = true
       bdev_async_discard = true
     cephClusterSpec:
+      mon:
+        count: 3
+        allowMultiplePerNode: false
+      mgr:
+        count: 1
+        modules:
+          - name: pg_autoscaler
+            enabled: true
       network:
         provider: host
         connections:
@@ -76,6 +84,55 @@ spec:
           - name: k8s-06
             devices:
               - name: /dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_1TB_S4EWNM0TA17489E
+        resources:
+          mgr:
+            requests:
+              cpu: "125m"
+              memory: "512Mi"
+            limits:
+              memory: "1Gi"
+          mon:
+            requests:
+              cpu: "50m"
+              memory: "512Mi"
+            limits:
+              memory: "1Gi"
+          osd:
+            requests:
+              cpu: "300m"
+              memory: "512Mi"
+            limits:
+              memory: "6Gi"
+          mgr-sidecar:
+            requests:
+              cpu: "50m"
+              memory: "100Mi"
+            limits:
+              memory: "200Mi"
+          crashcollector:
+            requests:
+              cpu: "15m"
+              memory: "64Mi"
+            limits:
+              memory: "128Mi"
+          logcollector:
+            requests:
+              cpu: "100m"
+              memory: "100Mi"
+            limits:
+              memory: "1Gi"
+          prepareosd:
+            requests:
+              cpu: "250m"
+              memory: "50Mi"
+            limits:
+              memory: "2Gi"
+          cleanup:
+            requests:
+              cpu: "250m"
+              memory: "100Mi"
+            limits:
+              memory: "1Gi"
     cephBlockPools:
       - name: ceph-blockpool
         spec:
@@ -114,10 +171,10 @@ spec:
             activeStandby: true
             resources:
               requests:
-                cpu: 1200m
-                memory: 2Gi
+                cpu: "35m"
+                memory: "64M"
               limits:
-                memory: 4Gi
+                memory: "600M"
         storageClass:
           enabled: true
           isDefault: false
@@ -150,7 +207,7 @@ spec:
             port: 80
             resources:
               requests:
-                cpu: 1000m
+                cpu: 100m
                 memory: 1Gi
               limits:
                 memory: 2Gi
