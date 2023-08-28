@@ -34,7 +34,7 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: cloudflare/cloudflared
-      tag: 2023.8.0-amd64
+      tag: 2023.8.1-amd64
     args: ['tunnel', '--config', '/etc/cloudflared/config.yaml', '--metrics', '0.0.0.0:9090', 'run']
     service:
       main:
