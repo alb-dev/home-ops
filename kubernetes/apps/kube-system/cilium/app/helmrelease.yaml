@@ -31,6 +31,8 @@ spec:
     cluster:
       name: home-cluster
       id: 1
+    endpointRoutes:
+      enabled: true
     containerRuntime:
       integration: containerd
       socketPath: /var/run/k3s/containerd/containerd.sock
