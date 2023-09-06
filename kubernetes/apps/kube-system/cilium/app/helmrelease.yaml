@@ -79,10 +79,10 @@ spec:
       leaseDuration: 120s
       leaseRenewDeadline: 60s
       leaseRetryPeriod: 1s
+    loadBalancer:
+      algorithm: "maglev"
+      mode: "dsr"
     localRedirectPolicy: true
-#    loadBalancer:
-#      algorithm: maglev
-#      mode: dsr
     operator:
       rollOutPods: true
       prometheus:
