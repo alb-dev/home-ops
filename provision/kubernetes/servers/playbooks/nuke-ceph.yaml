@@ -1,7 +1,7 @@
 ---
 - name: Cluster Rook-Ceph
   hosts:
-    - worker
+    - master
   become: true
   gather_facts: true
   any_errors_fatal: true
