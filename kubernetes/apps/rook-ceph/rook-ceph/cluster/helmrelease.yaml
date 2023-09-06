@@ -35,8 +35,6 @@ spec:
         ingressClassName: internal
         annotations:
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-          nginx.ingress.kubernetes.io/whitelist-source-range: |
-            10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
         host:
           name: &host rook.${DOMAIN}
           path: /
@@ -49,13 +47,14 @@ spec:
       [global]
       bdev_enable_discard = true
       bdev_async_discard = true
+      osd_class_update_on_start = false
     cephClusterSpec:
       network:
         provider: host
         connections:
           compression:
-            # TODO: Test out enabling this on next cluster rebuild
-            enabled: false
+            enabled: true
+          requireMsgr2: true
       crashCollector:
         disable: false
       dashboard:
