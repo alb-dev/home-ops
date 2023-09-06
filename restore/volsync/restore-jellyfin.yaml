@@ -1,4 +1,3 @@
-
 ---
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
@@ -15,7 +14,7 @@ spec:
     storageClassName: ceph-block
     # IMPORTANT NOTE:
     #   Set to the last X number of snapshots to restore from
-    previous: 2
+    previous: 4
     moverSecurityContext:
       runAsUser: 0
       runAsGroup: 0
