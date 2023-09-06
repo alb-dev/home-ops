@@ -6,7 +6,6 @@ resources:
   - ./helmrelease.yaml
   - ./volsync.yaml
   - ./volsync_external.yaml
-  - ./database.yaml
 patchesStrategicMerge:
   - ./patches/addons.yaml
 labels:
