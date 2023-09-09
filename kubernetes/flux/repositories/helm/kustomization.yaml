@@ -6,6 +6,7 @@ resources:
   - prometheus-community-charts.yaml
   - weaveworks-kured-charts.yaml
   - nextcloud.yaml
+  - democratic-csi.yaml
   - metrics-server-charts.yaml
   - node-feature-discovery.yaml
   - coredns-charts.yaml

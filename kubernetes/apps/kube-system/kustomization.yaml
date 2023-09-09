@@ -1,3 +1,4 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
@@ -5,7 +6,7 @@ resources:
   - snapshot-controller
   - snapshot-validation-webhook
   - kured/ks.yaml
-  - descheduler
+  - democratic-csi/ks.yaml
 #  - csi-driver-nfs
   - metrics-server
   - ./reloader/ks.yaml
