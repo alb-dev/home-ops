@@ -6,7 +6,7 @@ resources:
   - snapshot-controller
   - snapshot-validation-webhook
   - kured/ks.yaml
-  - democratic-csi/ks.yaml
+  - ./democratic-csi/ks.yaml
   - metrics-server
   - ./reloader/ks.yaml
   - ./intel-device-plugin/ks.yaml
