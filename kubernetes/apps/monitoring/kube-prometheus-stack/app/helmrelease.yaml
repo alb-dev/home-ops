@@ -117,7 +117,7 @@ spec:
           - hosts:
               - *host
       prometheusSpec:
-        replicas: 2
+        replicas: 1
         replicaExternalLabelName: __replica__
         #Breaks other metrics that has 'cluster'lable
         #externalLabels:
@@ -134,7 +134,7 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: ceph-block
+              storageClassName: local-hostpath
               resources:
                 requests:
                   storage: 60Gi
