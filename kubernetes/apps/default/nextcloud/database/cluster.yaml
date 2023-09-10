@@ -10,7 +10,7 @@ spec:
   instances: 3
   storage:
     size: 5Gi
-    storageClass: ceph-block
+    storageClass: local-hostpath
   bootstrap:
     initdb:
       database: nextcloud
