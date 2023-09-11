@@ -2,7 +2,7 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: config-home-assistant-v1
+  name: config-home-assistant-v2
   namespace: default
 spec:
   trigger:

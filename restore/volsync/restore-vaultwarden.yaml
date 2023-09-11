@@ -1,9 +1,8 @@
-
 ---
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: vaultwarden-v1
+  name: vaultwarden-v3
   namespace: default
 spec:
   trigger:
@@ -15,7 +14,7 @@ spec:
     storageClassName: ceph-block
     # IMPORTANT NOTE:
     #   Set to the last X number of snapshots to restore from
-    previous: 2
+    previous: 6
     moverSecurityContext:
       runAsUser: 0
       runAsGroup: 0

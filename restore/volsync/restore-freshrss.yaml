@@ -2,7 +2,7 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: freshrss-config-v1
+  name: freshrss-config-v2
   namespace: default
 spec:
   trigger:
@@ -14,7 +14,7 @@ spec:
     storageClassName: ceph-block
     # IMPORTANT NOTE:
     #   Set to the last X number of snapshots to restore from
-    previous: 2
+    previous: 3
     moverSecurityContext:
       runAsUser: 0
       runAsGroup: 33
