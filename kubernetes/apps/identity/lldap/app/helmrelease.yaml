@@ -65,7 +65,11 @@ spec:
         enabled: true
         type: pvc
         existingClaim: lldap-data
-
+    podSecurityContext:
+      runAsUser: 1100
+      runAsGroup: 1100
+      fsGroup: 1100
+      fsGroupChangePolicy: "OnRootMismatch"
     resources:
       requests:
         cpu: 5m

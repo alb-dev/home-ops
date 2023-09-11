@@ -2,7 +2,7 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: config-home-assistant-v3
+  name: backup-home-assistant
   namespace: default
 spec:
   trigger:
