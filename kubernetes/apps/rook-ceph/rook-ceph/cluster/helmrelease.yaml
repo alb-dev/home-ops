@@ -66,13 +66,13 @@ spec:
         config:
           osdsPerDevice: "1"
         nodes:
-          - name: k8s-04
+          - name: n1
             devices:
               - name: /dev/disk/by-id/nvme-WDS100T3X0C-00SJG0_2104BQ451713
-          - name: k8s-05
+          - name: n2
             devices:
               - name: /dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_1TB_S4EWNM0TA17478H
-          - name: k8s-06
+          - name: n3
             devices:
               - name: /dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_1TB_S4EWNM0TA17489E
     cephBlockPools:
