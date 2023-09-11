@@ -53,7 +53,7 @@ spec:
         provider: host
         connections:
           compression:
-            enabled: true
+            enabled: false
           requireMsgr2: true
       crashCollector:
         disable: false
