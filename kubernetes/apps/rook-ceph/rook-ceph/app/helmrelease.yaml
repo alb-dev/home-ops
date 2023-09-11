@@ -27,10 +27,5 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    csi:
-      csiAddons:
-        enabled: true
-      # Set when encryption/compression is enabled
-      cephFSKernelMountOptions: ms_mode=secure
     monitoring:
       enabled: true
