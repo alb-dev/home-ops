@@ -51,10 +51,7 @@ spec:
     cephClusterSpec:
       network:
         provider: host
-        connections:
-          compression:
-            enabled: false
-          requireMsgr2: true
+
       crashCollector:
         disable: false
       dashboard:
