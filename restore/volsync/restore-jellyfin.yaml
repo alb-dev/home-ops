@@ -14,7 +14,7 @@ spec:
     storageClassName: ceph-block
     # IMPORTANT NOTE:
     #   Set to the last X number of snapshots to restore from
-    previous: 4
+    previous: 2
     moverSecurityContext:
       runAsUser: 0
       runAsGroup: 0

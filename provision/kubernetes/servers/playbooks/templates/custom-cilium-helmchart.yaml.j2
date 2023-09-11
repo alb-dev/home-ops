@@ -18,7 +18,7 @@ spec:
     bgp:
       enabled: false
     cluster:
-      name: "home-cluster"
+      name: home-cluster
       id: 1
     containerRuntime:
       integration: containerd
@@ -44,6 +44,7 @@ spec:
       mode: dsr
     localRedirectPolicy: true
     operator:
+      replicas: 2
       rollOutPods: true
     rollOutCiliumPods: true
     securityContext:

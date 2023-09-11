@@ -26,16 +26,19 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    autoDirectNodeRoutes: true
     bpf:
       masquerade: true
+    bgp:
+      enabled: false
     cluster:
       name: home-cluster
       id: 1
-    endpointRoutes:
-      enabled: true
     containerRuntime:
       integration: containerd
       socketPath: /var/run/k3s/containerd/containerd.sock
+    endpointRoutes:
+      enabled: true
     hubble:
       enabled: true
       metrics:
@@ -83,28 +86,13 @@ spec:
       leaseRenewDeadline: 60s
       leaseRetryPeriod: 1s
     loadBalancer:
-      algorithm: "maglev"
-      mode: "dsr"
+      algorithm: maglev
+      mode: dsr
     localRedirectPolicy: true
     operator:
+      replicas: 1
       rollOutPods: true
-      prometheus:
-        enabled: true
-        serviceMonitor:
-          enabled: true
-      dashboards:
-        enabled: true
-        annotations:
-          grafana_folder: Cilium
-    dashboards:
-      enabled: true
-      annotations:
-        grafana_folder: Cilium
-    prometheus:
-      enabled: true
-      serviceMonitor:
-        enabled: true
     rollOutCiliumPods: true
     securityContext:
       privileged: true
-    tunnel: "disabled"
+    tunnel: disabled
