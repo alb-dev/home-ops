@@ -32,8 +32,8 @@ spec:
       strategy: RollingUpdate
     image:
       # https://github.com/excalidraw/excalidraw/pull/6143
-      repository: ghcr.io/onedr0p/excalidraw
-      tag: latest@sha256:bafe3a1e529aac9e9d536199e77133b60bfce4413458ee0a46e48fb07095d23b
+      repository: docker.io/excalidraw/excalidraw
+      tag: latest@sha256:648edf36c55793fdeed475e09a86fb6c16a68783dc442d37d5070adfc0362a8f
     service:
       main:
         ports:
