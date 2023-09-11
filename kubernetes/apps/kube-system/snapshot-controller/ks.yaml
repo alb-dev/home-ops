@@ -24,7 +24,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: home-ops-kubernetes
-  wait: ture
+  wait: true
   interval: 10m
   dependsOn:
     - name: cluster-apps-snapshot-controller
