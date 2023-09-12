@@ -1,0 +1,128 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app crowdsec
+  namespace: networking
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: *app
+      version: 0.9.7
+      sourceRef:
+        kind: HelmRepository
+        name: crowdsec
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+      remediateLastFailure: true
+    cleanupOnFail: true
+  # https://github.com/crowdsecurity/helm-charts/blob/main/charts/crowdsec/values.yaml
+  values:
+    container_runtime: containerd
+    image:
+      repository: ghcr.io/crowdsecurity/crowdsec
+      tag: v1.4.6
+    podAnnotations:
+      secret.reloader.stakater.com/reload: *app
+    lapi:
+      env:
+        - name: TZ
+          value: "${TIMEZONE}"
+        ### by default disable the agent for local API pods --> this is set in lapi-deployment helm template
+        # - name: DISABLE_AGENT
+        #   value: "true"
+        # # If it's a test, we don't want to share signals with CrowdSec so disable the Online API.
+        - name: DISABLE_ONLINE_API
+          value: "true"
+        - name: ENROLL_INSTANCE_NAME
+          value: "cluster-01"
+      dashboard:
+        enabled: true
+        image:
+          repository: metabase/metabase
+        assetURL: https://crowdsec-statics-assets.s3-eu-west-1.amazonaws.com/metabase_sqlite.zip
+        ingress:
+          enabled: true
+          annotations:
+            # metabase only supports http
+            nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+          ingressClassName: nginx-internal
+          host: "crowdsec.${DOMAIN}"
+      resources:
+        requests:
+          cpu: 150m
+          memory: 100M
+        limits:
+          memory: 100M
+      # -- Enable persistent volumes
+      persistentVolume:
+        # -- Persistent volume for data folder. Stores e.g. registered bouncer api keys
+        data:
+          enabled: true
+          accessModes:
+            - ReadWriteOnce
+          storageClassName: rook-ceph-filesystem
+          size: 1Gi
+        # -- Persistent volume for config folder. Stores e.g. online api credentials
+        config:
+          enabled: true
+          accessModes:
+            - ReadWriteOnce
+          storageClassName: rook-ceph-filesystem
+          size: 100Mi
+      metrics:
+        enabled: false
+        serviceMonitor:
+          enabled: false
+      strategy:
+        type: Recreate
+    agent:
+      # To specify each pod you want to process it logs (pods present in the node)
+      acquisition:
+        # The namespace where the pod is located
+        - namespace: ingress-nginx
+          # The pod name
+          podName: nginx-*
+          # as in crowdsec configuration, we need to specify the program name so the parser will match and parse logs
+          program: nginx
+      # Those are ENV variables
+      env:
+        # As it's a test, we don't want to share signals with CrowdSec so disable the Online API.
+        - name: DISABLE_crONLINE_API
+          value: "true"
+        # As we are running Nginx, we want to install the Nginx collection
+        - name: COLLECTIONS
+          value: "crowdsecurity/nginx crowdsecurity/linux crowdsecurity/base-http-scenarios crowdsecurity/http-cve crowdsecurity/pgsql crowdsecurity/sshd"
+        - name: PARSERS
+          value: "crowdsecurity/cri-logs"
+        - name: TZ
+          value: "${TIMEZONE}"
+        - name: DISABLE_ONLINE_API
+          value: "true"
+      resources:
+        limits:
+          memory: 100Mi
+        requests:
+          cpu: 150m
+          memory: 100Mi
+      # -- Enable persistent volumes
+      persistentVolume:
+        # -- Persistent volume for config folder. Stores local config (parsers, scenarios etc.)
+        config:
+          enabled: true
+          accessModes:
+            - ReadWriteMany
+          storageClassName: rook-ceph-filesystem
+          size: 100Mi
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
