@@ -88,16 +88,13 @@ spec:
       # To specify each pod you want to process it logs (pods present in the node)
       acquisition:
         # The namespace where the pod is located
-        - namespace: ingress-nginx
+        - namespace: networking
           # The pod name
           podName: nginx-*
           # as in crowdsec configuration, we need to specify the program name so the parser will match and parse logs
           program: nginx
       # Those are ENV variables
       env:
-        # As it's a test, we don't want to share signals with CrowdSec so disable the Online API.
-        - name: DISABLE_crONLINE_API
-          value: "true"
         # As we are running Nginx, we want to install the Nginx collection
         - name: COLLECTIONS
           value: "crowdsecurity/nginx crowdsecurity/linux crowdsecurity/base-http-scenarios crowdsecurity/http-cve crowdsecurity/pgsql crowdsecurity/sshd"
