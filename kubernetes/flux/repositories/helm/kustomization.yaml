@@ -36,3 +36,4 @@ resources:
   - zalando-postgres-operator.yaml
   - ext-postgres-operator.yaml
   - harbor.yaml
+  - crowdsec.yaml
