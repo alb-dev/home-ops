@@ -120,7 +120,7 @@ spec:
           enabled: true
           accessModes:
             - ReadWriteMany
-          storageClassName: rceph-filesystem
+          storageClassName: ceph-filesystem
           size: 100Mi
       metrics:
         enabled: true
