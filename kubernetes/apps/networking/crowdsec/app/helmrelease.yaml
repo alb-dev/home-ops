@@ -68,15 +68,15 @@ spec:
         data:
           enabled: true
           accessModes:
-            - ReadWriteOnce
-          storageClassName: rook-ceph-filesystem
+            - ReadWriteMany
+          storageClassName: ceph-filesystem
           size: 1Gi
         # -- Persistent volume for config folder. Stores e.g. online api credentials
         config:
           enabled: true
           accessModes:
-            - ReadWriteOnce
-          storageClassName: rook-ceph-filesystem
+            - ReadWriteMany
+          storageClassName: ceph-filesystem
           size: 100Mi
       metrics:
         enabled: false
@@ -120,7 +120,7 @@ spec:
           enabled: true
           accessModes:
             - ReadWriteMany
-          storageClassName: rook-ceph-filesystem
+          storageClassName: rceph-filesystem
           size: 100Mi
       metrics:
         enabled: true
