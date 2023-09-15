@@ -132,4 +132,4 @@ spec:
       - https://v.firebog.net/hosts/Prigent-Adult.txt
       - https://raw.githubusercontent.com/anudeepND/blacklist/master/facebook.txt
     whitelist:
-      - https://t.co
+      - t.co
