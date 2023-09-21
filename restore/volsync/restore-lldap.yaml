@@ -2,7 +2,7 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: lldap-backup
+  name: lldap-backup-2
   namespace: identity
 spec:
   trigger:
@@ -14,7 +14,7 @@ spec:
     storageClassName: ceph-block
     # IMPORTANT NOTE:
     #   Set to the last X number of snapshots to restore from
-    previous: 6
+    previous: 3
     moverSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000

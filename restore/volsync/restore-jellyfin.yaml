@@ -2,7 +2,7 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: jellyfin-backup
+  name: jellyfin-backup-real
   namespace: default
 spec:
   trigger:
@@ -14,7 +14,7 @@ spec:
     storageClassName: ceph-block
     # IMPORTANT NOTE:
     #   Set to the last X number of snapshots to restore from
-    previous: 7
+    previous: 3
     moverSecurityContext:
       runAsUser: 0
       runAsGroup: 0

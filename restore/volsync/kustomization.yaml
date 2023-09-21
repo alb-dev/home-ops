@@ -6,8 +6,8 @@ resources:
   - restore-home-assistant.yaml
   - restore-jellyfin.yaml
   - restore-mosquitto.yaml
-  - restore-paperpless.yaml
-  - restore-paperless-db.yaml
+#  - restore-paperpless.yaml
+#  - restore-paperless-db.yaml
   - restore-uptime-kuma.yaml
   - restore-vaultwarden.yaml
   - restore-zigbee2mqtt.yaml
