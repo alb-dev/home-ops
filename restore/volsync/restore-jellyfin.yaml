@@ -2,19 +2,17 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: jellyfin-backup
-  namespace: default
+  name: jellyfin
+  namespace: media
 spec:
   trigger:
     manual: restore-once
   restic:
-    repository: jellyfin-restic-secret
-    destinationPVC: jellyfin-config-v1
+    repository: jellyfin-restic
+    destinationPVC: config-jellyfin-0
     copyMethod: Direct
     storageClassName: ceph-block
-    # IMPORTANT NOTE:
-    #   Set to the last X number of snapshots to restore from
-    previous: 3
+    previous: 4
     moverSecurityContext:
       runAsUser: 0
       runAsGroup: 0
