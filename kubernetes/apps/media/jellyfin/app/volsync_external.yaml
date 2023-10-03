@@ -2,7 +2,7 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: jellyfin-backup
+  name: jellyfin-backup-ck
   namespace: default
 spec:
   sourcePVC: jellyfin-config-v1
@@ -11,22 +11,24 @@ spec:
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 14
-    repository: jellyfin-restic-secret
+    repository: jellyfin-restic-secret-ck
     retain:
       daily: 14
+    storageClassName: ceph-block
+    cacheStorageClassName: local-hostpath
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: jellyfin-restic-secret
+  name: jellyfin-restic-secret-ck
   namespace: default
 type: Opaque
 stringData:
   # The repository url
-  RESTIC_REPOSITORY: s3:http://192.168.178.35:9000/jellyfin
+  RESTIC_REPOSITORY: s3:https://${S3_EXTERNAL}/jellyfin
   # The repository encryption key
   RESTIC_PASSWORD: "${RESTIC_PW}"
   # ENV vars specific to the back end
   # https://restic.readthedocs.io/en/stable/030_preparing_a_new_repo.html
-  AWS_ACCESS_KEY_ID: "${MINIO_USER}"
-  AWS_SECRET_ACCESS_KEY: "${MINIO_PASSWORD}"
+  AWS_ACCESS_KEY_ID: "${CK_ACCESS_KEY}"
+  AWS_SECRET_ACCESS_KEY: "${CK_SECRET_KEY}"

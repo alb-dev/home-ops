@@ -2,7 +2,7 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: jellyfin-backup-real
+  name: jellyfin-backup
   namespace: default
 spec:
   trigger:
