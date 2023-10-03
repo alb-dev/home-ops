@@ -7,7 +7,6 @@ resources:
   - ./helmrelease.yaml
   - ./volsync.yaml
   - ./volsync_external.yaml
-  - ./pvc.yaml
 labels:
   - pairs:
       app.kubernetes.io/name: jellyfin
