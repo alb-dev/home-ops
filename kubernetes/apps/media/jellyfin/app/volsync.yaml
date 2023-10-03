@@ -2,16 +2,16 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
-  name: jellyfin-backup
-  namespace: default
+  name: jellyfin
+  namespace: media
 spec:
-  sourcePVC: jellyfin-config-v1
+  sourcePVC: config-jellyfin-0
   trigger:
     schedule: "0 22 * * *"
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 14
-    repository: jellyfin-restic-secret
+    repository: jellyfin-restic
     retain:
       daily: 14
     storageClassName: ceph-block
@@ -20,8 +20,8 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: jellyfin-restic-secret
-  namespace: default
+  name: jellyfin-restic
+  namespace: media
 type: Opaque
 stringData:
   # The repository url
