@@ -19,15 +19,15 @@ spec:
   values:
     updateStrategy: RollingUpdate
     configuration:
-      startTime: "1am"
-      endTime: "3am"
+      startTime: "21am"
+      endTime: "11am"
       logFormat: "json"
       timeZone: "Europe/Berlin"
 #      rebootSentinelCommand: |-
-#        sh -c "! needs-restarting --reboothint" 
+#        sh -c "! needs-restarting --reboothint"
     tolerations:
-        - key: node-role.kubernetes.io/master
-          operator: Exists
-          effect: NoSchedule
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
     metrics:
       create: true
