@@ -19,8 +19,8 @@ spec:
   values:
     updateStrategy: RollingUpdate
     configuration:
-      startTime: "21am"
-      endTime: "11am"
+      startTime: "9pm"
+      endTime: "11pm"
       logFormat: "json"
       timeZone: "Europe/Berlin"
 #      rebootSentinelCommand: |-
