@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: codeberg.org/forgejo/forgejo
-      tag: 1.20.4-0@sha256:a84873a56eef2893eba479045edd18a74e1993169637d901ff93418bdc877de3
+      tag: 1.20.5-0@sha256:d665129e66cc04fa72aa6a284eb98b17c0eee642aeaad7c88edec21f9edbf519
       pullPolicy: IfNotPresent
     persistence:
       enabled: true
