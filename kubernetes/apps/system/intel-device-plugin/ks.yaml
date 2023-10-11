@@ -19,7 +19,7 @@ metadata:
   name: cluster-apps-intel-device
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/kube-system/intel-device-plugin/device
+  path: ./kubernetes/apps/system/intel-device-plugin/device
   prune: true
   sourceRef:
     kind: GitRepository
