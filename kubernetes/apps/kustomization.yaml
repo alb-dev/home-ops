@@ -16,3 +16,4 @@ resources:
 #  - system-upgrade
   - flux-system
   - kyverno
+  - system

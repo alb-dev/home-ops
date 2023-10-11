@@ -1,7 +1,0 @@
-KIND=crds
-NAME=my-app-staging
-RELEASE=staging
-NAMESPACE=default
-kubectl annotate crds cert-manager meta.helm.sh/release-name=cert-manager
-kubectl annotate crds cert-manager meta.helm.sh/release-namespace=cert-manager
-kubectl label crds cert-manager app.kubernetes.io/managed-by=Helm
