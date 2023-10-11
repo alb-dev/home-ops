@@ -28,8 +28,6 @@ resources:
   - rook-ceph.yaml
   - weave-gitops.yaml
   - kyverno.yaml
-  - netcup-webhook.yaml
   - zalando-postgres-operator.yaml
-  - ext-postgres-operator.yaml
   - harbor.yaml
   - crowdsec.yaml
