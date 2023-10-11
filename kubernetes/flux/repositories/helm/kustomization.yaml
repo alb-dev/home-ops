@@ -27,7 +27,6 @@ resources:
   - cloudnative-pg.yaml
   - rook-ceph.yaml
   - weave-gitops.yaml
-  - k8s-gateway.yaml
   - kyverno.yaml
   - netcup-webhook.yaml
   - zalando-postgres-operator.yaml

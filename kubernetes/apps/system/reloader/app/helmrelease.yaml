@@ -2,13 +2,13 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &name reloader
-  namespace: &namespace system
+  name: reloader
+  namespace: system
 spec:
   interval: 15m
   chart:
     spec:
-      chart: *name
+      chart: reloader
       version: 1.0.42
       sourceRef:
         kind: HelmRepository
