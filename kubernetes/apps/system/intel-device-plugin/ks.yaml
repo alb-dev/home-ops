@@ -5,7 +5,7 @@ metadata:
   name: cluster-apps-intel-gpu
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/kube-system/intel-device-plugin/gpu
+  path: ./kubernetes/apps/system/intel-device-plugin/gpu
   prune: true
   sourceRef:
     kind: GitRepository
