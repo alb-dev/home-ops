@@ -6,7 +6,7 @@ namespace: media
 resources:
   - ./helmrelease.yaml
   - ./volsync.yaml
-  - ./volsync_external.yaml
+#  - ./volsync_external.yaml
 labels:
   - pairs:
       app.kubernetes.io/name: jellyfin

@@ -7,7 +7,7 @@ resources:
   - ./pvc.yaml
   - ./helmrelease.yaml
   - ./volsync.yaml
-  - ./volsync_external.yaml
+ # - ./volsync_external.yaml
 commonLabels:
   app.kubernetes.io/name: authelia
   app.kubernetes.io/instance: authelia
