@@ -34,7 +34,7 @@ spec:
             paths:
               - /
         tls:
-          - secretName: networking/alb-home-tls
+          - secretName: alb-home-tls
             hosts:
               - hashivault.${DOMAIN}
         standalone:
