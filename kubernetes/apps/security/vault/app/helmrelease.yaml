@@ -43,7 +43,7 @@ spec:
             log_format = "json"
             log_level = "debug"
             ui = true
-            cluster_name = "behndev-prod"
+            cluster_name = "alb-prod"
             storage "file" {
               path = "/vault/data"
             }
