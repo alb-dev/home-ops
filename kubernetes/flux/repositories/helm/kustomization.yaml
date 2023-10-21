@@ -29,5 +29,4 @@ resources:
   - weave-gitops.yaml
   - kyverno.yaml
   - zalando-postgres-operator.yaml
-  - harbor.yaml
-  - crowdsec.yaml
+  - hashicorp-charts.yaml

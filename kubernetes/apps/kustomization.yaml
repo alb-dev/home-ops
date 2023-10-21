@@ -7,6 +7,7 @@ resources:
   - identity
   - monitoring
   - networking
+  - security
   - kube-system
   - media
 #  - storage
