@@ -13,7 +13,7 @@ spec:
     pruneIntervalDays: 14
     repository: freshrss-restic-secret-ck
     moverSecurityContext:
-      runAsUser: 33
+      runAsUser: 0
       runAsGroup: 33
       fsGroup: 33
     retain:
