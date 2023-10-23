@@ -8,7 +8,7 @@ resources:
   - ./cloudflared/ks.yaml
  # - ./crowdsec/ks.yaml
   #- ./netcup-ddns/ks.yaml
-  - ./pihole/ks.yaml
+#  - ./pihole/ks.yaml
   #- ./k8s-gateway/ks.yaml
   - external-services
   - namespace.yaml
