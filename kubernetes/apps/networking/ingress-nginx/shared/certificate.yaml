@@ -11,9 +11,10 @@ spec:
     kind: ClusterIssuer
   commonName: "${DOMAIN}"
   privateKey:
-    algorithm: ECDSA
-    size: 256
+    algorithm: RSA
+    size: 4096
     rotationPolicy: Always
   dnsNames:
-    - "${DOMAIN}"
     - "*.${DOMAIN}"
+    - "*.${CLOUDDOMAIN}"
+    - "*.${DEDOMAIN}"
