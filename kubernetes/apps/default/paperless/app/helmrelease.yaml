@@ -78,7 +78,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: internal
+        ingressClassName: nginx-internal
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
           nginx.ingress.kubernetes.io/proxy-body-size: 4G

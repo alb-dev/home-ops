@@ -23,7 +23,7 @@ spec:
       ingress:
         enabled: true
         pathType: Prefix
-        ingressClassName: internal
+        ingressClassName: nginx-internal
         hosts:
           - &host alertmanager.${DOMAIN}
         tls:
@@ -109,7 +109,7 @@ spec:
     prometheus:
       ingress:
         enabled: true
-        ingressClassName: internal
+        ingressClassName: nginx-internal
         pathType: Prefix
         hosts:
           - &host "prometheus.${DOMAIN}"

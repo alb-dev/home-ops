@@ -155,7 +155,7 @@ spec:
           memory: 100Mi
     ingress:
       enabled: true
-      className: internal
+      className: nginx-internal
       annotations:
         external-dns.home.arpa/enabled: "true"
         nginx.ingress.kubernetes.io/proxy-body-size: "10G"

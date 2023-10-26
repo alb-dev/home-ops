@@ -73,7 +73,7 @@ spec:
       # @default -- See values.yaml
       main:
         enabled: true
-        ingressClassName: internal
+        ingressClassName: nginx-internal
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
@@ -92,7 +92,7 @@ spec:
               - "vault.${DOMAIN}"
       admin:
         enabled: true
-        ingressClassName: internal
+        ingressClassName: nginx-internal
         hosts:
           - host: "vault.${DOMAIN}"
             paths:

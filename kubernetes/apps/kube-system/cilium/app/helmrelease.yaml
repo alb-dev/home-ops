@@ -67,7 +67,7 @@ spec:
         rollOutPods: true
         ingress:
           enabled: true
-          className: internal
+          className: nginx-internal
           hosts:
             - &host "hubble.${DOMAIN}"
           tls:

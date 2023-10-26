@@ -50,7 +50,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: external
+        ingressClassName: nginx-internal
         hosts:
           - host: &host "lldap.${DOMAIN}"
             paths:
