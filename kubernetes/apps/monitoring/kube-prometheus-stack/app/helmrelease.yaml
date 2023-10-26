@@ -23,7 +23,7 @@ spec:
       ingress:
         enabled: true
         pathType: Prefix
-        ingressClassName: nginx-internal
+        ingressClassName: internal
         hosts:
           - &host alertmanager.${DOMAIN}
         tls:
