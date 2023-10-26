@@ -10,7 +10,7 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
-  ingressClassName: nginx-internal
+  ingressClassName: internal-nginx
   rules:
     - host: &host "athena.${DOMAIN}"
       http:
@@ -39,5 +39,5 @@ spec:
   externalName: nas.${HOMEDOMAIN}
   ports:
     - name: http
-      port: 5000
+      port: 5001
       protocol: TCP

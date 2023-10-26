@@ -28,7 +28,7 @@ spec:
         path: "/v1/sys/health?standbyok=true&sealedcode=204&uninitcode=204"
       ingress:
         enabled: true
-        ingressClassName: nginx-internal
+        ingressClassName: internal-nginx
         hosts:
           - host: hashivault.${DOMAIN}
             paths:
