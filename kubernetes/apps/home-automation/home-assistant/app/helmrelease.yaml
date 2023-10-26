@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: home-assistant
-  namespace: default
+  namespace: home-automation
 spec:
   interval: 15m
   chart:
@@ -55,16 +55,14 @@ spec:
       main:
         enabled: true
         ingressClassName: nginx-internal
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
-          - host: "hass.${DOMAIN}"
+          - host: &host "hass.${DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
-              - "hass.${DOMAIN}"
+              - *host
     probes:
       liveness:
         enabled: false

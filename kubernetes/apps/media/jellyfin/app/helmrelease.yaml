@@ -80,7 +80,6 @@ spec:
         tls:
           - hosts:
               - *host
-
     persistence:
       nfs-nas-media:
         type: nfs

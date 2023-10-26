@@ -10,6 +10,7 @@ resources:
   - security
   - kube-system
   - media
+  - home-automation
 #  - storage
   - volsync
   - rook-ceph

@@ -3,7 +3,7 @@ apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
   name: home-assistant-backup
-  namespace: default
+  namespace: home-automation
 spec:
   sourcePVC: config-home-assistant-0
   trigger:
@@ -19,7 +19,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: home-assistant-restic-secret
-  namespace: default
+  namespace: home-automation
 type: Opaque
 stringData:
   # The repository url
