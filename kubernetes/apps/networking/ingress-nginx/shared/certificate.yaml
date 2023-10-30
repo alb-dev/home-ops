@@ -9,13 +9,12 @@ spec:
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
-  commonName: "${DOMAIN}"
+  commonName: "*.${DOMAIN}"
   privateKey:
     algorithm: RSA
     size: 4096
     rotationPolicy: Always
   dnsNames:
-    - "${DOMAIN}"
     - "*.${DOMAIN}"
     - "*.${CLOUDDOMAIN}"
     - "*.${DEDOMAIN}"
