@@ -16,5 +16,3 @@ spec:
     rotationPolicy: Always
   dnsNames:
     - "*.${DOMAIN}"
-    - "*.${CLOUDDOMAIN}"
-    - "*.${DEDOMAIN}"
