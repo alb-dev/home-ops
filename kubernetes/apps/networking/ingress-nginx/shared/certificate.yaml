@@ -15,4 +15,5 @@ spec:
     size: 4096
     rotationPolicy: Always
   dnsNames:
+    - "${DOMAIN}"
     - "*.${DOMAIN}"
