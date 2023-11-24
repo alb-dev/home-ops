@@ -11,6 +11,7 @@ spec:
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 14
+    storageClassName: ceph-block
     repository: freshrss-restic-secret
     moverSecurityContext:
       runAsUser: 0

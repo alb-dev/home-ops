@@ -11,6 +11,7 @@ spec:
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 14
+    storageClassName: ceph-block
     repository: home-assistant-restic-secret-ck
     retain:
       daily: 14
