@@ -16,6 +16,10 @@ spec:
     cacheStorageClassName: local-hostpath
     cacheCapacity: 1Gi
     repository: authelia-restic-secret-ck
+    moverSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
     retain:
       daily: 14
 ---
