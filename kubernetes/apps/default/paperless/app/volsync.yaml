@@ -10,7 +10,7 @@ spec:
     schedule: "0 22 * * *"
   restic:
     copyMethod: Snapshot
-    pruneIntervalDays: 10
+    pruneIntervalDays: 14
     repository: paperless-restic
     cacheCapacity: 50Gi
     volumeSnapshotClassName: csi-ceph-blockpool

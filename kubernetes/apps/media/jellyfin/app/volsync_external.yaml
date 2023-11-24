@@ -11,11 +11,13 @@ spec:
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 14
+    volumeSnapshotClassName: csi-ceph-blockpool
     storageClassName: ceph-block
+    cacheStorageClassName: local-hostpath
+    cacheCapacity: 30Gi
     repository: jellyfin-restic-ck
     retain:
       daily: 14
-    cacheStorageClassName: local-hostpath
 ---
 apiVersion: v1
 kind: Secret

@@ -10,11 +10,11 @@ spec:
     schedule: "0 22 * * *"
   restic:
     copyMethod: Snapshot
-    pruneIntervalDays: 10
-    repository: paperless-db-restic
-    cacheCapacity: 2Gi
+    pruneIntervalDays: 14
+    cacheCapacity: 5Gi
     volumeSnapshotClassName: csi-ceph-blockpool
     storageClassName: ceph-block
+    repository: paperless-db-restic
     moverSecurityContext:
       runAsUser: 0
       runAsGroup: 0

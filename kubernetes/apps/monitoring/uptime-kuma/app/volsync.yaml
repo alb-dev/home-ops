@@ -11,7 +11,10 @@ spec:
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 14
+    volumeSnapshotClassName: csi-ceph-blockpool
     storageClassName: ceph-block
+    cacheStorageClassName: local-hostpath
+    cacheCapacity: 5Gi
     repository: uptime-kuma-restic-secret
     retain:
       daily: 14
