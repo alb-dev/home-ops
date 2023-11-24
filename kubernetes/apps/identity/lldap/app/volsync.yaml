@@ -11,7 +11,10 @@ spec:
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 14
+    volumeSnapshotClassName: csi-ceph-blockpool
     storageClassName: ceph-block
+    cacheStorageClassName: local-hostpath
+    cacheCapacity: 1Gi
     repository: lldap-restic-secret
     moverSecurityContext:
       runAsUser: 1000
