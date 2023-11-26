@@ -49,6 +49,8 @@ spec:
               TZ: "Europe/Berlin"
               SIGNUPS_ALLOWED: "false"
               SMTP_FROM: passwords@${DOMAIN}
+              SMTP_HOST: mail.${SECRET_FAM_DOMAIN}
+              SMTP_PORT: 587
               SMTP_SECURITY: force_tls
               INVITATION_ORG_NAME: ${DOMAIN}
               TRASH_AUTO_DELETE_DAYS: "30"
