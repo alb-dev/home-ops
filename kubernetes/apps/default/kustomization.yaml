@@ -6,7 +6,7 @@ resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
   # Flux-Kustomizations
-  - ./vaultwarden/ks.yaml
+  #- ./vaultwarden/ks.yaml
   - ./freshrss/ks.yaml
  # - ./jellyfin/ks.yaml
   - ./mosquitto/ks.yaml

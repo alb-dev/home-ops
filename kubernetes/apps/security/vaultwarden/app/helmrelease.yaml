@@ -1,0 +1,112 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: vaultwarden
+  namespace: security
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.3.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      main:
+        annotations:
+          secret.reloader.stakater.com/reload: &secret vaultwarden-secret
+        pod:
+          securityContext:
+            runAsUser: &uid 2700
+            runAsGroup: *uid
+            fsGroup: *uid
+            fsGroupChangePolicy: "OnRootMismatch"
+        containers:
+          main:
+            image:
+              repository: vaultwarden/server
+              tag: 1.30.1
+            env:
+              DATA_FOLDER: "data"
+              ICON_CACHE_FOLDER: "data/icon_cache"
+              ATTACHMENTS_FOLDER: "data/attachments"
+              DOMAIN: "https://passwords.${DOMAIN}"
+              TZ: "Europe/Berlin"
+              SIGNUPS_ALLOWED: "false"
+              SMTP_FROM: passwords@${DOMAIN}
+              SMTP_SECURITY: force_tls
+              INVITATION_ORG_NAME: ${DOMAIN}
+              TRASH_AUTO_DELETE_DAYS: "30"
+            envFrom:
+              - secretRef:
+                  name: *secret
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /alive
+                    port: &port 80
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+            resources:
+              requests:
+                cpu: 100m
+                memory: 256Mi
+              limits:
+                memory: 2Gi
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+    ingress:
+      main:
+        enabled: true
+        className: nginx-internal
+        hosts:
+          - host: &host passwords.${DOMAIN}
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - "passwords.${DOMAIN}"
+      admin:
+        enabled: true
+        ingressClassName: internal-nginx
+        hosts:
+          - host: "passwords.${DOMAIN}"
+            paths:
+              - path: /admin
+                pathType: Prefix
+        tls:
+          - hosts:
+              - "passwords.${DOMAIN}"
+    persistence:
+      data:
+        enabled: true
+        existingClaim: vaultwarden-data
+        globalMounts:
+          - path: /data
