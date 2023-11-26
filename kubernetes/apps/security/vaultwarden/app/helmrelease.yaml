@@ -99,8 +99,10 @@ spec:
         hosts:
           - host: "passwords.${DOMAIN}"
             paths:
-              - path: /admin
-                pathType: Prefix
+              - path: /
+                service:
+                  name: admin
+                  port: http
         tls:
           - hosts:
               - "passwords.${DOMAIN}"
