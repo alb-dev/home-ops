@@ -93,19 +93,6 @@ spec:
         tls:
           - hosts:
               - "passwords.${DOMAIN}"
-      admin:
-        enabled: true
-        ingressClassName: internal-nginx
-        hosts:
-          - host: "passwords.${DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  name: admin
-                  port: http
-        tls:
-          - hosts:
-              - "passwords.${DOMAIN}"
     persistence:
       data:
         enabled: true
