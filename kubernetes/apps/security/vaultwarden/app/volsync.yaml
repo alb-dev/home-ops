@@ -16,6 +16,10 @@ spec:
     cacheStorageClassName: local-hostpath
     cacheCapacity: 1Gi
     repository: vaultwarden-restic-secret
+    moverSecurityContext:
+      runAsUser: 2700
+      runAsGroup: 2700
+      fsGroup: 2700
     retain:
       daily: 14
 ---
