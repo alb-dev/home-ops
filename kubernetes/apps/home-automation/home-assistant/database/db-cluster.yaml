@@ -5,21 +5,21 @@ metadata:
   name: "home-assistant"
 spec:
   postgresVersion: 15
-  dataSource:
-    pgbackrest:
-      stanza: db
-      configuration:
-        - secret:
-            name: pgo-s3-creds
-      global:
-        repo1-path: "/home-assistant/repo1"
-        repo1-s3-uri-style: path
-      repo:
-        name: repo1
-        s3:
-          bucket: "crunchy-postgres"
-          endpoint: "s3.swalb.io:9000"
-          region: "us-east-1"
+#  dataSource:
+#    pgbackrest:
+#      stanza: db
+#      configuration:
+#        - secret:
+#            name: pgo-s3-creds
+#      global:
+#        repo1-path: "/home-assistant/repo1"
+#        repo1-s3-uri-style: path
+#      repo:
+#        name: repo1
+#        s3:
+#          bucket: "crunchy-postgres"
+#          endpoint: "s3.swalb.io:9000"
+#          region: "us-east-1"
   patroni:
     dynamicConfiguration:
       synchronous_mode: true
