@@ -3,33 +3,37 @@ apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
   name: zigbee2mqtt-backup
-  namespace: default
+  namespace: home-automation
 spec:
-  sourcePVC: zigbee2mqtt-data-v1
+  sourcePVC: zigbee2mqtt-config
   trigger:
     schedule: "0 22 * * *"
   restic:
     copyMethod: Snapshot
     pruneIntervalDays: 14
-    cacheCapacity: 5Gi
     volumeSnapshotClassName: csi-ceph-blockpool
     storageClassName: ceph-block
+    cacheStorageClassName: local-hostpath
+    cacheCapacity: 1Gi
     repository: zigbee2mqtt-restic-secret
+    moverSecurityContext:
+      runAsUser: 2700
+      runAsGroup: 2700
+      fsGroup: 2700
     retain:
-      daily: 14
+      daily: 10
+      within: 3d
 ---
 apiVersion: v1
 kind: Secret
 metadata:
   name: zigbee2mqtt-restic-secret
-  namespace: default
+  namespace: home-automation
 type: Opaque
 stringData:
   # The repository url
   RESTIC_REPOSITORY: s3:http://192.168.178.35:9000/zigbee2mqtt
   # The repository encryption key
   RESTIC_PASSWORD: "${RESTIC_PW}"
-  # ENV vars specific to the back end
-  # https://restic.readthedocs.io/en/stable/030_preparing_a_new_repo.html
   AWS_ACCESS_KEY_ID: "${MINIO_USER}"
   AWS_SECRET_ACCESS_KEY: "${MINIO_PASSWORD}"

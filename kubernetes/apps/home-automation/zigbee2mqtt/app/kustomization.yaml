@@ -6,7 +6,6 @@ namespace: default
 resources:
   - ./helmrelease.yaml
   - ./volsync.yaml
-  - ./pvc.yaml
   - ./secret.sops.yaml
 labels:
   - pairs:
