@@ -5,7 +5,7 @@ metadata:
   name: mosquitto-backup
   namespace: home-automation
 spec:
-  sourcePVC: mosquitto-config
+  sourcePVC: data-mosquitto-0
   trigger:
     schedule: "0 22 * * *"
   restic:
