@@ -29,11 +29,12 @@ spec:
     controllers:
       main:
         type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+
         pod:
           hostNetwork: true
           dnsPolicy: ClusterFirstWithHostNet
-        annotations:
-          reloader.stakater.com/auto: "true"
 
         statefulset:
           volumeClaimTemplates:
@@ -105,6 +106,8 @@ spec:
             port: 5353
             protocol: UDP
             targetPort: 5353
+          homekit:
+            port: 21063
 
     ingress:
       main:

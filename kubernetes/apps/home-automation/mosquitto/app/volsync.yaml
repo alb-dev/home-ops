@@ -1,0 +1,35 @@
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: mosquitto-backup
+  namespace: home-automation
+spec:
+  sourcePVC: mosquitto-data
+  trigger:
+    schedule: "0 22 * * *"
+  restic:
+    copyMethod: Snapshot
+    pruneIntervalDays: 14
+    volumeSnapshotClassName: csi-ceph-blockpool
+    storageClassName: ceph-block
+    cacheStorageClassName: local-hostpath
+    cacheCapacity: 1Gi
+    repository: mosquitto-restic-secret
+    retain:
+      daily: 10
+      within: 3d
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mosquitto-restic-secret
+  namespace: default
+type: Opaque
+stringData:
+  # The repository url
+  RESTIC_REPOSITORY: s3:http://192.168.178.35:9000/mosquitto
+  # The repository encryption key
+  RESTIC_PASSWORD: "${RESTIC_PW}"
+  AWS_ACCESS_KEY_ID: "${MINIO_USER}"
+  AWS_SECRET_ACCESS_KEY: "${MINIO_PASSWORD}"
