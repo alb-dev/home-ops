@@ -43,7 +43,7 @@ spec:
           main:
             image:
               repository: ghcr.io/koenkk/zigbee2mqtt
-              tag: 1.30.0
+              tag: 1.34.0
             env:
               TZ: Europe/Berlin
               ZIGBEE2MQTT_DATA: /config
@@ -61,7 +61,7 @@ spec:
               ZIGBEE2MQTT_CONFIG_DEVICE_OPTIONS_LEGACY: "false"
               ZIGBEE2MQTT_CONFIG_DEVICE_OPTIONS_RETAIN: "true"
               ZIGBEE2MQTT_CONFIG_EXPERIMENTAL_NEW_API: "true"
-              ZIGBEE2MQTT_CONFIG_FRONTEND_PORT: &port 80
+              #ZIGBEE2MQTT_CONFIG_FRONTEND_PORT: &port 80
               ZIGBEE2MQTT_CONFIG_FRONTEND_URL: "https://zigbee.${DOMAIN}"
               ZIGBEE2MQTT_CONFIG_HOMEASSISTANT: "true"
               ZIGBEE2MQTT_CONFIG_MQTT_INCLUDE_DEVICE_INFORMATION: "true"
@@ -94,7 +94,7 @@ spec:
       main:
         ports:
           http:
-            port: *port
+            port: 80
     ingress:
       main:
         enabled: true
