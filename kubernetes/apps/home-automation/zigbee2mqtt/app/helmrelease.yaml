@@ -37,6 +37,7 @@ spec:
               globalMounts:
                 - path: /config
 
+
         containers:
           main:
             image:
@@ -76,6 +77,10 @@ spec:
             envFrom:
               - secretRef:
                   name: zigbee2mqtt
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 10m
