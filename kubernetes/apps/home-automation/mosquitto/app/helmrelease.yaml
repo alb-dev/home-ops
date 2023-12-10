@@ -24,10 +24,11 @@ spec:
         statefulset:
           volumeClaimTemplates:
             - name: data
-              mountPath: /mosquitto/data
               accessMode: ReadWriteOnce
-              size: 1Gi
+              size: 512Mi
               storageClass: ceph-block
+              globalMounts:
+                - path: /data
 
 
         pod:
