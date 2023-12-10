@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.3.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s-charts
@@ -26,31 +26,83 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    controller:
-      type: statefulset
-      annotations:
-        reloader.stakater.com/auto: "true"
-    image:
-      repository: ghcr.io/home-assistant/home-assistant
-      tag: 2023.12.1
-    env:
-      TZ: "Europe/Berlin"
- #     SECRET_RECORDER_DB_URL:
- #       valueFrom:
- #         secretKeyRef:
- #           name: database-home-assistant-user
-  #          key: POSTGRES_URL
-    hostNetwork: true
-    dnsPolicy: ClusterFirstWithHostNet
+    controllers:
+      main:
+        type: statefulset
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        statefulset:
+          volumeClaimTemplates:
+            - name: config
+              mountPath: /config
+              accessMode: ReadWriteOnce
+              size: 20Gi
+              storageClass: ceph-block
+
+        containers:
+          main:
+            image:
+              repository: ghcr.io/home-assistant/home-assistant
+              tag: 2023.12.1
+            env:
+              TZ: "Europe/Berlin"
+           #   SECRET_RECORDER_DB_URL:
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: false
+            resources:
+              requests:
+                cpu: 10m
+                memory: 1250Mi
+              limits:
+                memory: 2500Mi
+
+      codeserver:
+        image:
+          repository: ghcr.io/coder/code-server
+          tag: 4.19.1@sha256:993c381c28a3738b903ac21180f5f9dab8f2aa547bbb0b9d69bea558691e10d3
+          pullPolicy: IfNotPresent
+        env:
+          TZ: "America/Chicago"
+          HASS_SERVER: http://localhost:8123
+          HASS_TOKEN: ${SECRET_HASS_TOKEN}
+          PASSWORD: ${SECRET_HASS_PASSWORD}
+        args:
+          - --user-data-dir
+          - "/config/.vscode"
+          - --auth
+          - "password"
+          - --port
+          - "12321"
+          - "/config"
+        volumeMounts:
+          - name: config
+            mountPath: /config
+
     service:
       main:
         type: LoadBalancer
         annotations:
           io.cilium/lb-ipam-ips: 192.168.178.243
-        externalTrafficPolicy: Local
         ports:
           http:
             port: 8123
+          mdns-tcp:
+            enabled: true
+            port: 5353
+            protocol: TCP
+            targetPort: 5353
+          mdns-udp:
+            enabled: true
+            port: 5353
+            protocol: UDP
+            targetPort: 5353
+
     ingress:
       main:
         enabled: true
@@ -60,25 +112,23 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host
-    probes:
-      liveness:
-        enabled: false
-      readiness:
-        enabled: false
-      startup:
-        enabled: false
-    volumeClaimTemplates:
-      - name: config
-        mountPath: /config
-        accessMode: ReadWriteOnce
-        size: 20Gi
-        storageClass: ceph-block
-    resources:
-      requests:
-        cpu: 10m
-        memory: 1250Mi
-      limits:
-        memory: 2500Mi
+      codeserver:
+        enabled: true
+        className: internal-nginx
+        hosts:
+          - host: "hass-vscode.${DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: codeserver
+                  port: http
+        tls:
+          - hosts:
+              - hass-vscode-tls
