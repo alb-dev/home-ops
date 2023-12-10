@@ -121,17 +121,17 @@ spec:
         tls:
           - hosts:
               - *host
-      codeserver:
-        enabled: true
-        className: internal-nginx
-        hosts:
-          - host: "hass-vscode.${DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  name: codeserver
-                  port: http
-        tls:
-          - hosts:
-              - hass-vscode-tls
+#      codeserver:
+#        enabled: true
+#        className: internal-nginx
+#        hosts:
+#          - host: "hass-vscode.${DOMAIN}"
+#            paths:
+#              - path: /
+#                pathType: Prefix
+#                service:
+#                  name: codeserver
+#                  port: http
+#        tls:
+#          - hosts:
+#              - hass-vscode-tls
