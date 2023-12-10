@@ -25,6 +25,7 @@ spec:
           securityContext:
             runAsUser: 2700
             runAsGroup: 2700
+            runAsNonRoot: true
             fsGroup: 2700
             fsGroupChangePolicy: OnRootMismatch
 
