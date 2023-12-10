@@ -30,12 +30,12 @@ spec:
 
         statefulset:
           volumeClaimTemplates:
-            - name: data
+            - name: config
               accessMode: ReadWriteOnce
               size: 1Gi
               storageClass: ceph-block
               globalMounts:
-                - path: /data
+                - path: /config
 
         containers:
           main:
@@ -44,7 +44,7 @@ spec:
               tag: 1.34.0
             env:
               TZ: Europe/Berlin
-              ZIGBEE2MQTT_DATA: /data
+              ZIGBEE2MQTT_DATA: /config
               ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_DISCOVERY_TOPIC: homeassistant
               ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_LEGACY_ENTITY_ATTRIBUTES: "false"
               ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_LEGACY_TRIGGERS: "false"
