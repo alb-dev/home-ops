@@ -20,7 +20,6 @@ resources:
   - stakater-charts.yaml
   - backube.yaml
   - jameswynn.yaml
-  - pihole.yaml
   - intel.yaml
   - piraeus.yaml
   - cilium.yaml
