@@ -32,6 +32,14 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
 
+        statefulset:
+          volumeClaimTemplates:
+            - name: data
+              mountPath: /mosquitto/data
+              accessMode: ReadWriteOnce
+              size: 1Gi
+              storageClass: ceph-block
+
         pod:
           securityContext:
             runAsUser: 2700
@@ -79,11 +87,6 @@ spec:
             autosave_interval 60
 
     persistence:
-      data:
-        enabled: true
-        existingClaim: "mosquitto-data"
-        globalMounts:
-          - path: /mosquitto/data
       config:
         enabled: true
         type: configMap
