@@ -5,7 +5,7 @@ metadata:
   name: zigbee2mqtt-backup
   namespace: home-automation
 spec:
-  sourcePVC: zigbee2mqtt-config
+  sourcePVC: config-zigbee2mqtt-0
   trigger:
     schedule: "0 22 * * *"
   restic:
