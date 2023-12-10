@@ -29,6 +29,9 @@ spec:
     controllers:
       main:
         type: statefulset
+        pod:
+          hostNetwork: true
+          dnsPolicy: ClusterFirstWithHostNet
         annotations:
           reloader.stakater.com/auto: "true"
 
