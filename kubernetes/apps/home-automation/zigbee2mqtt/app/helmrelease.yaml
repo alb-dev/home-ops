@@ -30,12 +30,12 @@ spec:
 
         statefulset:
           volumeClaimTemplates:
-            - name: config
+            - name: data
               accessMode: ReadWriteOnce
               size: 1Gi
               storageClass: ceph-block
               globalMounts:
-                - path: /config
+                - path: /data
 
         containers:
           main:
