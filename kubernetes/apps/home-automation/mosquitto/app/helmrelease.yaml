@@ -78,11 +78,6 @@ spec:
             autosave_interval 60
 
     persistence:
-      data:
-        enabled: true
-        existingClaim: mosquitto-data
-        globalMounts:
-          - path: /data
       config:
         enabled: true
         type: configMap
