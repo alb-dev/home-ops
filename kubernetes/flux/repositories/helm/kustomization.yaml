@@ -4,6 +4,7 @@ resources:
   - bitnami.yaml
   - prometheus-community-charts.yaml
   - weaveworks-kured-charts.yaml
+  - crunchydata
   - nextcloud.yaml
   - democratic-csi.yaml
   - metrics-server-charts.yaml
