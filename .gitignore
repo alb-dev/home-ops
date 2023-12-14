@@ -26,8 +26,6 @@ kubeconfig*
 kubernetes/schemas
 # extras
 config.xml
-kubernetes_new
-ansible
 .DS_Store
 .config.env
 archive
