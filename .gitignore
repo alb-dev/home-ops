@@ -11,7 +11,7 @@ kubeconfig
 Thumbs.db
 # temp folders
 .private/
-# ansible
+ansible
 xanmanning.k3s*
 # terraform
 .terraform
