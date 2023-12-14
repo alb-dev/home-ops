@@ -1,4 +1,0 @@
----
-- name: "Adding the default local user to passwordless sudoers."
-  shell: |
-    sudo bash -c "echo \"""{{ansible_user}}"" ALL=(ALL) NOPASSWD:ALL\" >> /etc/sudoers"
