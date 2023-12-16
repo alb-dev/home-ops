@@ -94,6 +94,9 @@ spec:
         ports:
           http:
             port: 8080
+          metrics:
+            enabled: true
+            port: 9000
     ingress:
       main:
         enabled: true
