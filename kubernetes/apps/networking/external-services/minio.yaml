@@ -2,9 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-      nginx.ingress.kubernetes.io/app-root: /admin
-  name: &app pihole
+  name: &app minio
   namespace: networking
   labels:
     app.kubernetes.io/name: *app
@@ -12,7 +10,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: &host "pihole.${DOMAIN}"
+    - host: &host "minio.${DOMAIN}"
       http:
         paths:
           - path: /
@@ -21,7 +19,7 @@ spec:
               service:
                 name: *app
                 port:
-                  number: 80
+                  number: 9000
   tls:
     - hosts:
         - *host
@@ -29,15 +27,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: &app pihole
+  name: &app minio
   namespace: networking
   labels:
     app.kubernetes.io/name: *app
     app.kubernetes.io/instance: *app
 spec:
   type: ExternalName
-  externalName: pihole.${SECRET_PRIVATE_DOMAIN}
+  externalName: s3.${DOMAIN}
   ports:
     - name: http
-      port: 80
+      port: 9000
       protocol: TCP
