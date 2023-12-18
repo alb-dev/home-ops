@@ -9,3 +9,4 @@ resources:
   - ./democratic-csi/ks.yaml
   - ./reloader/ks.yaml
   - ./intel-device-plugin/ks.yaml
+  - ./system-upgrade-controller/ks.yaml
