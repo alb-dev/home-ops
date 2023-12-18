@@ -15,7 +15,6 @@ resources:
   - volsync
   - rook-ceph
   - default
-#  - system-upgrade
   - flux-system
   - kyverno
   - system
