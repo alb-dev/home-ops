@@ -33,7 +33,7 @@ spec:
 
     # Base url for Planka. Will override `ingress.hosts[0].host`
     # Defaults to `http://localhost:3000` if ingress is disabled.
-    baseUrl: "planka.${DOMAIN}"
+    baseUrl: "https://planka.${DOMAIN}"
 
     serviceAccount:
       create: false
