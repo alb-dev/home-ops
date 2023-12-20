@@ -22,18 +22,18 @@ spec:
     image:
       repository: ghcr.io/plankanban/planka
       pullPolicy: IfNotPresent
-      tag: ""
+      tag: "1.15.3"
 
     imagePullSecrets: []
     nameOverride: ""
     fullnameOverride: ""
 
     # Generate a secret using openssl rand -base64 45
-    secretkey: ""
+    secretkey: "${SECRET_PLANKA}"
 
     # Base url for Planka. Will override `ingress.hosts[0].host`
     # Defaults to `http://localhost:3000` if ingress is disabled.
-    baseUrl: ""
+    baseUrl: "planka.${DOMAIN}"
 
     serviceAccount:
       create: false
@@ -43,7 +43,7 @@ spec:
     podAnnotations: {}
 
     podSecurityContext:
-      fsGroup: 2000
+      fsGroup: 2700
 
     securityContext:
       capabilities:
