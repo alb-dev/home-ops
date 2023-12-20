@@ -61,7 +61,6 @@ spec:
     ingress:
       enabled: true
       className: "nginx-internal"
-      annotations: {}
       hosts:
         - host: "planka.${DOMAIN}"
           paths:
@@ -69,7 +68,7 @@ spec:
               pathType: ImplementationSpecific
       tls:
         hosts:
-          - "planka.${DOMAIN}"
+          - planka.${DOMAIN}
 
     resources:
       limits:
