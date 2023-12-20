@@ -16,167 +16,167 @@ spec:
         kind: HelmRepository
         name: planka
         namespace: flux-system
-    values:
-      replicaCount: 1
+  values:
+    replicaCount: 1
 
-      image:
-        repository: ghcr.io/plankanban/planka
-        pullPolicy: IfNotPresent
-        tag: ""
+    image:
+      repository: ghcr.io/plankanban/planka
+      pullPolicy: IfNotPresent
+      tag: ""
 
-      imagePullSecrets: []
-      nameOverride: ""
-      fullnameOverride: ""
+    imagePullSecrets: []
+    nameOverride: ""
+    fullnameOverride: ""
 
-      # Generate a secret using openssl rand -base64 45
-      secretkey: ""
+    # Generate a secret using openssl rand -base64 45
+    secretkey: ""
 
-      # Base url for Planka. Will override `ingress.hosts[0].host`
-      # Defaults to `http://localhost:3000` if ingress is disabled.
-      baseUrl: ""
+    # Base url for Planka. Will override `ingress.hosts[0].host`
+    # Defaults to `http://localhost:3000` if ingress is disabled.
+    baseUrl: ""
 
-      serviceAccount:
-        create: false
-        annotations: {}
-        name: ""
+    serviceAccount:
+      create: false
+      annotations: {}
+      name: ""
 
-      podAnnotations: {}
+    podAnnotations: {}
 
-      podSecurityContext:
-        fsGroup: 2000
+    podSecurityContext:
+      fsGroup: 2000
 
-      securityContext:
-        capabilities:
-          drop:
-            - ALL
-        readOnlyRootFilesystem: true
-        runAsNonRoot: true
-        runAsUser: 2700
+    securityContext:
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      runAsUser: 2700
 
-      service:
-        type: ClusterIP
-        port: 1337
-        containerPort: 1337
+    service:
+      type: ClusterIP
+      port: 1337
+      containerPort: 1337
 
-      ingress:
-        enabled: true
-        className: "nginx-internal"
-        annotations: {}
+    ingress:
+      enabled: true
+      className: "nginx-internal"
+      annotations: {}
+      hosts:
+        - host: "planka.${DOMAIN}"
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+      tls:
         hosts:
-          - host: "planka.${DOMAIN}"
-            paths:
-              - path: /
-                pathType: ImplementationSpecific
-        tls:
-          hosts:
-            - "planka.${DOMAIN}"
+          - "planka.${DOMAIN}"
 
-      resources:
-        limits:
-          cpu: 100m
-          memory: 128Mi
-        requests:
-          cpu: 100m
-          memory: 128Mi
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
 
-      autoscaling:
-        enabled: false
-        minReplicas: 1
-        maxReplicas: 100
-        targetCPUUtilizationPercentage: 80
-        # targetMemoryUtilizationPercentage: 80
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 100
+      targetCPUUtilizationPercentage: 80
+      # targetMemoryUtilizationPercentage: 80
 
-      nodeSelector: {}
+    nodeSelector: {}
 
-      tolerations: []
+    tolerations: []
 
-      postgresql:
+    postgresql:
+      enabled: true
+      auth:
+        existingSecret: planka-postgresql
+      serviceBindings:
         enabled: true
-        auth:
-          existingSecret: planka-postgresql
-        serviceBindings:
+      primary:
+        podSecurityContext:
           enabled: true
-        primary:
-          podSecurityContext:
-            enabled: true
-            fsGroup: 2700
-          containerSecurityContext:
-            enabled: true
-            runAsUser: 2700
-            runAsNonRoot: true
-            privileged: false
-            readOnlyRootFilesystem: false
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop: ["ALL"]
-            seccompProfile:
-              type: "RuntimeDefault"
-      ## PVC-based data storage configuration
-      persistence:
-        enabled: true
-        existingClaim: planka-data
+          fsGroup: 2700
+        containerSecurityContext:
+          enabled: true
+          runAsUser: 2700
+          runAsNonRoot: true
+          privileged: false
+          readOnlyRootFilesystem: false
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+          seccompProfile:
+            type: "RuntimeDefault"
+    ## PVC-based data storage configuration
+    persistence:
+      enabled: true
+      existingClaim: planka-data
 
-      ## OpenID Identity Management configuration
+    ## OpenID Identity Management configuration
+    ##
+    ## Example:
+    ## ---------------
+    ## oidc:
+    ##   enabled: true
+    ##   clientId: sxxaAIAxVXlCxTmc1YLHBbQr8NL8MqLI2DUbt42d
+    ##   clientSecret: om4RTMRVHRszU7bqxB7RZNkHIzA8e4sGYWxeCwIMYQXPwEBWe4SY5a0wwCe9ltB3zrq5f0dnFnp34cEHD7QSMHsKvV9AiV5Z7eqDraMnv0I8IFivmuV5wovAECAYreSI
+    ##   issuerUrl: https://auth.local/application/o/planka/
+    ##   admin:
+    ##     roles:
+    ##       - planka-admin
+    ##
+    ## ---------------
+    ## NOTE: A minimal configuration requires setting `clientId`, `clientSecret` and `issuerUrl`. (plus `admin.roles` for administrators)
+    ## ref: https://docs.planka.cloud/docs/Configuration/OIDC
+    ##
+    oidc:
+      ## @param oidc.enabled Enable single sign-on (SSO) with OpenID Connect (OIDC)
       ##
-      ## Example:
-      ## ---------------
-      ## oidc:
-      ##   enabled: true
-      ##   clientId: sxxaAIAxVXlCxTmc1YLHBbQr8NL8MqLI2DUbt42d
-      ##   clientSecret: om4RTMRVHRszU7bqxB7RZNkHIzA8e4sGYWxeCwIMYQXPwEBWe4SY5a0wwCe9ltB3zrq5f0dnFnp34cEHD7QSMHsKvV9AiV5Z7eqDraMnv0I8IFivmuV5wovAECAYreSI
-      ##   issuerUrl: https://auth.local/application/o/planka/
-      ##   admin:
-      ##     roles:
-      ##       - planka-admin
+      enabled: false
+
+      ## OIDC credentials
+      ## @param oidc.clientId A string unique to the provider that identifies your app.
+      ## @param oidc.clientSecret A secret string that the provider uses to confirm ownership of a client ID.
       ##
-      ## ---------------
-      ## NOTE: A minimal configuration requires setting `clientId`, `clientSecret` and `issuerUrl`. (plus `admin.roles` for administrators)
-      ## ref: https://docs.planka.cloud/docs/Configuration/OIDC
+      ## NOTE: Either specify inline `clientId` and `clientSecret` or refer to them via `existingSecret`
       ##
-      oidc:
-        ## @param oidc.enabled Enable single sign-on (SSO) with OpenID Connect (OIDC)
+      clientId: ""
+      clientSecret: ""
+
+      ## @param oidc.existingSecret Name of an existing secret containing OIDC credentials
+      ## NOTE: Must contain key `clientId` and `clientSecret`
+      ## NOTE: When it's set, the `clientId` and `clientSecret` parameters are ignored
+      ##
+      existingSecret: ""
+
+      ## @param oidc.issuerUrl The OpenID connect metadata document endpoint
+      ##
+      issuerUrl: ""
+
+      ## @param oidc.scopes A list of scopes required for OIDC client.
+      ## If empty will default to `openid`, `profile` and `email`
+      ## NOTE: Planka needs the email and name claims
+      ##
+      scopes: []
+
+      ## Admin permissions configuration
+      admin:
+        ## @param oidc.admin.ignoreRoles If set to true, the admin roles will be ignored.
+        ## It is useful if you want to use OIDC for authentication but not for authorization.
+        ## If empty will default to `false`
         ##
-        enabled: false
+        ignoreRoles: false
 
-        ## OIDC credentials
-        ## @param oidc.clientId A string unique to the provider that identifies your app.
-        ## @param oidc.clientSecret A secret string that the provider uses to confirm ownership of a client ID.
+        ## @param oidc.admin.rolesAttribute The name of a custom group claim that you have configured in your OIDC provider
+        ## If empty will default to `groups`
         ##
-        ## NOTE: Either specify inline `clientId` and `clientSecret` or refer to them via `existingSecret`
+        rolesAttribute: groups
+
+        ## @param oidc.admin.roles The names of the admin groups
         ##
-        clientId: ""
-        clientSecret: ""
-
-        ## @param oidc.existingSecret Name of an existing secret containing OIDC credentials
-        ## NOTE: Must contain key `clientId` and `clientSecret`
-        ## NOTE: When it's set, the `clientId` and `clientSecret` parameters are ignored
-        ##
-        existingSecret: ""
-
-        ## @param oidc.issuerUrl The OpenID connect metadata document endpoint
-        ##
-        issuerUrl: ""
-
-        ## @param oidc.scopes A list of scopes required for OIDC client.
-        ## If empty will default to `openid`, `profile` and `email`
-        ## NOTE: Planka needs the email and name claims
-        ##
-        scopes: []
-
-        ## Admin permissions configuration
-        admin:
-          ## @param oidc.admin.ignoreRoles If set to true, the admin roles will be ignored.
-          ## It is useful if you want to use OIDC for authentication but not for authorization.
-          ## If empty will default to `false`
-          ##
-          ignoreRoles: false
-
-          ## @param oidc.admin.rolesAttribute The name of a custom group claim that you have configured in your OIDC provider
-          ## If empty will default to `groups`
-          ##
-          rolesAttribute: groups
-
-          ## @param oidc.admin.roles The names of the admin groups
-          ##
-          roles: []
-            # - planka-admin
+        roles: []
+          # - planka-admin
