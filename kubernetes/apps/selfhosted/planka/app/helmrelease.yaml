@@ -33,7 +33,7 @@ spec:
 
     # Base url for Planka. Will override `ingress.hosts[0].host`
     # Defaults to `http://localhost:3000` if ingress is disabled.
-    baseUrl: "https://planka.${DOMAIN}"
+    baseUrl: "planka.${DOMAIN}"
 
     serviceAccount:
       create: false
@@ -42,9 +42,16 @@ spec:
 
     podAnnotations: {}
 
-    podSecurityContext: {}
+    podSecurityContext:
+      fsGroup: 2700
 
-    securityContext: {}
+    securityContext:
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: false
+      runAsNonRoot: true
+      runAsUser: 2700
 
     service:
       type: ClusterIP
