@@ -23,6 +23,7 @@ resources:
   - jameswynn.yaml
   - intel.yaml
   - piraeus.yaml
+  - planka.yaml
   - cilium.yaml
   - cloudnative-pg.yaml
   - rook-ceph.yaml
