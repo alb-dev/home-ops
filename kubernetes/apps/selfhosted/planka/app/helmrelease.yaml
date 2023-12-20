@@ -42,7 +42,7 @@ spec:
 
     podAnnotations: {}
 
-    podSecurityContext:
+    podSecurityContext: {}
 
     securityContext:
       capabilities:
