@@ -92,7 +92,7 @@ spec:
     postgresql:
       enabled: true
       auth:
-        existingSecret: planka-postgresql
+        existingSecret: planka-postgresql-secret
       serviceBindings:
         enabled: true
       primary:
