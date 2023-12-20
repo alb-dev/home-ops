@@ -67,8 +67,8 @@ spec:
             - path: /
               pathType: ImplementationSpecific
       tls:
-        hosts:
-          - planka.${DOMAIN}
+        - hosts:
+            - planka.${DOMAIN}
 
     resources:
       limits:
