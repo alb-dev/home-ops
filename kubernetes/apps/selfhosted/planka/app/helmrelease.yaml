@@ -33,6 +33,7 @@ spec:
     admin_email: demo@demo
     admin_password: demo
     admin_name: demo
+    admin_username: demo
 
     # Base url for Planka. Will override `ingress.hosts[0].host`
     # Defaults to `http://localhost:3000` if ingress is disabled.
