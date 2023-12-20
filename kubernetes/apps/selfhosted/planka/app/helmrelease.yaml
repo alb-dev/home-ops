@@ -31,7 +31,7 @@ spec:
     # Generate a secret using openssl rand -base64 45
     secretkey: "${SECRET_PLANKA}"
     admin_email: demo@demo
-    admin_pw: demo
+    admin_password: demo
     admin_name: demo
 
     # Base url for Planka. Will override `ingress.hosts[0].host`
