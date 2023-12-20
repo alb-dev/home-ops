@@ -43,7 +43,6 @@ spec:
     podAnnotations: {}
 
     podSecurityContext:
-      fsGroup: 2700
 
     securityContext:
       capabilities:
@@ -51,7 +50,6 @@ spec:
           - ALL
       readOnlyRootFilesystem: false
       runAsNonRoot: true
-      runAsUser: 2700
 
     service:
       type: ClusterIP
