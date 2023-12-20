@@ -3,7 +3,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: planka-data
-  namespace: security
+  namespace: selfhosted
   labels:
     app.kubernetes.io/name: &name planka
     app.kubernetes.io/instance: *name
