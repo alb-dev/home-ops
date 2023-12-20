@@ -42,14 +42,16 @@ spec:
 
     podAnnotations: {}
 
-    podSecurityContext: {}
+    podSecurityContext:
+      fsGroup: 1000
 
     securityContext:
       capabilities:
         drop:
           - ALL
       readOnlyRootFilesystem: false
- #     runAsNonRoot: true
+      runAsNonRoot: true
+      runAsUser: 1000
 
     service:
       type: ClusterIP
