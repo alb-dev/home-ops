@@ -99,10 +99,8 @@ spec:
       primary:
         podSecurityContext:
           enabled: true
-          fsGroup: 2700
         containerSecurityContext:
           enabled: true
-          runAsUser: 2700
           runAsNonRoot: true
           privileged: false
           readOnlyRootFilesystem: false
