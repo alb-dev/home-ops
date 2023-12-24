@@ -34,7 +34,7 @@ metadata:
     app.kubernetes.io/instance: *app
 spec:
   type: ExternalName
-  externalName: s3.${DOMAIN}
+  externalName: s3.${HOMEDOMAIN}
   ports:
     - name: http
       port: 9000
