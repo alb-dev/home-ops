@@ -5,6 +5,7 @@ kind: Kustomization
 namespace: rook-ceph
 resources:
   - ./helmrelease.yaml
+  - ./rgw-external.yaml
 labels:
   - pairs:
       app.kubernetes.io/name: rook-ceph-cluster

@@ -30,6 +30,7 @@ spec:
     monitoring:
       enabled: true
       createPrometheusRules: true
+
     ingress:
       dashboard:
         ingressClassName: internal-nginx
@@ -41,8 +42,10 @@ spec:
         tls:
           - hosts:
               - *host
+
     toolbox:
       enabled: true
+
     configOverride: |
       [global]
       bdev_enable_discard = true
@@ -56,9 +59,11 @@ spec:
 
       crashCollector:
         disable: false
+
       dashboard:
         enabled: true
         urlPrefix: /
+
       storage:
         useAllNodes: false
         useAllDevices: false
@@ -74,7 +79,7 @@ spec:
           - name: n3
             devices:
               - name: /dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_1TB_S4EWNM0TA17489E
-              
+
       placement:
         mgr: 
           nodeAffinity:
@@ -136,22 +141,26 @@ spec:
             csi.storage.k8s.io/node-stage-secret-name: rook-csi-rbd-node
             csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
             csi.storage.k8s.io/fstype: ext4
+
     cephBlockPoolsVolumeSnapshotClass:
       enabled: true
       name: csi-ceph-blockpool
       isDefault: false
       deletionPolicy: Delete
+
     cephFileSystems:
       - name: ceph-filesystem
         spec:
           metadataPool:
             replicated:
               size: 3
+
           dataPools:
             - failureDomain: host
               replicated:
                 size: 3
               name: data0
+
           metadataServer:
             activeCount: 1
             activeStandby: true
@@ -161,6 +170,7 @@ spec:
                 memory: 4Gi
               limits:
                 memory: 4Gi
+
         storageClass:
           enabled: true
           isDefault: false
@@ -176,11 +186,13 @@ spec:
             csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
             csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
             csi.storage.k8s.io/fstype: ext4
+
     cephFileSystemVolumeSnapshotClass:
       enabled: true
       name: csi-ceph-filesystem
       isDefault: false
       deletionPolicy: Delete
+
     cephObjectStores:
       - name: ceph-objectstore
         spec:
