@@ -64,7 +64,6 @@ spec:
           SSH_LISTEN_PORT: 22
           SSH_DOMAIN: ssh.git.${DOMAIN}
           root_url: "https://git.${DOMAIN}"
-        "git.timeout":
           MIGRATE: 1000
           MIRROR: 1000
         respository:

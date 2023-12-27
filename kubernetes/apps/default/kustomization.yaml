@@ -6,14 +6,4 @@ resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
   # Flux-Kustomizations
-  #- ./vaultwarden/ks.yaml
   - ./freshrss/ks.yaml
- # - ./jellyfin/ks.yaml
-#  - ./mosquitto/ks.yaml
-#  - ./mealie/ks.yaml
-#  - ./smtp-relay/ks.yaml
-#  - ./zigbee2mqtt/ks.yaml
-#  - ./paperless/ks.yaml
-  - ./excalidraw/ks.yaml
-#  - ./harbor/ks.yaml
-#  - ./nextcloud/ks.yaml
